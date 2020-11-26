@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+    <!-- 扫描service下的包-->
+    <context:component-scan base-package="com.parking.service"/>
+
+    <!-- 将所有业务类注入到spring，可以通过配置或注解实现-->
+    <bean id="UserServiceImpl" class="com.parking.service.UserServiceImpl">
+        <property name="userMapper" ref="userMapper"/>
+    </bean>
+
+    <!--声明式事务配置-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- aop事务支持-->
+    <!--使用注解授权的第一个步骤：在子容器中加载该注解授权，不能再父容器中加载，因为子容器可以访问父容器，父容器不能访问子容器。因此该案例中开启aop对类代理、开启shiro注解支持这两步一定不能放在spring-shiro.xml文件中，因为他是父容器。  DispatcherServlet加载的文件属于子容器。ContextLoaderListener加载的文件属于父容器，具体见web.xml文件-->
+    <!-- 开启aop对类代理。记得添加上面的aop命名空间 -->
+<!--    <aop:config proxy-target-class="true"></aop:config>-->
+<!--    &lt;!&ndash; 开启shiro注解支持 &ndash;&gt;-->
+<!--    <bean  class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+<!--        <property name="securityManager" ref="manager"></property>&lt;!&ndash;除了ref属性值manager是上面SecurityManager对象的id值外其他都是固定搭配&ndash;&gt;-->
+<!--    </bean>-->
+
+
+
+
+
+</beans>

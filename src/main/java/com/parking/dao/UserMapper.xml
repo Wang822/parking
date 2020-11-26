@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.parking.dao.UserMapper">
+
+    <insert id="addUser" parameterType="User">
+        insert into is3test.user (username,password,account)
+        values (#{username},#{password},#{account});
+    </insert>
+    
+    <delete id="deleteUserById" parameterType="int">
+        delete from is3test.user where userid=#{userid}
+    </delete>
+    
+    <update id="updateUser" parameterType="User">
+        update is3test.user
+        set username=#{username},password=#{password},account=#{account}
+        where userid=#{userid};
+    </update>
+
+    <select id="queryUserByID" resultType="User">
+        select * from is3test.user where userid=#{userid}
+    </select>
+
+    <select id="queryAllUser" resultType="User">
+        select * from is3test.user
+    </select>
+
+
+</mapper>
