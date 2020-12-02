@@ -9,9 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 @RequestMapping(path="/demo")
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -20,15 +21,14 @@ public class UserController {
 
     //增加用户信息
     //@CrossOrigin(origins = {"http://localhost:8083"}) //前端端口
-    @GetMapping(path = "/AddUser")
+    @PostMapping(path = "/AddUser")
     public @ResponseBody
-    String addNewUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+    String addNewUser(@RequestParam("wx_id") String wx_id, @RequestParam("password") String password) {
 
         User n = new User();
         //n.setUserId(userid);
         n.setPassword(password);
-        n.setUserName(username);
-        n.setAccount(500);
+        n.setWxId(wx_id);
         userRepository.save(n);
         return "Saved";
         //return n;
@@ -37,25 +37,23 @@ public class UserController {
 
 
     //迭代查询所有用户信息
-    @GetMapping(path = "/AllUser")
+    @PostMapping(path = "/AllUser")
     public @ResponseBody
     Iterable<User> getAllUsers() {
-
-        return userRepository.findAll(Sort.by("userid"));
-
+        return userRepository.findAll(Sort.by("user_id"));
     }
 
 
 
     //按照id查询用户信息
-    @CrossOrigin(origins = {"http://localhost:8083"})
-    @GetMapping(path = "/GetUserById")
+    //@CrossOrigin(origins = {"http://localhost:8083"})
+    @PostMapping(path = "/GetUserById")
     public @ResponseBody
         //请求参数id映射绑定函数参数id,函数参数与数据库参数已在实体通过注解映射绑定
-    User getUserById(@RequestParam("userid") Integer userid) {
+    User getUserById(@RequestParam("user_id") Integer user_id) {
 
         // This returns a JSON or XML with the users
-        return userRepository.findById(userid).get();
+        return userRepository.findById(user_id).get();
 
     }
 
@@ -64,22 +62,22 @@ public class UserController {
 
 
     //按照id删除用户
-    @GetMapping(path = "/DeleteUserById")
+    @PostMapping(path = "/DeleteUserById")
     public @ResponseBody
-    void delUser(@RequestParam("userid") Integer userid) {
+    void delUser(@RequestParam("user_id") Integer user_id) {
 
-        userRepository.deleteById(userid);
+        userRepository.deleteById(user_id);
 
     }
 
 
 
     //通过id对name字段进行更新
-    @GetMapping(path = "/UpdateUserName")
+    @PostMapping(path = "/UpdateUserName")
     public @ResponseBody
-    void updateUser(@RequestParam("userid") Integer userid,@RequestParam("username") String username) {
+    void updateUser(@RequestParam("user_id") Integer user_id,@RequestParam("wx_id") String wx_id) {
 
-        userRepository.updateNameById(userid,username);
+        userRepository.updateNameByUser_id(user_id,wx_id);
 
     }
 
