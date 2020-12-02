@@ -19,7 +19,7 @@ public class UserController {
 
 
     //增加用户信息
-    @CrossOrigin(origins = {"http://localhost:8083"})
+    //@CrossOrigin(origins = {"http://localhost:8083"}) //前端端口
     @GetMapping(path = "/AddUser")
     public @ResponseBody
     String addNewUser(@RequestParam("username") String username, @RequestParam("password") String password) {

@@ -1,8 +1,8 @@
 package com.example.demo.entity;
 
 import javax.persistence.*;
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
+//import jdk.nashorn.internal.objects.annotations.Getter;
+//import jdk.nashorn.internal.objects.annotations.Setter;
 
 @Entity
 @Table(name = "user")
