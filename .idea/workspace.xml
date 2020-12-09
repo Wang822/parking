@@ -23,15 +23,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29c2ff58-3f4f-4a91-a239-7481b858c941" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/CodeGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/ParkingApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/controller/AccountController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/entity/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/mapper/AccountMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/service/IAccountService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/service/impl/AccountServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/AccountMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_47.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_cache_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_config_core_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_config_ogdl_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_cipher_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_core_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_crypto_hash_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_event_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_lang_1_4_0_RC2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk16_1_46.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/common/GlobalResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/common/HttpClientUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/common/WechatUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__cn_hutool_hutool_all_5_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_4_0_RC2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/parking/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/controller/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/parking/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/entity/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/parking/mapper/AccountMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/mapper/AccountMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/backend/parking/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/backend/parking/service/impl/AccountServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,17 +91,19 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.3770115" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
@@ -108,7 +128,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CodeGenerator">
+  <component name="RunManager" selected="Spring Boot.ParkingApplication ">
     <configuration name="CodeGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.backend.parking.CodeGenerator" />
       <module name="TJShop" />
@@ -122,74 +142,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="ParkingApplication " type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
       <module name="TJShop" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="TJShop" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="ssmdemo" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.DemoApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ParkingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="ssmdemo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.backend.parking.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.backend.parking.ParkingApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -287,8 +262,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.CodeGenerator" />
+      <item itemvalue="Spring Boot.ParkingApplication " />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.ParkingApplication " />
         <item itemvalue="Application.CodeGenerator" />
       </list>
     </recent_temporary>
@@ -307,7 +287,10 @@
       <workItem from="1606907710455" duration="602000" />
       <workItem from="1607431149797" duration="4231000" />
       <workItem from="1607444346436" duration="5926000" />
-      <workItem from="1607480896980" duration="311000" />
+      <workItem from="1607480896980" duration="2529000" />
+      <workItem from="1607483558509" duration="455000" />
+      <workItem from="1607500668080" duration="2095000" />
+      <workItem from="1607507436522" duration="793000" />
     </task>
     <servers />
   </component>
@@ -331,18 +314,18 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="693" y="322" width="428" height="220" key="#Assign_Data_Sources/62.0.1474.864@62.0.1474.864" timestamp="1606903767363" />
-    <state x="373" y="0" key="#Project_Structure" timestamp="1606898770416">
+    <state x="373" y="0" key="#Project_Structure" timestamp="1607507489181">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state x="373" y="0" key="#Project_Structure/62.0.1474.864@62.0.1474.864" timestamp="1606898770416" />
+    <state x="373" y="0" key="#Project_Structure/62.0.1474.864@62.0.1474.864" timestamp="1607507489181" />
     <state x="210" y="274" key="#SQL_Dialects" timestamp="1606396433439">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="210" y="274" key="#SQL_Dialects/62.0.1474.864@62.0.1474.864" timestamp="1606396433439" />
-    <state x="201" y="79" width="1257" height="694" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606903748304">
+    <state x="201" y="79" width="1257" height="694" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607501680774">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state x="201" y="79" width="1257" height="694" key="#com.intellij.execution.impl.EditConfigurationsDialog/62.0.1474.864@62.0.1474.864" timestamp="1606903748304" />
+    <state x="201" y="79" width="1257" height="694" key="#com.intellij.execution.impl.EditConfigurationsDialog/62.0.1474.864@62.0.1474.864" timestamp="1607501680774" />
     <state x="527" y="243" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1606900306134">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
@@ -351,38 +334,38 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="580" y="187" key="FileChooserDialogImpl/62.0.1474.864@62.0.1474.864" timestamp="1606898812501" />
-    <state width="1431" height="223" key="GridCell.Tab.0.bottom" timestamp="1607481131259">
+    <state width="1186" height="325" key="GridCell.Tab.0.bottom" timestamp="1607507881639">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="223" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1607481131259" />
-    <state width="1431" height="223" key="GridCell.Tab.0.center" timestamp="1607481131259">
+    <state width="1186" height="325" key="GridCell.Tab.0.bottom/62.0.1474.864@62.0.1474.864" timestamp="1607507881639" />
+    <state width="1186" height="325" key="GridCell.Tab.0.center" timestamp="1607507881639">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="223" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1607481131259" />
-    <state width="1431" height="223" key="GridCell.Tab.0.left" timestamp="1607481131259">
+    <state width="1186" height="325" key="GridCell.Tab.0.center/62.0.1474.864@62.0.1474.864" timestamp="1607507881639" />
+    <state width="1186" height="325" key="GridCell.Tab.0.left" timestamp="1607507881639">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="223" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1607481131259" />
-    <state width="1431" height="223" key="GridCell.Tab.0.right" timestamp="1607481131259">
+    <state width="1186" height="325" key="GridCell.Tab.0.left/62.0.1474.864@62.0.1474.864" timestamp="1607507881639" />
+    <state width="1186" height="325" key="GridCell.Tab.0.right" timestamp="1607507881639">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="223" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1607481131259" />
-    <state width="1186" height="284" key="GridCell.Tab.1.bottom" timestamp="1606904964180">
+    <state width="1186" height="325" key="GridCell.Tab.0.right/62.0.1474.864@62.0.1474.864" timestamp="1607507881639" />
+    <state width="1186" height="325" key="GridCell.Tab.1.bottom" timestamp="1607507881640">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1186" height="284" key="GridCell.Tab.1.bottom/62.0.1474.864@62.0.1474.864" timestamp="1606904964180" />
-    <state width="1186" height="284" key="GridCell.Tab.1.center" timestamp="1606904964180">
+    <state width="1186" height="325" key="GridCell.Tab.1.bottom/62.0.1474.864@62.0.1474.864" timestamp="1607507881640" />
+    <state width="1186" height="325" key="GridCell.Tab.1.center" timestamp="1607507881639">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1186" height="284" key="GridCell.Tab.1.center/62.0.1474.864@62.0.1474.864" timestamp="1606904964180" />
-    <state width="1186" height="284" key="GridCell.Tab.1.left" timestamp="1606904964180">
+    <state width="1186" height="325" key="GridCell.Tab.1.center/62.0.1474.864@62.0.1474.864" timestamp="1607507881639" />
+    <state width="1186" height="325" key="GridCell.Tab.1.left" timestamp="1607507881639">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1186" height="284" key="GridCell.Tab.1.left/62.0.1474.864@62.0.1474.864" timestamp="1606904964180" />
-    <state width="1186" height="284" key="GridCell.Tab.1.right" timestamp="1606904964180">
+    <state width="1186" height="325" key="GridCell.Tab.1.left/62.0.1474.864@62.0.1474.864" timestamp="1607507881639" />
+    <state width="1186" height="325" key="GridCell.Tab.1.right" timestamp="1607507881640">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
-    <state width="1186" height="284" key="GridCell.Tab.1.right/62.0.1474.864@62.0.1474.864" timestamp="1606904964180" />
+    <state width="1186" height="325" key="GridCell.Tab.1.right/62.0.1474.864@62.0.1474.864" timestamp="1607507881640" />
     <state width="1186" height="354" key="GridCell.Tab.2.bottom" timestamp="1606903522456">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
@@ -399,6 +382,10 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state width="1186" height="354" key="GridCell.Tab.2.right/62.0.1474.864@62.0.1474.864" timestamp="1606903522456" />
+    <state x="342" y="77" key="Maven.ArtifactSearchDialog" timestamp="1607502124747">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state x="342" y="77" key="Maven.ArtifactSearchDialog/62.0.1474.864@62.0.1474.864" timestamp="1607502124747" />
     <state x="-6" y="14" width="1148" height="850" key="SettingsEditor" timestamp="1607480804935">
       <screen x="62" y="0" width="1474" height="864" />
     </state>
@@ -407,5 +394,9 @@
       <screen x="62" y="0" width="1474" height="864" />
     </state>
     <state x="456" y="197" width="672" height="677" key="run.anything.popup/62.0.1474.864@62.0.1474.864" timestamp="1606903421453" />
+    <state x="462" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1607507219966">
+      <screen x="62" y="0" width="1474" height="864" />
+    </state>
+    <state x="462" y="181" width="672" height="678" key="search.everywhere.popup/62.0.1474.864@62.0.1474.864" timestamp="1607507219966" />
   </component>
 </project>
