@@ -7,16 +7,16 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
-  #type-aliases-package: com.backend.parking
+  type-aliases-package: com.backend.shop.pojo
 
 server:
   port: 9090
 
-shiro-redis:
-  enable: true
-  redis-manager:
-    host: localhost:6379
-
+#shiro-redis:
+#  enable: true
+#  redis-manager:
+#    host: localhost:6379
+#
 #parking:
 #  jwt:
 #    # secret key

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.backend</groupId>
-    <artifactId>parking</artifactId>
+    <artifactId>shop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>parking</name>
-    <description>project for Spring Boot</description>
+    <name>JShop</name>
+    <description>TJ Second-hand trading platform</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -83,22 +83,40 @@
         </dependency>
 
         <!-- shiro -->
-        <dependency>
+        <!-- <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis-spring-boot-starter</artifactId>
             <version>3.2.1</version>
+        </dependency> -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.4.0-RC2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <!-- hutool
+
+        <!-- hutool -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.3.3</version>
-        </dependency> -->
+        </dependency>
         <!-- jwt -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
+        </dependency>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
         </dependency>
         <!-- redis -->
         <dependency>
@@ -106,7 +124,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!-- http请求工具包依赖 -->
+        <!-- http 请求依赖 -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -118,18 +136,11 @@
             <version>1.46</version>
         </dependency>
 
-        <!-- fastjson -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>1.4.0-RC2</version>
-        </dependency>
-
     </dependencies>
 
     <build>
