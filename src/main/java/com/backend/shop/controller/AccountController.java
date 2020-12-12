@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.backend.shop.common.GlobalResult;
 import com.backend.shop.common.WechatUtil;
-import com.backend.shop.mapper.AccountMapper;
 import com.backend.shop.pojo.Account;
+import com.backend.shop.serviece.IAccountServiece;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,10 @@ import java.util.UUID;
 @Controller
 public class AccountController {
 
+    /* 不要在Controller里调用Mapper */
     @Autowired
-    private AccountMapper accountMapper;
+//    private AccountMapper accountMapper;
+    private IAccountServiece iAccountServiece;
 
     /**
      * 微信用户登录详情
@@ -50,7 +52,7 @@ public class AccountController {
         }
         // 5.根据返回的User实体类，判断用户是否是新用户，是的话，将用户信息存到数据库；不是的话，更新最新登录时间
 //        User user = this.userMapper.selectById(openid);
-        Account account = this.accountMapper.selectById(1); //wrapper, selectOne
+        Account account = this.iAccountServiece.getOneByOpenId(openid);
         // uuid生成唯一key，用于维护微信小程序用户与服务端的会话
         String skey = UUID.randomUUID().toString();
         if (account == null) {
@@ -66,13 +68,14 @@ public class AccountController {
             account.setNickName(nickName);
             account.setAuthenticated(false);
 
-            this.accountMapper.insert(account);
+            //this.accountMapper.insert(account);
+            this.iAccountServiece.save(account);
         } else {
             // 已存在，更新用户登录时间
             account.setLastVisitTime(new Date());
             // 重新设置会话skey
             account.setSkey(skey);
-            this.accountMapper.updateById(account);
+            this.iAccountServiece.updateById(account);
         }
         //encrypteData比rowData多了appid和openid
         //JSONObject userInfo = WechatUtil.getUserInfo(encrypteData, sessionKey, iv);

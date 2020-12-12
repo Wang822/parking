@@ -136,11 +136,18 @@
             <version>1.46</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.5</version>
-        </dependency>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jsqlparser</artifactId>
+                    <groupId>com.github.jsqlparser</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency> -->
     </dependencies>
 
     <build>
@@ -149,6 +156,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>com.backend.shop.ShopApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.springframework.boot</groupId>
