@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### other ###
+*.zip
+!**/src/main/java/com/backend/shop/common/WechatUtil.java
