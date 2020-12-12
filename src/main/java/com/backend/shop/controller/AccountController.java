@@ -51,7 +51,6 @@ public class AccountController {
             return GlobalResult.build(500, "签名校验失败", null);
         }
         // 5.根据返回的User实体类，判断用户是否是新用户，是的话，将用户信息存到数据库；不是的话，更新最新登录时间
-//        User user = this.userMapper.selectById(openid);
         Account account = this.iAccountServiece.getOneByOpenId(openid);
         // uuid生成唯一key，用于维护微信小程序用户与服务端的会话
         String skey = UUID.randomUUID().toString();
@@ -68,7 +67,6 @@ public class AccountController {
             account.setNickName(nickName);
             account.setAuthenticated(false);
 
-            //this.accountMapper.insert(account);
             this.iAccountServiece.save(account);
         } else {
             // 已存在，更新用户登录时间
