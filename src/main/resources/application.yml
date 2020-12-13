@@ -1,16 +1,16 @@
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.199.77.139:3306/JavaEE?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: JEE
-    password: 123
-
-mybatis-plus:
-  mapper-locations: classpath*:/mapper/**Mapper.xml
-  type-aliases-package: com.backend.shop.pojo
-
-server:
-  port: 9090
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://121.199.77.139:3306/JavaEE?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+#    username: JEE
+#    password: 123
+#
+#mybatis-plus:
+#  mapper-locations: classpath*:/mapper/**Mapper.xml
+#  type-aliases-package: com.backend.shop.pojo
+#
+#server:
+#  port: 9090
 
 #shiro-redis:
 #  enable: true
