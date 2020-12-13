@@ -35,4 +35,4 @@ build/
 ### other ###
 *.zip
 !**/src/main/java/com/backend/shop/common/WechatUtil.java
-src/main/java/com/backend/shop/common/WechatUtil.java
+!/src/main/java/com/backend/shop/common/WechatUtil.java
