@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Builder;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,10 +34,10 @@ public class Account {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date lastVisitTime;
 
-    @TableField("skey")
-    private String skey;
-
-    @TableField("session_key")
-    private String sessionKey;
+//    @TableField("skey")
+//    private String skey;
+//
+//    @TableField("session_key")
+//    private String sessionKey;
 
 }

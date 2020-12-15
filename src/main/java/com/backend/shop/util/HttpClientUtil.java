@@ -1,4 +1,4 @@
-package com.backend.shop.common;
+package com.backend.shop.util;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

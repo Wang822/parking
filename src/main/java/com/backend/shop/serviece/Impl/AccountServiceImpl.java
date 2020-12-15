@@ -2,14 +2,14 @@ package com.backend.shop.serviece.Impl;
 
 import com.backend.shop.mapper.AccountMapper;
 import com.backend.shop.pojo.Account;
-import com.backend.shop.serviece.IAccountServiece;
+import com.backend.shop.serviece.IAccountService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountServieceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountServiece {
+public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountService {
 
     @Autowired
     AccountMapper accountMapper;
