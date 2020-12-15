@@ -1,7 +1,9 @@
 package com.backend.shop.controller;
 
 import com.backend.shop.common.GlobalResult;
+import com.backend.shop.pojo.Account;
 import com.backend.shop.pojo.User;
+import com.backend.shop.serviece.IAccountService;
 import com.backend.shop.serviece.IUserService;
 import com.backend.shop.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class UserController {
 
     @Autowired
     IUserService iUserService;
+
+    @Autowired
+    IAccountService iAccountService;
 
     @PostMapping("user/get")
     @ResponseBody
@@ -34,12 +39,47 @@ public class UserController {
      * @ RequestBody 注解
      * 该注解常用来处理Content-Type: 编码格式例如application/json, application/xml等
      */
-    @PostMapping("user/addOrUpdate")
+    @PostMapping("user/add")
     @ResponseBody
     public GlobalResult addUser(@RequestHeader(value = "Authorization") String token,
                                 @RequestBody User user) {
-        user.setUserId(TokenUtil.getUserId(token));
-        iUserService.saveOrUpdate(user);
+        int userId = TokenUtil.getUserId(token); //获取User ID
+//        User exist = iUserService.getById(userId);
+//        if (exist != null) {
+//            return new GlobalResult(500, "重复创建用户", exist);
+//        }
+        user.setUserId(userId);
+        try {
+            iUserService.save(user);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return new GlobalResult(500, "重复创建用户");
+        }
+
+        //更新account authenticated
+        Account account = new Account();
+        account.setAccountId(userId);
+        iAccountService.verify(account);
+        return new GlobalResult(200, "成功修改用户信息", user);
+    }
+
+    @PostMapping("user/update")
+    @ResponseBody
+    public GlobalResult updateUser(@RequestHeader(value = "Authorization") String token,
+                                @RequestBody User user) {
+        int userId = TokenUtil.getUserId(token); //获取User ID
+
+        User exist = iUserService.getById(userId);
+        if (exist == null) {
+            return new GlobalResult(204, "未完成学生认证");
+        }
+        user.setUserId(userId);
+        iUserService.updateById(user);
+//        try {
+//            iUserService.updateById(user);
+//        } catch (Exception e) {
+//            return new GlobalResult(204, "未完成学生认证");
+//        }
         return new GlobalResult(200, "成功修改用户信息", user);
     }
 

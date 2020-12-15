@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.Date;
  */
 public class TokenUtil {
     //这里的token属性配置最好写在配置文件中，这里为了方面直接写成静态属性
-    public static final long EXPIRE_TIME= 2*60*60*1000;//token到期时间2小时，毫秒为单位
+    public static final long EXPIRE_TIME= 4*60*60*1000;//token到期时间4小时，毫秒为单位
     public static final long REFRESH_EXPIRE_TIME=30*60;//RefreshToken到期时间为30分钟，秒为单位
     private static final String TOKEN_SECRET="ljdyaishijin**3nkjnj??";  //密钥盐
 

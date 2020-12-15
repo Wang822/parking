@@ -65,7 +65,6 @@ public class AccountController {
         Account account = this.iAccountService.getOneByOpenId(openid);
         // uuid生成唯一key，用于维护微信小程序用户与服务端的会话
 //        String skey = UUID.randomUUID().toString();
-
         if (account == null) {
             // 用户信息入库
             String nickName = rawDataJson.getString("nickName");
@@ -77,7 +76,6 @@ public class AccountController {
             account.setLastVisitTime(new Date());
             account.setNickName(nickName);
             account.setAuthenticated(false);
-
             this.iAccountService.save(account);
         } else {
             // 已存在，更新用户登录时间
@@ -100,7 +98,6 @@ public class AccountController {
         RedisUtil.set(accountId, currentTimeMillis, TokenUtil.REFRESH_EXPIRE_TIME);
         response.setHeader("Authorization", token);
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
-
         GlobalResult result = new GlobalResult(200, "success login");
 
         return result;

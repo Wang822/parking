@@ -5,5 +5,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface IAccountService extends IService<Account> {
     Account getOneByOpenId(String openId);
-//    int getIdByOpenId
+    void verify(Account account); //学生认证
 }
