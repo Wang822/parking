@@ -65,6 +65,12 @@ public class GlobalResult {
         this.data = data;
     }
 
+    public GlobalResult(Integer status, String msg) {
+        this.status = status;
+        this.msg = msg;
+        this.data = null;
+    }
+
     public Boolean isOK() {
         return this.status == 200;
     }

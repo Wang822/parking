@@ -1,6 +1,6 @@
 package com.backend.shop;
 
-import com.backend.shop.common.MybatisUtils;
+import com.backend.shop.util.MybatisUtils;
 import com.backend.shop.mapper.QuestionPostDao;
 import com.backend.shop.pojo.QuestionPost;
 import java.util.List;
