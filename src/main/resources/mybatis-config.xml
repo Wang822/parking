@@ -19,5 +19,6 @@
     <!--    每一个mapper.xml都要在mybatis核心配置文件中注册-->
     <mappers>
         <mapper resource="QuestionPostMapper.xml"/>
+        <mapper resource="./mapper/ChatMapper.xml"/>
     </mappers>
 </configuration>
