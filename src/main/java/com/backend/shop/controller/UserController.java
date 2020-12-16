@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     IAccountService iAccountService;
 
-    @PostMapping("user/get")
+    @GetMapping("user/get")
     @ResponseBody
     public GlobalResult getUser(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);
