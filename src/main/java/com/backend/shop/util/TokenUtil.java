@@ -42,7 +42,7 @@ public class TokenUtil {
     /**
      * token验证
      */
-    public static boolean verify(String token) throws Exception{
+    public static boolean verify(String token) throws Exception {
 
         JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();//创建token验证器
         DecodedJWT decodedJWT = jwtVerifier.verify(token); //若不成功, exception

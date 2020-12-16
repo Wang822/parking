@@ -122,7 +122,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
 //                System.out.println("RETURN FALSE");
                 return false;
             }catch (Exception e){
-                e.printStackTrace();
+                //e.printStackTrace();
 //                System.out.println("*exception内token验证：" );//+ e.getClass()
                 if (e instanceof TokenExpiredException){
 //                    System.out.println("*TokenExpiredException in JWTFilter.onLoginSuccess");
@@ -171,7 +171,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      * 刷新AccessToken，进行判断RefreshToken是否过期，未过期就返回新的AccessToken且继续正常访问
      */
     private boolean refreshToken(ServletRequest request, ServletResponse response) {
-        String token = ((HttpServletRequest)request).getHeader("token");
+        String token = ((HttpServletRequest)request).getHeader("Authorization");
         String account = TokenUtil.getAccountId(token);
         Long currentTime=TokenUtil.getCurrentTime(token);
         // 判断Redis中RefreshToken是否存在
