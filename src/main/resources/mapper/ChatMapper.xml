@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.backend.shop.dao.ChatDAO">
+<mapper namespace="com.backend.shop.mapper.ChatDao">
     <!--insert new chat-->
-    <insert id="addNewChat" parameterType="Chat">
-        insert into chat
-        values (#{sender_id}, #{receiver_id}, #{time})
+    <insert id="add" parameterType="Chat">
+        insert into chat (sender_id, receiver_id, time, content)
+        values (#{senderId}, #{receiverId}, #{time}, #{content})
     </insert>
+    <select id="selectContacts" parameterType="int" resultType="User">
+        SELECT distinct *
+        FROM user
+        WHERE user_id in
+              (SELECT distinct receiver_id FROM chat Where sender_id = #{userId})
+           or (SELECT distinct sender_id FROM chat Where receiver_id = #{userId})
+    </select>
+    <select id="selectMessages" resultType="Chat">
+        SELECT *
+        FROM chat
+        WHERE (receiver_id = #{myUser} and sender_id = #{anotherUser})
+           or (receiver_id = #{anotherUser} and sender_id = #{myUser})
+    </select>
 </mapper>

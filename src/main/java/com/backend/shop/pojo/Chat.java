@@ -14,11 +14,14 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class Chat {
+    @TableField("content")
+    private String content;
+
     @TableField("sender_id")
-    private String senderId;
+    private int senderId;
 
     @TableField("receiver_id")
-    private String receiverId;
+    private int receiverId;
 
     @TableField("time")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
