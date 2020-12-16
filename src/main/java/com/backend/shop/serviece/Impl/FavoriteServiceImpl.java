@@ -2,10 +2,13 @@ package com.backend.shop.serviece.Impl;
 
 import com.backend.shop.mapper.FavoriteDao;
 import com.backend.shop.pojo.Favorite;
+import com.backend.shop.pojo.Good;
 import com.backend.shop.serviece.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 @Service
 @Transactional
@@ -21,5 +24,15 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public int selectFavor(Favorite favorite) {
         return favoriteDao.selectFavor(favorite);
+    }
+
+    @Override
+    public ArrayList<Good> selectGoods(int userId) {
+        return favoriteDao.selectGoods(userId);
+    }
+
+    @Override
+    public void deleteFavorite(int userId, int goodId) {
+        favoriteDao.deleteFavorite(userId, goodId);
     }
 }

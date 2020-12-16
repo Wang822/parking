@@ -6,17 +6,36 @@
         insert into favorite (user_id, good_id)
         values (#{userId}, #{goodId})
     </insert>
+    <!--select to check if the good is already in favorite-->
     <select id="selectFavor" parameterType="Favorite" resultType="int">
         SELECT count(*)
         FROM favorite
         WHERE user_id = #{userId}
           and good_id = #{goodId}
     </select>
-    <select id="selectGoods" parameterType="int" resultType="int">
-        SELECT *
-        FROM good
+    <!--select all goods in the user's favorite list-->
+    <select id="selectGoods" parameterType="int" resultType="Good">
+        SELECT good_id,
+               name,
+               status,
+               price,
+               description,
+               campus,
+               old,
+               seller_id,
+               pic_addr,
+               publish_date,
+               deposit,
+               tag
+        FROM Good
                  natural join favorite
         WHERE user_id = #{userId}
-        ORDER BY favor_id}
+        order by favor_id
     </select>
+    <delete id="deleteFavorite">
+        delete
+        from favorite
+        where user_id = #{userId}
+          and good_id = #{goodId}
+    </delete>
 </mapper>
