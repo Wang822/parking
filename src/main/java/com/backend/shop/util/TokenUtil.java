@@ -42,13 +42,17 @@ public class TokenUtil {
     /**
      * token验证
      */
-    public static boolean verify(String token) throws Exception{
+    public static boolean verify(String token) throws Exception {
 
         JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();//创建token验证器
         DecodedJWT decodedJWT = jwtVerifier.verify(token); //若不成功, exception
-        System.out.println("*TokenUtil.verify认证");
-        System.out.println("Account ID:   " + decodedJWT.getClaim("accountId").asString());
-        System.out.println("过期时间：      " + decodedJWT.getExpiresAt());
+//        System.out.println("\n**** TokenUtil.verify认证 ****");
+//        System.out.println("请求时间：      " + new Date());
+//        System.out.println("账户ID:        " + decodedJWT.getClaim("accountId").asString());
+//        System.out.println("过期时间：      " + decodedJWT.getExpiresAt());
+        System.out.println(new Date() + "  [Token认证]" +
+                "   AccountID: " + decodedJWT.getClaim("accountId").asString() +
+                "   过期时间: " + decodedJWT.getExpiresAt());
         return true;
     }
 

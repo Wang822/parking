@@ -89,7 +89,7 @@ public class AccountController {
         //6. 把新的skey返回给小程序
 //        GlobalResult result = GlobalResult.build(200, null, skey);
 
-
+        //Integer ID = account.getAccountId();
         String accountId = String.valueOf(account.getAccountId());
         // 生成token
         long currentTimeMillis = System.currentTimeMillis();
@@ -98,8 +98,8 @@ public class AccountController {
         RedisUtil.set(accountId, currentTimeMillis, TokenUtil.REFRESH_EXPIRE_TIME);
         response.setHeader("Authorization", token);
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
-        GlobalResult result = new GlobalResult(200, "success login");
 
+        GlobalResult result = new GlobalResult(200, "success login", account.isAuthenticated());
         return result;
     }
 
