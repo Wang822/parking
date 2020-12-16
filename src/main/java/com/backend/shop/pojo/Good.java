@@ -19,6 +19,9 @@ public class Good {
     public Good(int q_good_id, String q_name, int q_status, String q_price, String q_description, int q_campus, int q_old,
             int q_seller_id, String q_pic_addr, String q_deposit, String q_tag, Date q_publish_date)
     {
+        this.good_id=q_good_id;
+        this.name=q_name;
+        this.status=q_status;
         this.price=q_price;
         this.description= q_description;
         this.campus= q_campus;
