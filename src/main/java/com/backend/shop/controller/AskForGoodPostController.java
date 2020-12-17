@@ -26,7 +26,7 @@ public class AskForGoodPostController {
     }
 
     @PostMapping("/add")
-    public GlobalResult addFavor(@RequestHeader(value = "Authorization") String token,
+    public GlobalResult addAskForGoodPost(@RequestHeader(value = "Authorization") String token,
                                  @RequestParam String afg_intro,
                                  @RequestParam String afg_title,
                                  @RequestParam int afg_tag,
