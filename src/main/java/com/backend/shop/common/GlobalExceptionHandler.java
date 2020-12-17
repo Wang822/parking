@@ -26,7 +26,7 @@ import java.util.Map;
 @ResponseBody
 public class GlobalExceptionHandler {
 
-    //日志，这里不说日志
+    //日志
 //    private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
 

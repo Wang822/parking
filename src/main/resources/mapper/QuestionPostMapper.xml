@@ -4,7 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间绑定一个指定的dao接口-->
 <mapper namespace="com.backend.shop.mapper.QuestionPostDao">
-    <select id="getQuestionPostList" resultType="com.backend.shop.pojo.QuestionPost">
-    select * from JavaEE.QuestionPost
+    <select id="findAll" resultType="QuestionPost">
+    select *
+    from QuestionPost
   </select>
+
+    <!--insert -->
+    <insert id="add" parameterType="QuestionPost">
+        insert into QuestionPost (user_id, q_content,q_title,time)
+        values (#{userId}, #{qContent},#{qTitle},#{time})
+    </insert>
 </mapper>
