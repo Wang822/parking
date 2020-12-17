@@ -1,9 +1,9 @@
-package com.backend.shop.serviece.Impl;
+package com.backend.shop.service.Impl;
 
 import com.backend.shop.mapper.ChatDao;
 import com.backend.shop.pojo.Chat;
 import com.backend.shop.pojo.User;
-import com.backend.shop.serviece.ChatService;
+import com.backend.shop.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

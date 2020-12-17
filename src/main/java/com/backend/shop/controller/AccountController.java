@@ -7,7 +7,7 @@ import com.backend.shop.util.RedisUtil;
 import com.backend.shop.util.TokenUtil;
 import com.backend.shop.util.WechatUtil;
 import com.backend.shop.pojo.Account;
-import com.backend.shop.serviece.IAccountService;
+import com.backend.shop.service.IAccountService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

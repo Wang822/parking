@@ -3,14 +3,12 @@ package com.backend.shop.controller;
 import com.backend.shop.common.GlobalResult;
 import com.backend.shop.pojo.Account;
 import com.backend.shop.pojo.User;
-import com.backend.shop.serviece.IAccountService;
-import com.backend.shop.serviece.IUserService;
+import com.backend.shop.service.IAccountService;
+import com.backend.shop.service.IUserService;
 import com.backend.shop.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UserController {

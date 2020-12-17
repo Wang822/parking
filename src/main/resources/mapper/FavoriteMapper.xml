@@ -32,10 +32,17 @@
         WHERE user_id = #{userId}
         order by favor_id
     </select>
+    <!--delete a favorite-->
     <delete id="deleteFavorite">
         delete
         from favorite
         where user_id = #{userId}
           and good_id = #{goodId}
     </delete>
+    <!--select count of favorites-->
+    <select id="selectCount" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM favorite
+        WHERE user_id = #{userId}
+    </select>
 </mapper>

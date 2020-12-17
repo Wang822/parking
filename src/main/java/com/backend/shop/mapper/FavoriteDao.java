@@ -16,4 +16,6 @@ public interface FavoriteDao {
     ArrayList<Good> selectGoods(int userId);
 
     void deleteFavorite(@Param("userId") int userId, @Param("goodId") int goodId);
+
+    int selectCount(int userId);
 }

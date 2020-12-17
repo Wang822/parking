@@ -3,10 +3,9 @@ package com.backend.shop.controller;
 import com.backend.shop.common.GlobalResult;
 import com.backend.shop.pojo.Chat;
 import com.backend.shop.pojo.User;
-import com.backend.shop.serviece.ChatService;
+import com.backend.shop.service.ChatService;
 import com.backend.shop.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;

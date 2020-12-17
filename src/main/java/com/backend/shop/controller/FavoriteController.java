@@ -3,11 +3,9 @@ package com.backend.shop.controller;
 import com.backend.shop.common.GlobalResult;
 import com.backend.shop.pojo.Favorite;
 import com.backend.shop.pojo.Good;
-import com.backend.shop.pojo.User;
-import com.backend.shop.serviece.FavoriteService;
+import com.backend.shop.service.FavoriteService;
 import com.backend.shop.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -47,5 +45,12 @@ public class FavoriteController {
         int userId = TokenUtil.getUserId(token);
         favoriteService.deleteFavorite(userId, goodId);
         return new GlobalResult(200, "successful operation");
+    }
+
+    @GetMapping("/count")
+    public GlobalResult getCount(@RequestHeader(value = "Authorization") String token) {
+        int userId = TokenUtil.getUserId(token);
+        int count = favoriteService.selectCount(userId);
+        return new GlobalResult(200, "successful operation", count);
     }
 }
