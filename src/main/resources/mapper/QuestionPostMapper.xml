@@ -11,7 +11,7 @@
 
     <!--insert -->
     <insert id="add" parameterType="QuestionPost">
-        insert into AskForGoodPost (user_id, q_content,q_title,time)
+        insert into QuestionPost (user_id, q_content,q_title,time)
         values (#{userId}, #{qContent},#{qTitle},#{time})
     </insert>
 </mapper>
