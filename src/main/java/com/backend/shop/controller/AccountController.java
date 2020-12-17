@@ -38,7 +38,7 @@ public class AccountController {
             @ApiResponse(code = 200, message = "success login", responseHeaders = {
                     @ResponseHeader(name = "Authorization", description = "登录token")}),
             @ApiResponse(code = 401, message = "token verify fail")})
-    public GlobalResult user_login(@ApiParam("临时登录凭证")    @RequestParam(value = "code") String code,
+    public GlobalResult<Boolean> user_login(@ApiParam("临时登录凭证")    @RequestParam(value = "code") String code,
                                    @ApiParam("用户非敏感信息")  @RequestParam(value = "rawData") String rawData,
                                    @ApiParam("签名")          @RequestParam(value = "signature") String signature,
                                    @ApiParam("用户敏感信息")    @RequestParam(value = "encrypteData") String encrypteData,
@@ -57,7 +57,7 @@ public class AccountController {
         // 4.校验签名 小程序发送的签名signature与服务器端生成的签名signature2 = sha1(rawData + sessionKey)
         String signature2 = DigestUtils.sha1Hex(rawData + sessionKey);
         if (!signature.equals(signature2)) {
-            return new GlobalResult(500, "签名校验失败");
+            return new GlobalResult<>(500, "签名校验失败");
         }
         // 5.根据返回的User实体类，判断用户是否是新用户，是的话，将用户信息存到数据库；不是的话，更新最新登录时间
         Account account = this.iAccountService.getOneByOpenId(openid);
@@ -96,7 +96,7 @@ public class AccountController {
         response.setHeader("Authorization", token);
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
 
-        GlobalResult result = new GlobalResult(200, "success login", account.isAuthenticated());
+        GlobalResult<Boolean> result = new GlobalResult<>(200, "success login", account.isAuthenticated());
         return result;
     }
 

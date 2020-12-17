@@ -26,16 +26,16 @@ public class UserController {
     @ResponseBody
     @ApiOperation(value = "获取用户个人信息", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功读取用户信息", response = User.class),
+            @ApiResponse(code = 200, message = "成功读取用户信息"),
             @ApiResponse(code = 401, message = "token verify fail"),
             @ApiResponse(code = 204, message = "此用户未完成学生认证")})
-    public GlobalResult getUser(@RequestHeader(value = "Authorization") String token) {
+    public GlobalResult<User> getUser(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);
         User user = iUserService.getById(userId);
         if (user == null) {
-            return new GlobalResult(204, "此用户未完成学生认证");
+            return new GlobalResult<>(204, "此用户未完成学生认证");
         }
-        return new GlobalResult(200, "成功读取用户信息", user);
+        return new GlobalResult<>(200, "成功读取用户信息", user);
     }
 
     /**
@@ -49,10 +49,10 @@ public class UserController {
     @ResponseBody
     @ApiOperation(value = "添加用户/学生认证", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功添加用户", response = User.class),
+            @ApiResponse(code = 200, message = "成功添加用户"),
             @ApiResponse(code = 401, message = "token verify fail"),
             @ApiResponse(code = 500, message = "重复创建用户")})
-    public GlobalResult addUser(@RequestHeader(value = "Authorization") String token,
+    public GlobalResult<User> addUser(@RequestHeader(value = "Authorization") String token,
                                 @ApiParam("用户个人信息，不用ID") @RequestBody User user) {
         int userId = TokenUtil.getUserId(token); //获取User ID
         user.setUserId(userId);
@@ -60,34 +60,34 @@ public class UserController {
             iUserService.save(user);
         } catch (Exception e) {
             //e.printStackTrace();
-            return new GlobalResult(500, "重复创建用户");
+            return new GlobalResult<>(500, "重复创建用户");
         }
 
         //更新account authenticated
         Account account = new Account();
         account.setAccountId(userId);
         iAccountService.verify(account);
-        return new GlobalResult(200, "成功添加用户", user);
+        return new GlobalResult<>(200, "成功添加用户", user);
     }
 
     @PostMapping("/update")
     @ResponseBody
     @ApiOperation(value = "修改用户个人信息", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功修改用户信息", response = User.class),
+            @ApiResponse(code = 200, message = "成功修改用户信息"),
             @ApiResponse(code = 401, message = "token verify fail"),
             @ApiResponse(code = 204, message = "未完成学生认证")})
-    public GlobalResult updateUser(@RequestHeader(value = "Authorization") String token,
+    public GlobalResult<User> updateUser(@RequestHeader(value = "Authorization") String token,
                                    @ApiParam("用户个人信息，不用ID") @RequestBody User user) {
         int userId = TokenUtil.getUserId(token); //获取User ID
 
         User exist = iUserService.getById(userId);
         if (exist == null) {
-            return new GlobalResult(204, "未完成学生认证");
+            return new GlobalResult<User>(204, "未完成学生认证");
         }
         user.setUserId(userId);
         iUserService.updateById(user);
-        return new GlobalResult(200, "成功修改用户信息", user);
+        return new GlobalResult<User>(200, "成功修改用户信息", user);
     }
 
 }
