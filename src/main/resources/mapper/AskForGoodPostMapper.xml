@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间绑定一个指定的dao接口-->
+<mapper namespace="com.backend.shop.mapper.AskForGoodPostDao">
+
+<!--    selectAll-->
+    <select id="findAll" resultType="AskForGoodPost">
+        select *
+        from AskForGoodPost
+    </select>
+
+    <!--insert new chat-->
+    <insert id="add" parameterType="AskForGoodPost">
+        insert into AskForGoodPost (user_id, afg_intro,afg_title,afg_tag,campus,afg_price,afg_condition,time)
+        values (#{userId}, #{afgIntro},#{afgTitle},#{afgTag},#{campus},#{afgPrice},#{afgCondition},#{time})
+    </insert>
+</mapper>
