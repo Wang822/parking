@@ -6,6 +6,8 @@ import com.backend.shop.pojo.Good;
 import com.backend.shop.service.FavoriteService;
 import com.backend.shop.util.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -33,10 +35,10 @@ public class FavoriteController {
     }
 
     @GetMapping("/get")
-    public GlobalResult getContacts(@RequestHeader(value = "Authorization") String token) {
+    public ResponseEntity<ArrayList<Good>> getFavorites(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);
         ArrayList<Good> goods = favoriteService.selectGoods(userId);
-        return new GlobalResult(200, "successful operation", goods);
+        return ResponseEntity.status(HttpStatus.OK).body(goods);
     }
 
     @DeleteMapping("/remove/{goodId}")

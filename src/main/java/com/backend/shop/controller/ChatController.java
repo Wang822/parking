@@ -2,6 +2,7 @@ package com.backend.shop.controller;
 
 import com.backend.shop.common.GlobalResult;
 import com.backend.shop.pojo.Chat;
+import com.backend.shop.pojo.Good;
 import com.backend.shop.pojo.User;
 import com.backend.shop.service.ChatService;
 import com.backend.shop.util.TokenUtil;
@@ -9,6 +10,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -53,22 +56,22 @@ public class ChatController {
     }
 
     @GetMapping("/getContacts")
-    public GlobalResult getContacts(@RequestHeader(value = "Authorization") String token) {
+    public ResponseEntity<ArrayList<User>> getContacts(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);
         ArrayList<User> users = chatService.selectContacts(userId);
-        return new GlobalResult(200, "successful operation", users);
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
     @ApiOperation(value = "get all messages between two users", response = Chat.class)
     @GetMapping("getMessages/{anotherUserId}")
-    public GlobalResult getMessages(@RequestHeader(value = "Authorization") String token,
-                                    @ApiParam("another user's id") @PathVariable int anotherUserId) {
+    public ResponseEntity<ArrayList<Chat>> getMessages(@RequestHeader(value = "Authorization") String token,
+                                                       @ApiParam("another user's id") @PathVariable int anotherUserId) {
         int userId = TokenUtil.getUserId(token);
         ArrayList<Chat> chats = chatService.selectMessages(userId, anotherUserId);
 //        if(chats.isEmpty()){
 //            return new GlobalResult(401, "no messages between these two users");
 //        }
-        return new GlobalResult(200, "successful operation", chats);
+        return ResponseEntity.status(HttpStatus.OK).body(chats);
     }
 }
 
