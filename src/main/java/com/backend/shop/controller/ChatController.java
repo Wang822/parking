@@ -39,10 +39,10 @@ public class ChatController {
      */
     @PostMapping("/addMessage")
     @ApiOperation(value = "add a new massage")
-    public GlobalResult addChat(@RequestHeader(value = "Authorization") String token,
-                                @ApiParam("receiver's id") @RequestParam int receiver_id,
-                                @ApiParam("message's content") @RequestParam String content,
-                                @ApiParam("time, yyyy-MM-dd hh:mm:ss") @RequestParam String time) throws ParseException {
+    public ResponseEntity<String> addChat(@RequestHeader(value = "Authorization") String token,
+                                          @ApiParam("receiver's id") @RequestParam int receiver_id,
+                                          @ApiParam("message's content") @RequestParam String content,
+                                          @ApiParam("time, yyyy-MM-dd hh:mm:ss") @RequestParam String time) throws ParseException {
         int userId = TokenUtil.getUserId(token);
         Chat chat = new Chat();
         chat.setReceiverId(receiver_id);
@@ -52,7 +52,7 @@ public class ChatController {
         chat.setTime(date);
         chat.setContent(content);
         chatService.add(chat);
-        return new GlobalResult(200, "successful operation");
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
     @GetMapping("/getContacts")
