@@ -37,13 +37,15 @@ public class MyShiroConfig {
         Map<String,String> filterRuleMap=new LinkedHashMap<>();
         // Map<String, String> filterMap = shiroFilterChainDefinition.getFilterChainMap();
         //放行接口
-//        filterRuleMap.put("/","anon");
-//        filterRuleMap.put("/webjars/**","anon");
+        // login
         filterRuleMap.put("/wx/login","anon");
-//        filterRuleMap.put("/css/**","anon");
-//        filterRuleMap.put("/images/**","anon");
-//        filterRuleMap.put("/js/**","anon");
-//        filterRuleMap.put("/lib/**","anon");
+        // swagger
+        filterRuleMap.put("/swagger**/**","anon");
+        filterRuleMap.put("/v3/**","anon");
+        filterRuleMap.put("/v2/**","anon");
+        filterRuleMap.put("/doc.html","anon");
+        filterRuleMap.put("/webjars/**","anon");
+
         //拦截所有接口
         filterRuleMap.put("/**","jwt");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
