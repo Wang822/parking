@@ -10,35 +10,35 @@ import lombok.Data;
 
 @Data
 @TableName("user")
-@ApiModel("用户个人信息")
+@ApiModel(value = "User", description = "用户个人信息")
 public class User {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "user_id", type = IdType.INPUT)
-    @ApiModelProperty("ID")
+    @ApiModelProperty(value = "ID", example = "2")
     private int userId;
 
     @TableField("nick_name")
-    @ApiModelProperty("昵称")
+    @ApiModelProperty(value = "昵称", example = "nick")
     private String nickName;
 
     @TableField("real_name")
-    @ApiModelProperty("真实姓名")
+    @ApiModelProperty(value = "真实姓名", example = "real")
     private String realName;
 
     @TableField("campus")
-    @ApiModelProperty("校区")
+    @ApiModelProperty(value = "校区",example = "1")
     private int campus;
 
     @TableField("college")
-    @ApiModelProperty("学院")
+    @ApiModelProperty(value = "学院", example = "sse")
     private String college;
 
     @TableField("major")
-    @ApiModelProperty("专业")
+    @ApiModelProperty(value = "专业", example = "se")
     private String major;
 
     @TableField("grade")
-    @ApiModelProperty("年级")
+    @ApiModelProperty(value = "年级", example = "3")
     private int grade;
 }

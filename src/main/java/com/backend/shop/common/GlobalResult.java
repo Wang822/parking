@@ -1,5 +1,8 @@
 package com.backend.shop.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  *   自定义响应数据结构
  *              200：表示成功
@@ -8,18 +11,20 @@ package com.backend.shop.common;
  *              502：拦截器拦截到用户token出错
  *              555：异常抛出信息
  */
+@ApiModel(value = "Global Result", description = "Response封装")
 public class GlobalResult {
 
-    // 响应业务状态
+    @ApiModelProperty(value = "响应业务状态",example = "200")
     private Integer status;
 
-    // 响应消息
+    @ApiModelProperty(value = "响应消息",example = "success")
     private String msg;
 
-    // 响应中的数据
+    @ApiModelProperty(value = "响应数据(对象)", example = "null")
     private Object data;
 
-//    private String ok;  // 不使用
+    @ApiModelProperty(value = "ok,未使用", example = "true")
+    private String ok;
 
     public static GlobalResult build(Integer status, String msg, Object data) {
         return new GlobalResult(status, msg, data);
