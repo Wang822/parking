@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AskForGoodPostDao {
-    List<AskForGoodPost> findAll();
 
+    List<AskForGoodPost> findAll();
     void add(AskForGoodPost askForGoodPost);
 
 
