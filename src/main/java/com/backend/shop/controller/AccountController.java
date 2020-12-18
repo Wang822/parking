@@ -7,9 +7,12 @@ import com.backend.shop.util.RedisUtil;
 import com.backend.shop.util.TokenUtil;
 import com.backend.shop.util.WechatUtil;
 import com.backend.shop.pojo.Account;
-import com.backend.shop.serviece.IAccountService;
+import com.backend.shop.service.IAccountService;
+import io.swagger.annotations.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,32 +23,31 @@ import java.util.Date;
 
 
 @Controller
+@Api(value = "账户")
 public class AccountController {
 
     /* 不要在Controller里调用Mapper */
     @Autowired
-//    private AccountMapper accountMapper;
     private IAccountService iAccountService;
-
-//    @Autowired
-//    private RedisUtil redisUtil; // static
 
     /**
      * 微信用户登录详情
      */
+    @ApiOperation("注册或登录")
     @PostMapping("wx/login")
     @ResponseBody
-    public GlobalResult user_login(@RequestParam(value = "code", required = false) String code,
-                                   @RequestParam(value = "rawData", required = false) String rawData,
-                                   @RequestParam(value = "signature", required = false) String signature,
-                                   @RequestParam(value = "encrypteData", required = false) String encrypteData,
-                                   @RequestParam(value = "iv", required = false) String iv,
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "success login", responseHeaders = {
+                    @ResponseHeader(name = "Authorization", description = "登录token")}),
+            @ApiResponse(code = 401, message = "token verify fail"),
+            @ApiResponse(code = 403, message = "签名校验失败")})
+    public ResponseEntity<Boolean> user_login(
+                                   @ApiParam("临时登录凭证")    @RequestParam(value = "code") String code,
+                                   @ApiParam("用户非敏感信息")  @RequestParam(value = "rawData") String rawData,
+                                   @ApiParam("签名")          @RequestParam(value = "signature") String signature,
+                                   @ApiParam("用户敏感信息")    @RequestParam(value = "encrypteData") String encrypteData,
+                                   @ApiParam("解密算法向量")    @RequestParam(value = "iv") String iv,
                                    HttpServletResponse response) {
-//        System.out.println("code " + code);
-//        System.out.println(rawData);
-//        System.out.println(signature);
-//        System.out.println(encrypteData);
-//        System.out.println(iv);
         // 用户非敏感信息：rawData
         // 签名：signature
         JSONObject rawDataJson = JSON.parseObject(rawData);
@@ -59,7 +61,8 @@ public class AccountController {
         // 4.校验签名 小程序发送的签名signature与服务器端生成的签名signature2 = sha1(rawData + sessionKey)
         String signature2 = DigestUtils.sha1Hex(rawData + sessionKey);
         if (!signature.equals(signature2)) {
-            return new GlobalResult(500, "签名校验失败");
+//            return new GlobalResult<>(403, "签名校验失败");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
         // 5.根据返回的User实体类，判断用户是否是新用户，是的话，将用户信息存到数据库；不是的话，更新最新登录时间
         Account account = this.iAccountService.getOneByOpenId(openid);
@@ -71,7 +74,6 @@ public class AccountController {
 
             account = new Account();
             account.setOpenId(openid);
-            //account.setSkey("");
             account.setCreateTime(new Date());
             account.setLastVisitTime(new Date());
             account.setNickName(nickName);
@@ -99,10 +101,11 @@ public class AccountController {
         response.setHeader("Authorization", token);
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
 
-        GlobalResult result = new GlobalResult(200, "success login", account.isAuthenticated());
-        return result;
+        System.out.println(new Date() + "  [Login]   AccountID: " + accountId);
+
+//        return new GlobalResult<>(200, "success login", account.isAuthenticated());
+        return ResponseEntity.ok(account.isAuthenticated());
     }
 
-    /* logout */
 }
 

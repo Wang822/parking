@@ -1,9 +1,9 @@
-package com.backend.shop.serviece.Impl;
+package com.backend.shop.service.Impl;
 
 import com.backend.shop.mapper.FavoriteDao;
 import com.backend.shop.pojo.Favorite;
 import com.backend.shop.pojo.Good;
-import com.backend.shop.serviece.FavoriteService;
+import com.backend.shop.service.FavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +34,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public void deleteFavorite(int userId, int goodId) {
         favoriteDao.deleteFavorite(userId, goodId);
+    }
+
+    @Override
+    public int selectCount(int userId) {
+        return favoriteDao.selectCount(userId);
     }
 }

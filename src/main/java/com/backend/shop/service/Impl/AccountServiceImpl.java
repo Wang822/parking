@@ -1,8 +1,8 @@
-package com.backend.shop.serviece.Impl;
+package com.backend.shop.service.Impl;
 
 import com.backend.shop.mapper.AccountMapper;
 import com.backend.shop.pojo.Account;
-import com.backend.shop.serviece.IAccountService;
+import com.backend.shop.service.IAccountService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

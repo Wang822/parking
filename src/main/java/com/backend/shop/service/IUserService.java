@@ -1,4 +1,4 @@
-package com.backend.shop.serviece;
+package com.backend.shop.service;
 
 import com.backend.shop.pojo.User;
 import com.baomidou.mybatisplus.extension.service.IService;

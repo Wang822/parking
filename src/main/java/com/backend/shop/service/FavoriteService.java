@@ -1,4 +1,4 @@
-package com.backend.shop.serviece;
+package com.backend.shop.service;
 
 import com.backend.shop.pojo.Favorite;
 import com.backend.shop.pojo.Good;
@@ -15,4 +15,6 @@ public interface FavoriteService {
     ArrayList<Good> selectGoods(int userId);
 
     void deleteFavorite(int userId, int goodId);
+
+    int selectCount(int userId);
 }

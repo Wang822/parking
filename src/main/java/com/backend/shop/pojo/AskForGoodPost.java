@@ -14,23 +14,34 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class QuestionPost {
+public class AskForGoodPost {
 
-    @TableId(value = "q_post_id", type = IdType.AUTO)
-    private int qPostId;
+    @TableId(value = "afg_post_id", type = IdType.AUTO)
+    private int afgPostId;
 
     @TableField("user_id")
     private int userId;
 
-    @TableField("q_content")
-    private String qContent;
+    @TableField("afg_intro")
+    private String afgIntro;
 
-    @TableField("q_title")
-    private String qTitle;
+    @TableField("afg_title")
+    private String afgTitle;
+
+    @TableField("afg_tag")
+    private int afgTag;
+
+    @TableField("campus")
+    private int campus;
+
+    @TableField("afg_price")
+    private double afgPrice;
+
+    @TableField("afg_condition")
+    private String afgCondition;
 
     @TableField("time")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date time;
 
 }
-
