@@ -1,5 +1,6 @@
 package com.backend.shop.common;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -7,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,10 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @ControllerAdvice
 @ResponseBody
@@ -34,16 +33,22 @@ public class GlobalExceptionHandler {
      * 捕捉所有Shiro异常
      */
     @ExceptionHandler(ShiroException.class)
-    public GlobalResult handle401(ShiroException e) {
-        return new GlobalResult(401, "无权访问(Unauthorized):" + e.getMessage());
+    public ResponseEntity<String> handle401(ShiroException e) {
+        String msg = "无权访问(Unauthorized):" + e.getMessage();
+        System.out.println(new Date() + "  [EXCEPTION]ShiroException:   " + msg);
+//        return new GlobalResult(401, "无权访问(Unauthorized):" + e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(msg);
     }
 
     /**
      * 单独捕捉Shiro(UnauthorizedException)异常 该异常为访问有权限管控的请求而该用户没有所需权限所抛出的异常
      */
     @ExceptionHandler(UnauthorizedException.class)
-    public GlobalResult handle401(UnauthorizedException e) {
-        return new GlobalResult(401, "无权访问(Unauthorized):当前Subject没有此请求所需权限(" + e.getMessage() + ")");
+    public ResponseEntity<String> handle401(UnauthorizedException e) {
+        String msg = "无权访问(Unauthorized):当前Subject没有此请求所需权限(" + e.getMessage() + ")";
+        System.out.println(new Date() + "  [EXCEPTION]UnauthorizedException:   " + msg);
+//        return new GlobalResult(401, "无权访问(Unauthorized):当前Subject没有此请求所需权限(" + e.getMessage() + ")");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(msg);
     }
 
     /**
@@ -51,18 +56,34 @@ public class GlobalExceptionHandler {
      * 该异常为以游客身份访问有权限管控的请求无法对匿名主体进行授权，而授权失败所抛出的异常
      */
     @ExceptionHandler(UnauthenticatedException.class)
-    public GlobalResult handle401(UnauthenticatedException e) {
-        return new GlobalResult(401, "无权访问(Unauthorized):当前Subject是匿名Subject，请先登录(This subject is anonymous.)");
+    public ResponseEntity<String> handle401(UnauthenticatedException e) {
+        String msg = "无权访问(Unauthorized):当前Subject是匿名Subject，请先登录(This subject is anonymous.)";
+        System.out.println(new Date() + "  [EXCEPTION]UnauthenticatedException:   " + msg);
+//        return new GlobalResult(401, "无权访问(Unauthorized):当前Subject是匿名Subject，请先登录(This subject is anonymous.)");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(msg);
     }
 
     /**
      * 捕捉校验异常(BindException)
      */
     @ExceptionHandler(BindException.class)
-    public GlobalResult validException(BindException e) {
+    public ResponseEntity<String> validException(BindException e) {
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
         Map<String, Object> error = this.getValidError(fieldErrors);
-        return new GlobalResult(400, error.get("errorMsg").toString(), error.get("errorList"));
+        String msg = error.get("errorMsg").toString();
+        System.out.println(new Date() + "  [EXCEPTION]BindException:   " + msg);
+//        return new GlobalResult(400, error.get("errorMsg").toString(), error.get("errorList"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
+    }
+
+    /**
+     * 捕捉JWT解析异常
+     */
+    @ExceptionHandler(JWTDecodeException.class)
+    public ResponseEntity<String> decodeException(JWTDecodeException e) {
+        String msg = "异常校验码: " + e.getMessage();
+        System.out.println(new Date() + "  [EXCEPTION]JWTDecodeException:   " + msg);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(msg);
     }
 
 
@@ -70,16 +91,18 @@ public class GlobalExceptionHandler {
      * 捕捉404异常
      */
     @ExceptionHandler(NoHandlerFoundException.class)
-    public GlobalResult handle(NoHandlerFoundException e) {
-        return new GlobalResult(404, e.getMessage());
+    public ResponseEntity<String> handle(NoHandlerFoundException e) {
+//        return new GlobalResult(404, e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
     /**
      * 捕捉其他所有异常
      */
     @ExceptionHandler(Exception.class)
-    public GlobalResult globalException(HttpServletRequest request, Throwable ex) {
-        return new GlobalResult(500, ex.toString() + ": " + ex.getMessage());
+    public ResponseEntity<String> globalException(HttpServletRequest request, Throwable ex) {
+//        return new GlobalResult(500, ex.toString() + ": " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.toString() + ": " + ex.getMessage());
     }
 
 

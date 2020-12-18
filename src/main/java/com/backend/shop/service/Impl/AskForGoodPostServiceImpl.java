@@ -27,5 +27,13 @@ public class AskForGoodPostServiceImpl implements AskForGoodPostService {
         askForGoodPostDao.add(askForGoodPost);
     }
 
+    @Override
+    public void deleteAskForGoodPost(int afgPostId){askForGoodPostDao.delete(afgPostId);}
+
+    @Override
+    public String selectNickname(int afgPostId){
+        return askForGoodPostDao.findNickname(afgPostId);
+    }
+
 
 }

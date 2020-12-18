@@ -29,4 +29,14 @@ public class RecommendGoodsPostServiceImpl implements RecommendGoodsPostService 
         recommendGoodsPostDao.add(recommendGoodsPost);
     }
 
+    @Override
+    public void deleteRecommendGoodsPost(int rgPostId){recommendGoodsPostDao.delete(rgPostId);}
+
+    @Override
+    public String selectNickname(int rgPostId){
+        return recommendGoodsPostDao.findNickname(rgPostId);
+    }
+
+
+
 }

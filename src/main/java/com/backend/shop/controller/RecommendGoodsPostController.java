@@ -1,15 +1,19 @@
 package com.backend.shop.controller;
 
 
-import com.backend.shop.common.GlobalResult;
+import com.backend.shop.pojo.AskForGoodPost;
 import com.backend.shop.pojo.RecommendGoodsPost;
 import com.backend.shop.service.RecommendGoodsPostService;
 import com.backend.shop.util.TokenUtil;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,18 +24,23 @@ public class RecommendGoodsPostController {
     private RecommendGoodsPostService recommendGoodsPostService;
 
     @GetMapping("/findAll")
-    public GlobalResult findAll(){
+    @ApiOperation(value = "return all RecommendGoodsPosts",response = RecommendGoodsPost.class)
+    public ResponseEntity<List<RecommendGoodsPost>> findAll(){
         List<RecommendGoodsPost> recommendGoodsPosts = recommendGoodsPostService.findAll();
-        return new GlobalResult(200,"success",recommendGoodsPosts);
+        for (RecommendGoodsPost recommendGoodsPost : recommendGoodsPosts) {
+            recommendGoodsPost.setNick_name(recommendGoodsPostService.selectNickname(recommendGoodsPost.getRgPostId()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(recommendGoodsPosts);
 
     }
 
     @PostMapping("/add")
-    public GlobalResult addRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
-                                 @RequestParam String rg_intro,
-                                 @RequestParam String rg_title,
-                                 @RequestParam int rg_tag,
-                                 @RequestParam String time
+    @ApiOperation(value = "add a new RecommendGoodsPost")
+    public ResponseEntity<String> addRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
+                                                        @ApiParam("RecommendGoodsPost's introduction")@RequestParam String rg_intro,
+                                                        @ApiParam("RecommendGoodsPost's title")@RequestParam String rg_title,
+                                                        @ApiParam("RecommendGoodsPost's tag")@RequestParam int rg_tag,
+                                                        @ApiParam("time, yyyy-MM-dd hh:mm:ss")@RequestParam String time
     ) throws ParseException {
         int userId = TokenUtil.getUserId(token);
         RecommendGoodsPost recommendGoodsPost = new RecommendGoodsPost();
@@ -44,7 +53,16 @@ public class RecommendGoodsPostController {
         recommendGoodsPost.setTime(date);
         // System.out.println("time");
         recommendGoodsPostService.addRecommendGoodsPost(recommendGoodsPost);
-        return new GlobalResult(200, "successful operation");
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+    }
+
+    @DeleteMapping("/remove/{rgPostId}")
+    @ApiOperation(value = "delete an RecommendGoodsPost")
+    public ResponseEntity<String> deleteRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
+                                                           @ApiParam("RecommendGoodsPost's id")@PathVariable int rgPostId) {
+        int userId = TokenUtil.getUserId(token);
+        recommendGoodsPostService.deleteRecommendGoodsPost(rgPostId);
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
 }

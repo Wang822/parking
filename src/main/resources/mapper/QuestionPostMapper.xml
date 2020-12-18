@@ -14,4 +14,25 @@
         insert into QuestionPost (user_id, q_content,q_title,time)
         values (#{userId}, #{qContent},#{qTitle},#{time})
     </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete
+        from QuestionPost
+        where q_post_id = #{qPostId}
+    </delete>
+
+    <!--    selectNickname-->
+    <select id="findNickname" resultType="String">
+        SELECT nick_name
+        FROM user natural join QuestionPost
+        WHERE q_post_id=#{qPostId}
+    </select>
+
+    <!--delete-->
+    <delete id="deleteRe">
+        delete
+        from QuestionPostReply
+        where q_post_id = #{qPostId}
+    </delete>
 </mapper>

@@ -16,4 +16,18 @@
         insert into RecommendGoodsPost (user_id, rg_intro,rg_title,rg_tag,time)
         values (#{userId}, #{rgIntro},#{rgTitle},#{rgTag},#{time})
     </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete
+        from RecommendGoodsPost
+        where rg_post_id = #{rgPostId}
+    </delete>
+
+    <!--    selectNickname-->
+    <select id="findNickname" resultType="String">
+        SELECT nick_name
+        FROM user natural join RecommendGoodsPost
+        WHERE rg_post_id=#{rgPostId}
+    </select>
 </mapper>

@@ -9,4 +9,7 @@ public interface QuestionPostService {
 
     List<QuestionPost> findAll();
     void addQuestionPost(QuestionPost questionPost);
+    void deleteQuestionPost(int qPostId);
+    String selectNickname(int qPostId);
+    void deleteReplies(int qPostId);
 }
