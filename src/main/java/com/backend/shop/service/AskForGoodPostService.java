@@ -10,4 +10,6 @@ public interface AskForGoodPostService {
     List<AskForGoodPost> findAll();
 
     void addAskForGoodPost(AskForGoodPost askForGoodPost);
+
+    void deleteAskForGoodPost(int afgPostId);
 }

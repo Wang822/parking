@@ -1,6 +1,5 @@
 package com.backend.shop.controller;
 
-import com.backend.shop.common.GlobalResult;
 import com.backend.shop.pojo.QuestionPost;
 import com.backend.shop.service.QuestionPostService;
 import com.backend.shop.util.TokenUtil;
@@ -9,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,14 +20,14 @@ public class QuestionPostController {
     private QuestionPostService questionPostService;
 
     @GetMapping("/findAll")
-    public GlobalResult findAll(){
+    public ResponseEntity<List<QuestionPost>> findAll(){
         List<QuestionPost> questionPosts = questionPostService.findAll();
-        return new GlobalResult(200,"success",questionPosts);
+        return ResponseEntity.status(HttpStatus.OK).body(questionPosts);
 
     }
 
     @PostMapping("/add")
-    public GlobalResult addQuestionPost(@RequestHeader(value = "Authorization") String token,
+    public ResponseEntity<String> addQuestionPost(@RequestHeader(value = "Authorization") String token,
                                               @RequestParam String q_content,
                                               @RequestParam String q_title,
                                               @RequestParam String time
@@ -41,7 +42,15 @@ public class QuestionPostController {
         questionPost.setTime(date);
         // System.out.println("time");
         questionPostService.addQuestionPost(questionPost);
-        return new GlobalResult(200, "successful operation");
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+    }
+
+    @DeleteMapping("/remove/{qPostId}")
+    public ResponseEntity<String> deleteQuestionPost(@RequestHeader(value = "Authorization") String token,
+                                                       @PathVariable int qPostId) {
+        int userId = TokenUtil.getUserId(token);
+        questionPostService.deleteQuestionPost(qPostId);
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
 }

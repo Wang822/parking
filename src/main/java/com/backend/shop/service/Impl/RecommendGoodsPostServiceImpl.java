@@ -29,4 +29,8 @@ public class RecommendGoodsPostServiceImpl implements RecommendGoodsPostService 
         recommendGoodsPostDao.add(recommendGoodsPost);
     }
 
+    @Override
+    public void deleteRecommendGoodsPost(int rgPostId){recommendGoodsPostDao.delete(rgPostId);}
+
+
 }

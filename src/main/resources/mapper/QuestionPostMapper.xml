@@ -14,4 +14,11 @@
         insert into QuestionPost (user_id, q_content,q_title,time)
         values (#{userId}, #{qContent},#{qTitle},#{time})
     </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete
+        from QuestionPost
+        where q_post_id = #{qPostId}
+    </delete>
 </mapper>

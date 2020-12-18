@@ -9,4 +9,5 @@ public interface QuestionPostService {
 
     List<QuestionPost> findAll();
     void addQuestionPost(QuestionPost questionPost);
+    void deleteQuestionPost(int qPostId);
 }
