@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.shop.mapper.GoodDao">
+    <resultMap id="goodMap" type="com.backend.shop.pojo.Good">
+        <result column="good_id" property="good_id"/>
+        <result column="name" property="name"/>
+        <result column="status" property="status"/>
+        <result column="price" property="price"/>
+        <result column="description" property="description"/>
+        <result column="campus" property="campus"/>
+        <result column="old" property="old"/>
+        <result column="seller_id" property="seller_id"/>
+        <result column="pic_addr" property="pic_addr"/>
+        <result column="publish_date" property="publish_date"/>
+        <result column="deposit" property="deposit"/>
+        <result column="tag" property="tag"/>
+    </resultMap>
+
+    <insert id="addGood" parameterType="Good" statementType="CALLABLE">
+        insert into Good(good_id,name,status,price,description,campus,old,seller_id,pic_addr
+        ,publish_date,deposit,tag)
+        values (#{good_id},#{name},#{status},#{price},#{description},#{campus},#{old}
+        ,#{seller_id},#{pic_addr},#{publish_date},#{deposit},#{tag})
+    </insert>
+
+    <delete id="deleteGood" parameterType="int" statementType="CALLABLE">
+        delete
+        from Good
+        where good_id=#{good_id}
+    </delete>
+
+    <update id="reviseGood" parameterType="Good">
+        update Good
+        set name=#{name}
+            status=#{status}
+            price=#{price}
+            description=#{description}
+            campus=#{campus}
+            old=#{old}
+            seller_id=#{seller_id}
+            pic_addr=#{pic_addr}
+            publish_date=#{publish_date}
+            deposit=#{deposit}
+            tag=#{tag}
+        where good_id=#{good_id}
+    </update>
+
+    <select id="getGood" parameterType="int" resultMap="goodMap">
+        select *
+        from Good
+        where good_id=#{good_id}
+    </select>
+</mapper>

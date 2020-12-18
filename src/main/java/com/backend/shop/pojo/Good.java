@@ -41,7 +41,7 @@ public class Good {
     private String deposit;
 
     @TableField("tag")
-    private String tag;
+    private int tag;
 
     @TableField("publish_date")
     private Date publish_date;
@@ -98,9 +98,9 @@ public class Good {
 
     public void setDeposit(String q_deposit) {this.deposit=q_deposit;}
 
-    public String getTag() {return tag;}
+    public int getTag() {return tag;}
 
-    public void setTag(String q_tag){this.tag=q_tag;}
+    public void setTag(int q_tag){this.tag=q_tag;}
 
     public Date getPublish_date(){return publish_date;}
 
