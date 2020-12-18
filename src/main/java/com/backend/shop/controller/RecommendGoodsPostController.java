@@ -1,9 +1,12 @@
 package com.backend.shop.controller;
 
 
+import com.backend.shop.pojo.AskForGoodPost;
 import com.backend.shop.pojo.RecommendGoodsPost;
 import com.backend.shop.service.RecommendGoodsPostService;
 import com.backend.shop.util.TokenUtil;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +24,7 @@ public class RecommendGoodsPostController {
     private RecommendGoodsPostService recommendGoodsPostService;
 
     @GetMapping("/findAll")
+    @ApiOperation(value = "return all RecommendGoodsPosts",response = RecommendGoodsPost.class)
     public ResponseEntity<List<RecommendGoodsPost>> findAll(){
         List<RecommendGoodsPost> recommendGoodsPosts = recommendGoodsPostService.findAll();
         for (RecommendGoodsPost recommendGoodsPost : recommendGoodsPosts) {
@@ -31,11 +35,12 @@ public class RecommendGoodsPostController {
     }
 
     @PostMapping("/add")
+    @ApiOperation(value = "add a new RecommendGoodsPost")
     public ResponseEntity<String> addRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
-                                 @RequestParam String rg_intro,
-                                 @RequestParam String rg_title,
-                                 @RequestParam int rg_tag,
-                                 @RequestParam String time
+                                                        @ApiParam("RecommendGoodsPost's introduction")@RequestParam String rg_intro,
+                                                        @ApiParam("RecommendGoodsPost's title")@RequestParam String rg_title,
+                                                        @ApiParam("RecommendGoodsPost's tag")@RequestParam int rg_tag,
+                                                        @ApiParam("time, yyyy-MM-dd hh:mm:ss")@RequestParam String time
     ) throws ParseException {
         int userId = TokenUtil.getUserId(token);
         RecommendGoodsPost recommendGoodsPost = new RecommendGoodsPost();
@@ -52,8 +57,9 @@ public class RecommendGoodsPostController {
     }
 
     @DeleteMapping("/remove/{rgPostId}")
+    @ApiOperation(value = "delete an RecommendGoodsPost")
     public ResponseEntity<String> deleteRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
-                                                       @PathVariable int rgPostId) {
+                                                           @ApiParam("RecommendGoodsPost's id")@PathVariable int rgPostId) {
         int userId = TokenUtil.getUserId(token);
         recommendGoodsPostService.deleteRecommendGoodsPost(rgPostId);
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
