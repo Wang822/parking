@@ -23,6 +23,9 @@ public class RecommendGoodsPostController {
     @GetMapping("/findAll")
     public ResponseEntity<List<RecommendGoodsPost>> findAll(){
         List<RecommendGoodsPost> recommendGoodsPosts = recommendGoodsPostService.findAll();
+        for (RecommendGoodsPost recommendGoodsPost : recommendGoodsPosts) {
+            recommendGoodsPost.setNick_name(recommendGoodsPostService.selectNickname(recommendGoodsPost.getRgPostId()));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(recommendGoodsPosts);
 
     }

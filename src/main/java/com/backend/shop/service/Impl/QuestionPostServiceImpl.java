@@ -30,5 +30,16 @@ public class QuestionPostServiceImpl implements QuestionPostService {
     @Override
     public void deleteQuestionPost(int qPostId){questionPostDao.delete(qPostId);}
 
+    @Override
+    public String selectNickname(int qPostId){
+        return questionPostDao.findNickname(qPostId);
+    }
+
+    @Override
+    public void deleteReplies(int qPostId){
+        questionPostDao.deleteRe(qPostId);
+    }
+
+
 
 }

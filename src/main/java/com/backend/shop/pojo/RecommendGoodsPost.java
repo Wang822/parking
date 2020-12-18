@@ -33,4 +33,6 @@ public class RecommendGoodsPost {
 
     @TableField("time")
     private Date time;
+
+    private String nick_name=null;
 }

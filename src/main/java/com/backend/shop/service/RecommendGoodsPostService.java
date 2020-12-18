@@ -12,4 +12,6 @@ public interface RecommendGoodsPostService {
     void addRecommendGoodsPost(RecommendGoodsPost recommendGoodsPost);
 
     void deleteRecommendGoodsPost(int rgPostId);
+
+    String selectNickname(int rgPostId);
 }

@@ -8,7 +8,39 @@
     <!--insert -->
     <insert id="add" parameterType="QuestionPostReply">
         insert into QuestionPostReply (q_post_id,user_id,content,time)
-        values (#{qReplyId},#{userId},#{content},#{time})
+        values (#{qPostId},#{userId},#{content},#{time})
     </insert>
 
+    <!--select all replies in a question post-->
+    <select id="selectReplies" parameterType="int" resultType="QuestionPostReply">
+        SELECT q_reply_id,
+               q_post_id,
+               content,
+               time,
+               user_id
+        FROM QuestionPostReply
+        WHERE q_post_id = #{qPostId}
+        order by time
+    </select>
+
+    <!--delete-->
+    <delete id="delete">
+        delete
+        from QuestionPostReply
+        where q_post_id = #{qPostId}
+    </delete>
+
+    <!--    selectNickname-->
+    <select id="findNickname" resultType="String">
+        SELECT nick_name
+        FROM user natural join QuestionPostReply
+        WHERE q_reply_id=#{qReplyId}
+    </select>
+
+    <!--delete-->
+    <delete id="deleteOneReply">
+        delete
+        from QuestionPostReply
+        where q_reply_id = #{qReplyId}
+    </delete>
 </mapper>

@@ -19,9 +19,13 @@ public class QuestionPostController {
     @Autowired
     private QuestionPostService questionPostService;
 
+
     @GetMapping("/findAll")
     public ResponseEntity<List<QuestionPost>> findAll(){
         List<QuestionPost> questionPosts = questionPostService.findAll();
+        for (QuestionPost questionPost : questionPosts) {
+            questionPost.setNick_name(questionPostService.selectNickname(questionPost.getQPostId()));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(questionPosts);
 
     }
@@ -49,7 +53,9 @@ public class QuestionPostController {
     public ResponseEntity<String> deleteQuestionPost(@RequestHeader(value = "Authorization") String token,
                                                        @PathVariable int qPostId) {
         int userId = TokenUtil.getUserId(token);
+
         questionPostService.deleteQuestionPost(qPostId);
+        questionPostService.deleteReplies(qPostId);
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 

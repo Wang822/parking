@@ -12,4 +12,6 @@ public interface AskForGoodPostService {
     void addAskForGoodPost(AskForGoodPost askForGoodPost);
 
     void deleteAskForGoodPost(int afgPostId);
+
+    String selectNickname(int afgPostId);
 }

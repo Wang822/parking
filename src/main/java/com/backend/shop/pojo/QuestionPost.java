@@ -32,5 +32,7 @@ public class QuestionPost {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date time;
 
+    private String nick_name=null;
+
 }
 

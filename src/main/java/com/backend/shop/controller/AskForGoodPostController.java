@@ -22,6 +22,9 @@ public class AskForGoodPostController {
     @GetMapping("/findAll")
     public ResponseEntity<List<AskForGoodPost>> findAll(){
         List<AskForGoodPost> askForGoodPosts = askForGoodPostService.findAll();
+        for (AskForGoodPost askForGoodPost : askForGoodPosts) {
+            askForGoodPost.setNick_name(askForGoodPostService.selectNickname(askForGoodPost.getAfgPostId()));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(askForGoodPosts);
 
     }

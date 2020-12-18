@@ -12,6 +12,7 @@ public interface AskForGoodPostDao {
     void add(AskForGoodPost askForGoodPost);
     void delete(@Param("afgPostId") int afgPostId);
 
+    String findNickname(@Param("afgPostId") int afgPostId);
 
 
 }
