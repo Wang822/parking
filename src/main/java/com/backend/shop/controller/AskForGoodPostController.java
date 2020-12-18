@@ -1,6 +1,5 @@
 package com.backend.shop.controller;
 
-import com.backend.shop.common.GlobalResult;
 import com.backend.shop.pojo.AskForGoodPost;
 import com.backend.shop.service.AskForGoodPostService;
 import com.backend.shop.util.TokenUtil;
@@ -9,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,14 +20,14 @@ public class AskForGoodPostController {
     private AskForGoodPostService askForGoodPostService;
 
     @GetMapping("/findAll")
-    public GlobalResult findAll(){
+    public ResponseEntity<List<AskForGoodPost>> findAll(){
         List<AskForGoodPost> askForGoodPosts = askForGoodPostService.findAll();
-        return new GlobalResult(200,"success",askForGoodPosts);
+        return ResponseEntity.status(HttpStatus.OK).body(askForGoodPosts);
 
     }
 
     @PostMapping("/add")
-    public GlobalResult addAskForGoodPost(@RequestHeader(value = "Authorization") String token,
+    public ResponseEntity<String> addAskForGoodPost(@RequestHeader(value = "Authorization") String token,
                                  @RequestParam String afg_intro,
                                  @RequestParam String afg_title,
                                  @RequestParam int afg_tag,
@@ -50,7 +51,15 @@ public class AskForGoodPostController {
         askForGoodPost.setTime(date);
        // System.out.println("time");
         askForGoodPostService.addAskForGoodPost(askForGoodPost);
-        return new GlobalResult(200, "successful operation");
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+    }
+
+    @DeleteMapping("/remove/{afgPostId}")
+    public ResponseEntity<String> deleteAskForGoodPost(@RequestHeader(value = "Authorization") String token,
+                                              @PathVariable int afgPostId) {
+        int userId = TokenUtil.getUserId(token);
+        askForGoodPostService.deleteAskForGoodPost(afgPostId);
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
 }

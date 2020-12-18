@@ -27,4 +27,8 @@ public class QuestionPostServiceImpl implements QuestionPostService {
         questionPostDao.add(questionPost);
     }
 
+    @Override
+    public void deleteQuestionPost(int qPostId){questionPostDao.delete(qPostId);}
+
+
 }

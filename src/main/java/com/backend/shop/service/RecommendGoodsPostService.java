@@ -10,4 +10,6 @@ public interface RecommendGoodsPostService {
     List<RecommendGoodsPost> findAll();
 
     void addRecommendGoodsPost(RecommendGoodsPost recommendGoodsPost);
+
+    void deleteRecommendGoodsPost(int rgPostId);
 }

@@ -1,7 +1,6 @@
 package com.backend.shop.controller;
 
 
-import com.backend.shop.common.GlobalResult;
 import com.backend.shop.pojo.RecommendGoodsPost;
 import com.backend.shop.service.RecommendGoodsPostService;
 import com.backend.shop.util.TokenUtil;
@@ -10,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,14 +21,14 @@ public class RecommendGoodsPostController {
     private RecommendGoodsPostService recommendGoodsPostService;
 
     @GetMapping("/findAll")
-    public GlobalResult findAll(){
+    public ResponseEntity<List<RecommendGoodsPost>> findAll(){
         List<RecommendGoodsPost> recommendGoodsPosts = recommendGoodsPostService.findAll();
-        return new GlobalResult(200,"success",recommendGoodsPosts);
+        return ResponseEntity.status(HttpStatus.OK).body(recommendGoodsPosts);
 
     }
 
     @PostMapping("/add")
-    public GlobalResult addRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
+    public ResponseEntity<String> addRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
                                  @RequestParam String rg_intro,
                                  @RequestParam String rg_title,
                                  @RequestParam int rg_tag,
@@ -44,7 +45,15 @@ public class RecommendGoodsPostController {
         recommendGoodsPost.setTime(date);
         // System.out.println("time");
         recommendGoodsPostService.addRecommendGoodsPost(recommendGoodsPost);
-        return new GlobalResult(200, "successful operation");
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+    }
+
+    @DeleteMapping("/remove/{rgPostId}")
+    public ResponseEntity<String> deleteRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
+                                                       @PathVariable int rgPostId) {
+        int userId = TokenUtil.getUserId(token);
+        recommendGoodsPostService.deleteRecommendGoodsPost(rgPostId);
+        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
 }

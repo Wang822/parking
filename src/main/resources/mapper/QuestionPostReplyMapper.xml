@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间绑定一个指定的dao接口-->
+<mapper namespace="com.backend.shop.mapper.QuestionPostReplyDao">
+
+    <!--insert -->
+    <insert id="add" parameterType="QuestionPostReply">
+        insert into QuestionPostReply (q_post_id,user_id,content,time)
+        values (#{qReplyId},#{userId},#{content},#{time})
+    </insert>
+
+</mapper>

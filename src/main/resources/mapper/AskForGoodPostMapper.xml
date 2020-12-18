@@ -16,4 +16,11 @@
         insert into AskForGoodPost (user_id, afg_intro,afg_title,afg_tag,campus,afg_price,afg_condition,time)
         values (#{userId}, #{afgIntro},#{afgTitle},#{afgTag},#{campus},#{afgPrice},#{afgCondition},#{time})
     </insert>
+
+    <!--delete-->
+    <delete id="delete">
+        delete
+        from AskForGoodPost
+        where afg_post_id = #{afgPostId}
+    </delete>
 </mapper>
