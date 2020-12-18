@@ -12,5 +12,8 @@ public interface QuestionPostDao {
     void add(QuestionPost questionPost);
     void delete(@Param("qPostId") int qPostId);
 
+    String findNickname(@Param("qPostId") int qPostId);
+    void deleteRe(@Param("qPostId") int qPostId);
+
 
 }

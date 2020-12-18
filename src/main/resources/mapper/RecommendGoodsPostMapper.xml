@@ -23,4 +23,11 @@
         from RecommendGoodsPost
         where rg_post_id = #{rgPostId}
     </delete>
+
+    <!--    selectNickname-->
+    <select id="findNickname" resultType="String">
+        SELECT nick_name
+        FROM user natural join RecommendGoodsPost
+        WHERE rg_post_id=#{rgPostId}
+    </select>
 </mapper>

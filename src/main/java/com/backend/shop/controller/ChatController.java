@@ -34,7 +34,7 @@ public class ChatController {
      * @param receiver_id user id of receiver
      * @param content     message content
      * @param time        sending time, pattern: yyyy-MM-dd hh:mm:ss
-     * @return GlobalResult
+     * @return ResponseEntity
      * @throws ParseException time pattern error
      */
     @PostMapping("/addMessage")
@@ -55,6 +55,7 @@ public class ChatController {
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
+    @ApiOperation(value = "get users who have chatted with the user")
     @GetMapping("/getContacts")
     public ResponseEntity<ArrayList<User>> getContacts(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);

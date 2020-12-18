@@ -1,8 +1,11 @@
 package com.backend.shop.controller;
 
+import com.backend.shop.pojo.AskForGoodPost;
 import com.backend.shop.pojo.QuestionPost;
 import com.backend.shop.service.QuestionPostService;
 import com.backend.shop.util.TokenUtil;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,18 +22,24 @@ public class QuestionPostController {
     @Autowired
     private QuestionPostService questionPostService;
 
+
     @GetMapping("/findAll")
+    @ApiOperation(value = "return all QuestionPosts",response = QuestionPost.class)
     public ResponseEntity<List<QuestionPost>> findAll(){
         List<QuestionPost> questionPosts = questionPostService.findAll();
+        for (QuestionPost questionPost : questionPosts) {
+            questionPost.setNick_name(questionPostService.selectNickname(questionPost.getQPostId()));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(questionPosts);
 
     }
 
     @PostMapping("/add")
+    @ApiOperation(value = "add a new QuestionPost")
     public ResponseEntity<String> addQuestionPost(@RequestHeader(value = "Authorization") String token,
-                                              @RequestParam String q_content,
-                                              @RequestParam String q_title,
-                                              @RequestParam String time
+                                                  @ApiParam("QuestionPost's content")@RequestParam String q_content,
+                                                  @ApiParam("QuestionPost's title")@RequestParam String q_title,
+                                                  @ApiParam("time, yyyy-MM-dd hh:mm:ss")@RequestParam String time
     ) throws ParseException {
         int userId = TokenUtil.getUserId(token);
         QuestionPost questionPost = new QuestionPost();
@@ -46,10 +55,13 @@ public class QuestionPostController {
     }
 
     @DeleteMapping("/remove/{qPostId}")
+    @ApiOperation(value = "delete a QuestionPost")
     public ResponseEntity<String> deleteQuestionPost(@RequestHeader(value = "Authorization") String token,
-                                                       @PathVariable int qPostId) {
+                                                     @ApiParam("QuestionPost's id")@PathVariable int qPostId) {
         int userId = TokenUtil.getUserId(token);
+
         questionPostService.deleteQuestionPost(qPostId);
+        questionPostService.deleteReplies(qPostId);
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 

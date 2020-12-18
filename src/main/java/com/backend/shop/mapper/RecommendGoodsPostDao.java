@@ -11,4 +11,6 @@ public interface RecommendGoodsPostDao {
     List<RecommendGoodsPost> findAll();
     void add(RecommendGoodsPost recommendGoodsPost);
     void delete(@Param("rgPostId") int rgPostId);
+
+    String findNickname(@Param("rgPostId") int rgPostId);
 }

@@ -5,10 +5,11 @@
 <!--命名空间绑定一个指定的dao接口-->
 <mapper namespace="com.backend.shop.mapper.AskForGoodPostDao">
 
+
 <!--    selectAll-->
     <select id="findAll" resultType="AskForGoodPost">
-        select *
-        from AskForGoodPost
+        SELECT *
+        FROM AskForGoodPost
     </select>
 
     <!--insert new chat-->
@@ -23,4 +24,11 @@
         from AskForGoodPost
         where afg_post_id = #{afgPostId}
     </delete>
+
+    <!--    selectNickname-->
+    <select id="findNickname" resultType="String">
+        SELECT nick_name
+        FROM user natural join AskForGoodPost
+        WHERE afg_post_id=#{afgPostId}
+    </select>
 </mapper>

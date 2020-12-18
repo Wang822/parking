@@ -38,6 +38,7 @@ public class FavoriteController {
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
+    @ApiOperation(value = "get all favorite goods of the user")
     @GetMapping("/get")
     public ResponseEntity<ArrayList<Good>> getFavorites(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);
@@ -45,6 +46,7 @@ public class FavoriteController {
         return ResponseEntity.status(HttpStatus.OK).body(goods);
     }
 
+    @ApiOperation(value = "remove a good")
     @DeleteMapping("/remove/{goodId}")
     public ResponseEntity<String> deleteFavor(@RequestHeader(value = "Authorization") String token,
                                               @PathVariable int goodId) {
@@ -53,6 +55,7 @@ public class FavoriteController {
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
+    @ApiOperation(value = "get the number of goods in user's favorite")
     @GetMapping("/count")
     public ResponseEntity<Integer> getCount(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);

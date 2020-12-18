@@ -41,4 +41,8 @@ public class User {
     @TableField("grade")
     @ApiModelProperty(value = "年级", example = "3")
     private int grade;
+
+    @TableField("avatar")
+    @ApiModelProperty(value = "头像图片路径(wx.cloud)", example = "example.png")
+    private String avatar;
 }
