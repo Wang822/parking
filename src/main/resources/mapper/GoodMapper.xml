@@ -50,4 +50,21 @@
         from Good
         where good_id=#{good_id}
     </select>
+
+    <select id="existGood" parameterType="int" resultType="int">
+        select count(*)
+        from Good
+        where good_id=#{good_id}
+    </select>
+
+    <select id="getGoodByPage">
+        select *
+        from Good
+    </select>
+
+    <select id="getGoodOnSailCount">
+        select count(*)
+        from Good
+        where user_id = #{userId}
+    </select>
 </mapper>
