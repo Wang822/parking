@@ -23,7 +23,7 @@ import java.util.Date;
 
 
 @Controller
-@Api(value = "账户")
+@Api(value = "账户", description = "账户")
 public class AccountController {
 
     /* 不要在Controller里调用Mapper */
