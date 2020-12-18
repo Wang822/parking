@@ -22,5 +22,6 @@ public interface GoodService extends IService<Good> {
 
     int getGoodOnSailCount(int userId);
     //Page<Good> getGoodByPage(Page<Good> page, @Param("Good") Good good);
+
     Page<Good> getGoodByPage(Page<Good> page);
 }

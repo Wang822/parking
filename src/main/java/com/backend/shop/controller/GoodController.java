@@ -28,7 +28,7 @@ public class GoodController {
     private GoodService goodService;
 
 
-    public Map<String, Object> getBackValue(boolean flag, String message) {
+    public Map<String, Object> getBackValue(boolean flag, Object message) {
         Map<String, Object> map = new HashMap<String, Object>();
         if (flag==false) {
             map.put("result_code", 0);
@@ -41,23 +41,23 @@ public class GoodController {
 
     @ApiOperation(value="remove a good")
     @DeleteMapping("/remove/{goodId}")
-    public ResponseEntity<Map> deleteGood(@PathVariable int goodId)
+    public ResponseEntity<String> deleteGood(@PathVariable int goodId)
     {
-        boolean flag=true;
-        Map<String, Object> resultMap = new HashMap<>();
+//        boolean flag=true;
+//        Map<String, Object> resultMap = new HashMap<>();
         if(goodService.existGood(goodId)==0)
         {
-            flag=false;
-            resultMap=getBackValue(flag,"Good with this goodId does not exist.");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultMap);
+//            flag=false;
+//            resultMap=getBackValue(flag,"Good with this goodId does not exist.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Good with this goodId does not exist.");
         }
         goodService.deleteGood(goodId);
-        resultMap=getBackValue(flag,"Successful operation.");
-        return ResponseEntity.status(HttpStatus.OK).body(resultMap);
+//        resultMap=getBackValue(flag,"Successful operation.");
+        return ResponseEntity.status(HttpStatus.OK).body("Successful operation.");
     }
 
     @PutMapping("/revise")
-    public ResponseEntity<Map> reviseGood(@RequestHeader(value="Authorization") String token,
+    public ResponseEntity<String> reviseGood(@RequestHeader(value="Authorization") String token,
                                    @RequestParam int good_id,
                                    @RequestParam String name,
                                    @RequestParam int status,
@@ -70,14 +70,14 @@ public class GoodController {
                                    @RequestParam int tag,
                                    @RequestParam Date publish_date)
     {
-        boolean flag=true;
-        Map<String, Object> resultMap = new HashMap<>();
+//        boolean flag=true;
+//        Map<String, Object> resultMap = new HashMap<>();
         int sellerId= TokenUtil.getUserId(token);
         if(goodService.existGood(good_id)==0)
         {
-            flag=false;
-            resultMap=getBackValue(flag,"Good with this goodId does not exist.");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultMap);
+//            flag=false;
+//            resultMap=getBackValue(flag,"Good with this goodId does not exist.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Good with this goodId does not exist.");
         }
         Good good=new Good();
         good.setGood_id(good_id);
@@ -93,12 +93,12 @@ public class GoodController {
         good.setTag(tag);
         good.setPublish_date(publish_date);
         goodService.reviseGood(good);
-        resultMap=getBackValue(flag,"Successful operation.");
-        return ResponseEntity.status(HttpStatus.OK).body(resultMap);
+//        resultMap=getBackValue(flag,"Successful operation.");
+        return ResponseEntity.status(HttpStatus.OK).body("Successful operation.");
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Map> addGood(@RequestHeader(value="Authorization") String token,
+    public ResponseEntity<String> addGood(@RequestHeader(value="Authorization") String token,
                                           @RequestParam int good_id,
                                           @RequestParam String name,
                                           @RequestParam int status,
@@ -111,14 +111,14 @@ public class GoodController {
                                           @RequestParam int tag,
                                           @RequestParam Date publish_date)
     {
-        boolean flag=true;
-        Map<String, Object> resultMap = new HashMap<>();
+//        boolean flag=true;
+//        Map<String, Object> resultMap = new HashMap<>();
         int sellerId= TokenUtil.getUserId(token);
         if(goodService.existGood(good_id)!=0)
         {
-            flag=false;
-            resultMap=getBackValue(flag,"Good with this good_id already exists.");
-            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(resultMap);
+//            flag=false;
+//            resultMap=getBackValue(flag,"Good with this good_id already exists.");
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("Good with this good_id already exists.");
         }
         Good good=new Good();
         good.setGood_id(good_id);
@@ -134,34 +134,34 @@ public class GoodController {
         good.setTag(tag);
         good.setPublish_date(publish_date);
         goodService.addGood(good);
-        resultMap=getBackValue(flag,"Successful operation.");
-        return ResponseEntity.status(HttpStatus.OK).body(resultMap);
+//        resultMap=getBackValue(flag,"Successful operation.");
+        return ResponseEntity.status(HttpStatus.OK).body("Successful operation.");
     }
 
     @GetMapping("/getItem/{goodId}")
-    public ResponseEntity<Map> getGood(@PathVariable int goodId)
+    public ResponseEntity<Good> getGood(@PathVariable int goodId)
     {
-        boolean flag=true;
-        Map<String, Object> resultMap = new HashMap<>();
-        if(goodService.existGood(goodId)==0)
-        {
-            flag=false;
-            resultMap=getBackValue(flag,"Good with this goodId does not exist.");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultMap);
-        }
+//        boolean flag=true;
+//        Map<String, Object> resultMap = new HashMap<>();
+//        if(goodService.existGood(goodId)==0)
+//        {
+//            flag=false;
+//            resultMap=getBackValue(flag,"Good with this goodId does not exist.");
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultMap);
+//        }
         Good good=goodService.getGood(goodId);
-        resultMap=getBackValue(flag,"Successful operation.");
-        return ResponseEntity.status(HttpStatus.OK).body(resultMap);
+        //resultMap=getBackValue(flag,good);
+        return ResponseEntity.status(HttpStatus.OK).body(good);
     }
 
-    @GetMapping("/getItemList/{currPage}/{pageSize")
-    public ResponseEntity<Map> getGoodByPage(@PathVariable int currPage,@PathVariable int pageSize)
+    @GetMapping("/getItemList/{currPage}/{pageSize}")
+    public ResponseEntity<Page<Good>> getGoodByPage(@PathVariable int currPage,@PathVariable int pageSize)
     {
         Page<Good> page=new Page<>(currPage,pageSize);
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result_code",1);
-        resultMap.put("result_body",goodService.getGoodByPage(page));
-        return ResponseEntity.status(HttpStatus.OK).body(resultMap);
+//        Map<String, Object> resultMap = new HashMap<>();
+//        resultMap.put("result_code",1);
+//        resultMap.put("result_body",goodService.getGoodByPage(page));
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
     @GetMapping("/getGoodOnSail")
     public ResponseEntity<Integer> getGoodOnSailCount(@RequestHeader(value = "Authorization") String token)
@@ -170,5 +170,4 @@ public class GoodController {
         int count=goodService.getGoodOnSailCount(userId);
         return ResponseEntity.status(HttpStatus.OK).body(count);
     }
-
 }
