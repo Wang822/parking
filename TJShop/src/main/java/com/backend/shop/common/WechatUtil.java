@@ -1,8 +1,7 @@
-package com.backend.shop.util;
+package com.backend.shop.common;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.backend.shop.util.HttpClientUtil;
 import org.apache.shiro.codec.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -25,9 +24,9 @@ public class WechatUtil {
         Map<String, String> requestUrlParam = new HashMap<>();
         // https://mp.weixin.qq.com/wxopen/devprofile?action=get_profile&token=164113089&lang=zh_CN
         //小程序appId
-        requestUrlParam.put("appid", "wxe93ef398c6fe527b");
+        requestUrlParam.put("appid", "小程序appId");
         //小程序secret
-        requestUrlParam.put("secret", "00efe23522582ea1264dc8b6f1ed5d3c");
+        requestUrlParam.put("secret", "小程序secret");
         //小程序端返回的code
         requestUrlParam.put("js_code", code);
         //默认参数

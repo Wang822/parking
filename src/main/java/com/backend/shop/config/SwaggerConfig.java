@@ -25,7 +25,9 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
                 .title("Spring Boot REST API")
-                .description("\"REST API 测试\"")
+                .description("********* Base URL *********\n" +
+                             " http://47.112.129.193:9090\n" +
+                             "****************************\n")
                 .version("1.0.0")
                 .build();
     }
