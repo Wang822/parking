@@ -37,6 +37,13 @@
         WHERE afg_reply_id=#{afgReplyId}
     </select>
 
+    <!--    selectAvatar-->
+    <select id="findAvatar" resultType="String">
+        SELECT avatar
+        FROM user natural join AskForGoodPostReply
+        WHERE afg_reply_id=#{afgReplyId}
+    </select>
+
     <!--delete-->
     <delete id="deleteOneReply">
         delete

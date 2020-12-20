@@ -40,9 +40,6 @@ public class QuestionPost {
     private Date time;
 
     private String nick_name=null;
-    private List<ReplyList> replyLists=null;
-    private String replyContent=null;
-    private int answer_id=0;
 
 }
 

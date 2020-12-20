@@ -40,6 +40,7 @@ public class AskForGoodPostReply {
         private Date time;
 
         private String nick_name=null;
+        private String avatar=null;
 
 
 

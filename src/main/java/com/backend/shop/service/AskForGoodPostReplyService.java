@@ -10,6 +10,6 @@ public interface AskForGoodPostReplyService {
     List<AskForGoodPostReply> selectAskForGoodPostReplies(int afgPostId);
     void deleteAskForGoodPostReplies(int afgPostId);
     String selectNickname(int afgReplyId);
-
+    String selectAvatar(int afgReplyId);
     void deleteOneAskForGoodPostReply(int afgReplyId);
 }

@@ -28,8 +28,18 @@ public class QuestionPostController {
         List<QuestionPost> questionPosts = questionPostService.findAll();
         for (QuestionPost questionPost : questionPosts) {
             questionPost.setNick_name(questionPostService.selectNickname(questionPost.getQPostId()));
-           // questionPost.setReplyContent(questionPostService.findContent(questionPost.getQPostId()));
-            //questionPost.setReplyLists(questionPostService.findQReplies(questionPostService.findAnswerid(questionPost.getQPostId())));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(questionPosts);
+
+    }
+
+    @GetMapping("/findAllById")
+    @ApiOperation(value = "return all QuestionPosts")
+    public ResponseEntity<List<QuestionPost>> findAllById(@RequestHeader(value = "Authorization") String token){
+        int userId = TokenUtil.getUserId(token);
+        List<QuestionPost> questionPosts = questionPostService.findAllById(userId);
+        for (QuestionPost questionPost : questionPosts) {
+            questionPost.setNick_name(questionPostService.selectNickname(questionPost.getQPostId()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(questionPosts);
 

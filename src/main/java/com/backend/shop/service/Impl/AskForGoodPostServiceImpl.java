@@ -1,7 +1,6 @@
 package com.backend.shop.service.Impl;
 
 import com.backend.shop.mapper.AskForGoodPostDao;
-import com.backend.shop.pojo.ReplyList;
 import com.backend.shop.pojo.AskForGoodPost;
 import com.backend.shop.service.AskForGoodPostService;
 import java.util.List;
@@ -37,11 +36,6 @@ public class AskForGoodPostServiceImpl implements AskForGoodPostService {
     }
 
     @Override
-    public List<ReplyList> findAFGReplies(int afgPostId){
-        return askForGoodPostDao.findReplies(afgPostId);
-    }
-
-    @Override
     public int selectRCount(int afgPostId){
         return askForGoodPostDao.selectCount(afgPostId);
     }
@@ -51,5 +45,9 @@ public class AskForGoodPostServiceImpl implements AskForGoodPostService {
         askForGoodPostDao.deleteRe(afgPostId);
     }
 
+    @Override
+    public List<AskForGoodPost> findAllById(int userId){
+        return askForGoodPostDao.findAllById(userId);
+    }
 
 }

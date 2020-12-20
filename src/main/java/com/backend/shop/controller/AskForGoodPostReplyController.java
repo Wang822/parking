@@ -48,6 +48,7 @@ public class AskForGoodPostReplyController {
         List<AskForGoodPostReply> askForGoodPostReplies = askForGoodPostReplyService.selectAskForGoodPostReplies(afgPostId);
         for (AskForGoodPostReply askForGoodPostReply : askForGoodPostReplies) {
             askForGoodPostReply.setNick_name(askForGoodPostReplyService.selectNickname(askForGoodPostReply.getAfgReplyId()));
+            askForGoodPostReply.setAvatar(askForGoodPostReplyService.selectAvatar(askForGoodPostReply.getAfgReplyId()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(askForGoodPostReplies);
     }

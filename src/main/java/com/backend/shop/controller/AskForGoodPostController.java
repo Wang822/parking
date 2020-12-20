@@ -28,7 +28,18 @@ public class AskForGoodPostController {
         List<AskForGoodPost> askForGoodPosts = askForGoodPostService.findAll();
         for (AskForGoodPost askForGoodPost : askForGoodPosts) {
             askForGoodPost.setNick_name(askForGoodPostService.selectNickname(askForGoodPost.getAfgPostId()));
-            //askForGoodPost.setReplyLists(askForGoodPostService.findAFGReplies(askForGoodPost.getAfgPostId()));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(askForGoodPosts);
+
+    }
+
+    @GetMapping("/findAllById")
+    @ApiOperation(value = "return all AskForGoodPosts",response = AskForGoodPost.class)
+    public ResponseEntity<List<AskForGoodPost>> findAllById(@RequestHeader(value = "Authorization") String token){
+        int userId = TokenUtil.getUserId(token);
+        List<AskForGoodPost> askForGoodPosts = askForGoodPostService.findAllById(userId);
+        for (AskForGoodPost askForGoodPost : askForGoodPosts) {
+            askForGoodPost.setNick_name(askForGoodPostService.selectNickname(askForGoodPost.getAfgPostId()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(askForGoodPosts);
 

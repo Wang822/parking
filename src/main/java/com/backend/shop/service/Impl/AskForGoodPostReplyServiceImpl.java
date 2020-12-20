@@ -35,6 +35,11 @@ public class AskForGoodPostReplyServiceImpl implements AskForGoodPostReplyServic
     }
 
     @Override
+    public String selectAvatar(int afgReplyId){
+        return askForGoodPostReplyDao.findAvatar(afgReplyId);
+    }
+
+    @Override
     public void deleteOneAskForGoodPostReply(int afgReplyId){
         askForGoodPostReplyDao.deleteOneReply(afgReplyId);
     }

@@ -14,5 +14,6 @@ public interface AskForGoodPostReplyDao {
 
     String findNickname(@Param("afgReplyId") int afgReplyId);
     void deleteOneReply(@Param("afgReplyId") int afgReplyId);
+    String findAvatar(@Param("afgReplyId") int afgReplyId);
 
 }

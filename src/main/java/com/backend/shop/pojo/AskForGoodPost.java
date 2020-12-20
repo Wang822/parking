@@ -56,7 +56,6 @@ public class AskForGoodPost {
     private Date time;
 
     private String nick_name=null;
-    private List<ReplyList> replyLists=null;
 
 
 }

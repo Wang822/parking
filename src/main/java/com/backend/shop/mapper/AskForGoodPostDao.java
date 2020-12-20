@@ -1,6 +1,5 @@
 package com.backend.shop.mapper;
 
-import com.backend.shop.pojo.ReplyList;
 import com.backend.shop.pojo.AskForGoodPost;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,8 +15,9 @@ public interface AskForGoodPostDao {
     String findNickname(@Param("afgPostId") int afgPostId);
     void deleteRe(@Param("afgPostId") int afgPostId);
 
-    List<ReplyList> findReplies(@Param("afgPostId") int afgPostId);
     int selectCount(@Param("afgPostId") int afgPostId);
+
+    List<AskForGoodPost> findAllById(@Param("userId") int userId);
 
 
 }

@@ -1,6 +1,5 @@
 package com.backend.shop.service;
 
-import com.backend.shop.pojo.ReplyList;
 import com.backend.shop.pojo.AskForGoodPost;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,7 @@ public interface AskForGoodPostService {
 
     String selectNickname(int afgPostId);
     void deleteReplies(int afgPostId);
-    List<ReplyList> findAFGReplies(int afgPostId);
+
     int selectRCount(int afgPostId);
+    List<AskForGoodPost> findAllById(int userId);
 }
