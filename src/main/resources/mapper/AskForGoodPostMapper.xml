@@ -48,7 +48,7 @@
     </select>
 
     <!--    select one's post-->
-    <select id="findAll" resultType="AskForGoodPost">
+    <select id="findAllById" resultType="AskForGoodPost">
         SELECT *
         FROM AskForGoodPost
         WHERE user_id=#{userId}

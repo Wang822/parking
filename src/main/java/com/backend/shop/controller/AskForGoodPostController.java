@@ -34,7 +34,7 @@ public class AskForGoodPostController {
     }
 
     @GetMapping("/findAllById")
-    @ApiOperation(value = "return all AskForGoodPosts",response = AskForGoodPost.class)
+    @ApiOperation(value = "return all AskForGoodPosts")
     public ResponseEntity<List<AskForGoodPost>> findAllById(@RequestHeader(value = "Authorization") String token){
         int userId = TokenUtil.getUserId(token);
         List<AskForGoodPost> askForGoodPosts = askForGoodPostService.findAllById(userId);
