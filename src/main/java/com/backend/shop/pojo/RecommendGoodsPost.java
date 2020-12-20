@@ -43,5 +43,9 @@ public class RecommendGoodsPost {
     @ApiModelProperty(value = "time", example = "2020-12-19 18:28:00")
     private Date time;
 
+    @TableField("avatar")
+    @ApiModelProperty(value = "头像图片路径(wx.cloud)", example = "example.png")
+    private String avatar;
+
     private String nick_name=null;
 }

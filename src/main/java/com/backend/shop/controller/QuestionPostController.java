@@ -1,6 +1,5 @@
 package com.backend.shop.controller;
 
-import com.backend.shop.pojo.AskForGoodPost;
 import com.backend.shop.pojo.QuestionPost;
 import com.backend.shop.service.QuestionPostService;
 import com.backend.shop.util.TokenUtil;
@@ -24,11 +23,13 @@ public class QuestionPostController {
 
 
     @GetMapping("/findAll")
-    @ApiOperation(value = "return all QuestionPosts",response = QuestionPost.class)
+    @ApiOperation(value = "return all QuestionPosts")
     public ResponseEntity<List<QuestionPost>> findAll(){
         List<QuestionPost> questionPosts = questionPostService.findAll();
         for (QuestionPost questionPost : questionPosts) {
             questionPost.setNick_name(questionPostService.selectNickname(questionPost.getQPostId()));
+           // questionPost.setReplyContent(questionPostService.findContent(questionPost.getQPostId()));
+            //questionPost.setReplyLists(questionPostService.findQReplies(questionPostService.findAnswerid(questionPost.getQPostId())));
         }
         return ResponseEntity.status(HttpStatus.OK).body(questionPosts);
 
@@ -57,12 +58,21 @@ public class QuestionPostController {
     @DeleteMapping("/remove/{qPostId}")
     @ApiOperation(value = "delete a QuestionPost")
     public ResponseEntity<String> deleteQuestionPost(@RequestHeader(value = "Authorization") String token,
-                                                     @ApiParam("QuestionPost's id")@PathVariable int qPostId) {
+                                                     @ApiParam("QuestionPost's id")int qPostId) {
         int userId = TokenUtil.getUserId(token);
 
         questionPostService.deleteQuestionPost(qPostId);
         questionPostService.deleteReplies(qPostId);
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+    }
+
+    @ApiOperation(value = "get the number of replies in post")
+    @GetMapping("/count")
+    public ResponseEntity<Integer> getCount(@RequestHeader(value = "Authorization") String token,
+                                            @ApiParam("AskForGoodPost's id")int qPostId) {
+        int userId = TokenUtil.getUserId(token);
+        int count = questionPostService.selectRCount(qPostId);
+        return ResponseEntity.status(HttpStatus.OK).body(count);
     }
 
 }

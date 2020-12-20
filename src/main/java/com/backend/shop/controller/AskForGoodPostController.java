@@ -1,7 +1,6 @@
 package com.backend.shop.controller;
 
 import com.backend.shop.pojo.AskForGoodPost;
-import com.backend.shop.pojo.Chat;
 import com.backend.shop.service.AskForGoodPostService;
 import com.backend.shop.util.TokenUtil;
 import io.swagger.annotations.ApiOperation;
@@ -29,6 +28,7 @@ public class AskForGoodPostController {
         List<AskForGoodPost> askForGoodPosts = askForGoodPostService.findAll();
         for (AskForGoodPost askForGoodPost : askForGoodPosts) {
             askForGoodPost.setNick_name(askForGoodPostService.selectNickname(askForGoodPost.getAfgPostId()));
+            //askForGoodPost.setReplyLists(askForGoodPostService.findAFGReplies(askForGoodPost.getAfgPostId()));
         }
         return ResponseEntity.status(HttpStatus.OK).body(askForGoodPosts);
 
@@ -66,10 +66,20 @@ public class AskForGoodPostController {
     @DeleteMapping("/remove/{afgPostId}")
     @ApiOperation(value = "delete an AskForGoodPost")
     public ResponseEntity<String> deleteAskForGoodPost(@RequestHeader(value = "Authorization") String token,
-                                                       @ApiParam("AskForGoodPost's id")@PathVariable int afgPostId) {
+                                                       @ApiParam("AskForGoodPost's id")int afgPostId) {
         int userId = TokenUtil.getUserId(token);
         askForGoodPostService.deleteAskForGoodPost(afgPostId);
+        askForGoodPostService.deleteReplies(afgPostId);
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+    }
+
+    @ApiOperation(value = "get the number of replies in post")
+    @GetMapping("/count")
+    public ResponseEntity<Integer> getCount(@RequestHeader(value = "Authorization") String token,
+                                                 @ApiParam("AskForGoodPost's id")int afgPostId) {
+        int userId = TokenUtil.getUserId(token);
+        int count = askForGoodPostService.selectRCount(afgPostId);
+        return ResponseEntity.status(HttpStatus.OK).body(count);
     }
 
 }

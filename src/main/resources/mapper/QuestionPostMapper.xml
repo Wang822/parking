@@ -35,4 +35,31 @@
         from QuestionPostReply
         where q_post_id = #{qPostId}
     </delete>
+
+    <select id="findReplies" resultType="ReplyList">
+        select user_id,nick_name,avatar
+        from user
+        where user_id=#{userId}
+    </select>
+
+
+    <select id="findContent" resultType="String">
+        SELECT content
+        FROM QuestionPostReply
+        WHERE q_post_id=#{qPostId}
+    </select>
+
+
+    <select id="findAnswerid" resultType="int">
+        select user_id
+        from QuestionPostReply
+        where q_post_id=#{qPostId}
+    </select>
+
+    <!--select count of favorites-->
+    <select id="selectCount" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM QuestionPostReply
+        WHERE q_post_id=#{qPostId}
+    </select>
 </mapper>
