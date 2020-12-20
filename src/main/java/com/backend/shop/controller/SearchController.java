@@ -6,6 +6,7 @@ import com.backend.shop.service.SearchService;
 import com.backend.shop.util.TokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +32,10 @@ public class SearchController {
     @ApiOperation(value = "search for goods")
     @GetMapping("")
     public ResponseEntity<ArrayList<Good>> search(@RequestHeader(value = "Authorization") String token,
-                                                  @RequestParam(value = "name") String name,
-                                                  @RequestParam(value = "tag", required = false, defaultValue = "-1") int tag,
-                                                  @RequestParam(value = "highPrice", required = false, defaultValue = "-1") double highPrice,
-                                                  @RequestParam(value = "lowPrice", required = false, defaultValue = "-1") double lowPrice) {
+                                                  @ApiParam(example = "软件工程") @RequestParam(value = "name") String name,
+                                                  @ApiParam(example = "1") @RequestParam(value = "tag", required = false, defaultValue = "-1") int tag,
+                                                  @ApiParam(example = "30") @RequestParam(value = "highPrice", required = false, defaultValue = "-1") double highPrice,
+                                                  @ApiParam(example = "5") @RequestParam(value = "lowPrice", required = false, defaultValue = "-1") double lowPrice) {
         if (highPrice == -1) {
             highPrice = 10000000;
         }
