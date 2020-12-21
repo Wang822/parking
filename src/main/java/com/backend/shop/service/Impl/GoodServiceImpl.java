@@ -3,6 +3,7 @@ package com.backend.shop.service.Impl;
 import com.backend.shop.mapper.GoodDao;
 import com.backend.shop.pojo.Good;
 import com.backend.shop.service.GoodService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.ibatis.annotations.Param;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 @Service
 @Transactional
-public class GoodServiceImpl extends ServiceImpl<GoodDao,Good> implements GoodService {
+public class GoodServiceImpl implements GoodService {
 
     @Autowired
     private GoodDao goodDao;
@@ -25,13 +26,13 @@ public class GoodServiceImpl extends ServiceImpl<GoodDao,Good> implements GoodSe
     }
 
     @Override
-    public Good getGood(int good_id) {
-        return goodDao.getGood(good_id);
+    public Good getGood(int goodId) {
+        return goodDao.getGood(goodId);
     }
 
     @Override
-    public void deleteGood(int good_id) {
-        goodDao.deleteGood(good_id);
+    public void deleteGood(int goodId) {
+        goodDao.deleteGood(goodId);
     }
 
     @Override
@@ -40,17 +41,26 @@ public class GoodServiceImpl extends ServiceImpl<GoodDao,Good> implements GoodSe
     }
 
     @Override
-    public int existGood(int good_id) {
-        return goodDao.existGood(good_id);
+    public int existGood(int goodId) {
+        return goodDao.existGood(goodId);
     }
 
     @Override
-    public Page<Good> getGoodByPage(Page<Good> page) {
-        return getBaseMapper().getGoodByPage(page);
+    public IPage<Good> getGoodByPage(Good good,int currPage,int pageSize, int userId) throws RuntimeException{
+        try{
+            Page<Good> p = new Page<>(currPage,pageSize);
+            p.setRecords(goodDao.getGoodByPage(p,good,userId));
+            return p;
+        }catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
     //public Page<Good> getGoodByPage(Page<Good> page, @Param("Good") Good good) {
     //    return getBaseMapper().getGoodByPage(page,good);
     //}
     @Override
     public int getGoodOnSailCount(int userId){return goodDao.getGoodOnSailCount(userId);}
+
+    @Override
+    public int getAllGoodOnSailCount(){return goodDao.getAllGoodOnSailCount();}
 }

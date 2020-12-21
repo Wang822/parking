@@ -1,70 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.shop.mapper.GoodDao">
-<!--    <resultMap id="goodMap" type="com.backend.shop.pojo.Good">-->
-<!--        <result column="good_id" property="good_id"/>-->
-<!--        <result column="name" property="name"/>-->
-<!--        <result column="status" property="status"/>-->
-<!--        <result column="price" property="price"/>-->
-<!--        <result column="description" property="description"/>-->
-<!--        <result column="campus" property="campus"/>-->
-<!--        <result column="old" property="old"/>-->
-<!--        <result column="seller_id" property="seller_id"/>-->
-<!--        <result column="pic_addr" property="pic_addr"/>-->
-<!--        <result column="publish_date" property="publish_date"/>-->
-<!--        <result column="deposit" property="deposit"/>-->
-<!--        <result column="tag" property="tag"/>-->
-<!--    </resultMap>-->
+    <resultMap id="goodMap" type="com.backend.shop.pojo.Good">
+        <result column="goodid" property="goodid"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="description" property="description"/>
+        <result column="campus" property="campus"/>
+        <result column="old" property="old"/>
+        <result column="sellerid" property="sellerid"/>
+        <result column="addr" property="picaddr"/>
+        <result column="publishdate" property="publishdate"/>
+        <result column="tag" property="tag"/>
+    </resultMap>
 
-    <insert id="addGood" parameterType="Good" statementType="CALLABLE">
-        insert into Good(good_id,name,status,price,description,campus,old,seller_id,pic_addr
-        ,publish_date,deposit,tag)
-        values (#{good_id},#{name},#{status},#{price},#{description},#{campus},#{old}
-        ,#{seller_id},#{pic_addr},#{publish_date},#{deposit},#{tag})
+    <insert id="addGood" >
+        insert into Good(goodid,name,price,description,campus,old,sellerid,addr
+        ,publishdate,tag)
+        values (#{gid},#{name},#{price},#{description},#{campus},#{old}
+        ,#{seller},#{pic},#{publish},#{tag})
     </insert>
 
     <delete id="deleteGood" parameterType="int" statementType="CALLABLE">
         delete
         from Good
-        where good_id=#{good_id}
+        where goodid=#{gid}
     </delete>
 
     <update id="reviseGood" parameterType="Good">
         update Good
         set name=#{name}
-            status=#{status}
             price=#{price}
             description=#{description}
             campus=#{campus}
             old=#{old}
-            seller_id=#{seller_id}
-            pic_addr=#{pic_addr}
-            publish_date=#{publish_date}
-            deposit=#{deposit}
+            sellerid=#{seller}
+            addr=#{pic}
             tag=#{tag}
-        where good_id=#{good_id}
+        where goodid=#{gid}
     </update>
 
-    <select id="getGood" parameterType="int">
-        select *
+    <select id="getGood" parameterType="int" resultType="com.backend.shop.pojo.Good">
+        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
         from Good
-        where good_id=#{good_id}
+        where goodid=#{gid}
     </select>
 
     <select id="existGood" parameterType="int" resultType="int">
         select count(*)
         from Good
-        where good_id=#{good_id}
+        where goodid=#{gid}
     </select>
 
-    <select id="getGoodByPage">
-        select *
+    <select id="getGoodByPage" parameterType="int" resultType="com.backend.shop.pojo.Good">
+        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
         from Good
+        where sellerid= #{userid}
     </select>
 
-    <select id="getGoodOnSailCount">
+    <select id="getGoodOnSailCount" resultType="int">
         select count(*)
         from Good
-        where user_id = #{userId}
+        where sellerid = #{userid}
+    </select>
+
+    <select id="getAllGoodOnSailCount" resultType="int">
+        select count(*)
+        from Good
     </select>
 </mapper>

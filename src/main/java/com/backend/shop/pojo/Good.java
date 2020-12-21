@@ -1,7 +1,11 @@
 package com.backend.shop.pojo;
+import java.sql.Timestamp;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,56 +14,52 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Good {
-    @TableField("good_id")
-    private int good_id;
+    @TableId(value="gid", type= IdType.INPUT)
+    @ApiModelProperty(value = "商品id", example = "1234")
+    private int gid;
 
     @TableField("name")
+    @ApiModelProperty(value = "商品名", example = "2")
     private String name;
 
-    @TableField("status")
-    private int status;
-
     @TableField("price")
-    private String price;
+    @ApiModelProperty(value = "价格", example = "12.6")
+    private double price;
 
     @TableField("description")
+    @ApiModelProperty(value = "商品描述", example = "description")
     private String description;
 
     @TableField("campus")
+    @ApiModelProperty(value = "校区", example = "2")
     private int campus;
 
     @TableField("old")
+    @ApiModelProperty(value = "成色，9-9成旧", example = "9")
     private int old;
 
-    @TableField("seller_id")
-    private int seller_id;
+    @TableField("seller")
+    @ApiModelProperty(value = "卖家ID", example = "1224")
+    private int seller;
 
-    @TableField("pic_addr")
-    private String pic_addr;
-
-    @TableField("deposit")
-    private String deposit;
+    @TableField("pic")
+    @ApiModelProperty(value = "图片地址", example = "pic_addr")
+    private String pic;
 
     @TableField("tag")
+    @ApiModelProperty(value = "标签", example = "4")
     private int tag;
 
-    @TableField("publish_date")
-    private Date publish_date;
+    @TableField("publish")
+    @ApiModelProperty(value = "发布时间", example = "2020-12-10 23:13:10")
+    private Timestamp publish;
 
     public int getGood_id() {
-        return good_id;
+        return gid;
     }
 
     public void setGood_id(int q_good_id) {
-        this.good_id = q_good_id;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int q_status) {
-        this.status = q_status;
+        this.gid = q_good_id;
     }
 
     public String getName() {
@@ -70,9 +70,9 @@ public class Good {
         this.name = q_name;
     }
 
-    public String getPrice() {return price;}
+    public double getPrice() {return price;}
 
-    public void setPrice(String q_price) {this.price=q_price;}
+    public void setPrice(double q_price) {this.price=q_price;}
 
     public String getDescription() {return description;}
 
@@ -86,41 +86,35 @@ public class Good {
 
     public void setOld(int q_old){this.old=q_old;}
 
-    public int getSeller_id(){return seller_id;}
+    public int getSeller_id(){return seller;}
 
-    public void setSeller_id(int q_seller_id) {this.seller_id=q_seller_id;}
+    public void setSeller_id(int q_seller_id) {this.seller=q_seller_id;}
 
-    public String getPic_addr(){return pic_addr;}
+    public String getPic_addr(){return pic;}
 
-    public void setPic_addr(String q_pic_addr){this.pic_addr=q_pic_addr;}
-
-    public String getDeposit() {return deposit;}
-
-    public void setDeposit(String q_deposit) {this.deposit=q_deposit;}
+    public void setPic_addr(String q_pic_addr){this.pic=q_pic_addr;}
 
     public int getTag() {return tag;}
 
     public void setTag(int q_tag){this.tag=q_tag;}
 
-    public Date getPublish_date(){return publish_date;}
+    public Timestamp getPublish_date(){return publish;}
 
-    public void setPublish_date(Date q_publish_date){this.publish_date=q_publish_date;}
+    public void setPublish_date(Timestamp q_publish_date){this.publish=q_publish_date;}
 
     @Override
     public String toString() {
         return "Good{" +
-                "good_id=" + good_id +
+                "goodId=" + gid +
                 ", name=" + name+
-                ", status='" + status +
                 ", price='" + price +
                 ", description=" + description +
                 ", campus=" + campus+
                 ", old=" + old +
-                ", seller_id=" + seller_id +
-                ", pic_addr='" + pic_addr +
-                ", deposit=" + deposit +
+                ", sellerId=" + seller +
+                ", picAddr='" + pic +
                 ", tag" + tag+
-                ", publish_date=" + publish_date +
+                ", publishDate=" + publish +
                 '}';
     }
 }

@@ -200,6 +200,13 @@
             <version>1.46</version>
         </dependency>
 
+        <!--分页插件 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
         <!--
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -231,17 +238,16 @@
                         </excludes>
                     </configuration>
                 </plugin>
-                <!--
+
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
                     <configuration>
-                        <source>8</source>
-                        <target>8</target>
+                        <fork>true</fork>
                     </configuration>
                 </plugin>
-                -->
             </plugins>
+
         </build>
 <!--        &lt;!&ndash;    资源导出失败问题&ndash;&gt;-->
 <!--        <build>-->
@@ -264,8 +270,6 @@
 <!--            </resource>-->
 <!--        </resources>-->
 <!--        </build>-->
-
-
 
 
 </project>
