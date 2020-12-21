@@ -40,7 +40,8 @@ public class RecommendGoodsPostController {
                                                         @ApiParam("RecommendGoodsPost's introduction")@RequestParam String rg_intro,
                                                         @ApiParam("RecommendGoodsPost's title")@RequestParam String rg_title,
                                                         @ApiParam("RecommendGoodsPost's tag")@RequestParam int rg_tag,
-                                                        @ApiParam("time, yyyy-MM-dd hh:mm:ss")@RequestParam String time
+                                                        @ApiParam("time, yyyy-MM-dd hh:mm:ss")@RequestParam String time,
+                                                                    @ApiParam("avatar")@RequestParam String avatar
     ) throws ParseException {
         int userId = TokenUtil.getUserId(token);
         RecommendGoodsPost recommendGoodsPost = new RecommendGoodsPost();
@@ -48,6 +49,7 @@ public class RecommendGoodsPostController {
         recommendGoodsPost.setRgIntro(rg_intro);
         recommendGoodsPost.setRgTag(rg_tag);
         recommendGoodsPost.setRgTitle(rg_title);
+        recommendGoodsPost.setAvatar(avatar);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = sdf.parse(time);
         recommendGoodsPost.setTime(date);

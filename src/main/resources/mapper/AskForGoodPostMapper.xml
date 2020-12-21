@@ -31,4 +31,28 @@
         FROM user natural join AskForGoodPost
         WHERE afg_post_id=#{afgPostId}
     </select>
+
+    <!--delete-->
+    <delete id="deleteRe">
+        delete
+        from AskForGoodPostReply
+        where afg_post_id = #{afgPostId}
+    </delete>
+
+
+    <!--select count of favorites-->
+    <select id="selectCount" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM AskForGoodPostReply
+        WHERE afg_post_id=#{afgPostId}
+    </select>
+
+    <!--    select one's post-->
+    <select id="findAllById" resultType="AskForGoodPost">
+        SELECT *
+        FROM AskForGoodPost
+        WHERE user_id=#{userId}
+    </select>
+
+
 </mapper>

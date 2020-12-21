@@ -32,6 +32,7 @@ public class QuestionPostServiceImpl implements QuestionPostService {
 
     @Override
     public String selectNickname(int qPostId){
+
         return questionPostDao.findNickname(qPostId);
     }
 
@@ -41,5 +42,15 @@ public class QuestionPostServiceImpl implements QuestionPostService {
     }
 
 
+    @Override
+    public int selectRCount(int qPostId){
+        return questionPostDao.selectCount(qPostId);
+    }
+
+
+    @Override
+    public List<QuestionPost> findAllById(int userId){
+        return questionPostDao.findAllById(userId);
+    }
 
 }

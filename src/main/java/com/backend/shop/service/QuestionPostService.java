@@ -12,4 +12,7 @@ public interface QuestionPostService {
     void deleteQuestionPost(int qPostId);
     String selectNickname(int qPostId);
     void deleteReplies(int qPostId);
+
+    int selectRCount(int qPostId);
+    List<QuestionPost> findAllById(int userId);
 }

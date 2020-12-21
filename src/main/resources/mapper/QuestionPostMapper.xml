@@ -35,4 +35,18 @@
         from QuestionPostReply
         where q_post_id = #{qPostId}
     </delete>
+
+
+    <!--select count of favorites-->
+    <select id="selectCount" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM QuestionPostReply
+        WHERE q_post_id=#{qPostId}
+    </select>
+
+    <select id="findAllById" resultType="QuestionPost">
+    select *
+    from QuestionPost
+    where user_id=#{userId}
+  </select>
 </mapper>

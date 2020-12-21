@@ -40,9 +40,9 @@ public class ChatController {
     @PostMapping("/addMessage")
     @ApiOperation(value = "add a new massage")
     public ResponseEntity<String> addChat(@RequestHeader(value = "Authorization") String token,
-                                          @ApiParam("receiver's id") @RequestParam int receiver_id,
-                                          @ApiParam("message's content") @RequestParam String content,
-                                          @ApiParam("time, yyyy-MM-dd hh:mm:ss") @RequestParam String time) throws ParseException {
+                                          @ApiParam(value = "receiver's id", example = "3") @RequestParam int receiver_id,
+                                          @ApiParam(value = "message's content", example = "6") @RequestParam String content,
+                                          @ApiParam(value = "time, yyyy-MM-dd hh:mm:ss", example = "2020-12-19 23:22:11") @RequestParam String time) throws ParseException {
         int userId = TokenUtil.getUserId(token);
         Chat chat = new Chat();
         chat.setReceiverId(receiver_id);
@@ -66,7 +66,7 @@ public class ChatController {
     @ApiOperation(value = "get all messages between two users", response = Chat.class)
     @GetMapping("getMessages/{anotherUserId}")
     public ResponseEntity<ArrayList<Chat>> getMessages(@RequestHeader(value = "Authorization") String token,
-                                                       @ApiParam("another user's id") @PathVariable int anotherUserId) {
+                                                       @ApiParam(value = "another user's id", example = "6") @PathVariable int anotherUserId) {
         int userId = TokenUtil.getUserId(token);
         ArrayList<Chat> chats = chatService.selectMessages(userId, anotherUserId);
 //        if(chats.isEmpty()){

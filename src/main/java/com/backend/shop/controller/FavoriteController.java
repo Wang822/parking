@@ -6,6 +6,7 @@ import com.backend.shop.pojo.Good;
 import com.backend.shop.service.FavoriteService;
 import com.backend.shop.util.TokenUtil;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class FavoriteController {
     @ApiOperation(value = "add a good into favorite: if already exist, return code 208, else return 200")
     @PostMapping("/add")
     public ResponseEntity<String> addFavor(@RequestHeader(value = "Authorization") String token,
-                                           @RequestParam int good_id) {
+                                           @ApiParam(value = "good's id", example = "1") @RequestParam int good_id) {
         int userId = TokenUtil.getUserId(token);
         Favorite favorite = new Favorite();
         favorite.setGoodId(good_id);
@@ -49,7 +50,7 @@ public class FavoriteController {
     @ApiOperation(value = "remove a good")
     @DeleteMapping("/remove/{goodId}")
     public ResponseEntity<String> deleteFavor(@RequestHeader(value = "Authorization") String token,
-                                              @PathVariable int goodId) {
+                                              @ApiParam(value = "good's id", example = "2") @PathVariable int goodId) {
         int userId = TokenUtil.getUserId(token);
         favoriteService.deleteFavorite(userId, goodId);
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");

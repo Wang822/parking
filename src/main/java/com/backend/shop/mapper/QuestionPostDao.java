@@ -16,4 +16,10 @@ public interface QuestionPostDao {
     void deleteRe(@Param("qPostId") int qPostId);
 
 
+    int selectCount(@Param("qPostId") int qPostId);
+
+    List<QuestionPost> findAllById(@Param("userId") int userId);
+
+
+
 }

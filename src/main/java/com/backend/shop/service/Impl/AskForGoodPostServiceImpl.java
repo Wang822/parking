@@ -35,5 +35,19 @@ public class AskForGoodPostServiceImpl implements AskForGoodPostService {
         return askForGoodPostDao.findNickname(afgPostId);
     }
 
+    @Override
+    public int selectRCount(int afgPostId){
+        return askForGoodPostDao.selectCount(afgPostId);
+    }
+
+    @Override
+    public void deleteReplies(int afgPostId){
+        askForGoodPostDao.deleteRe(afgPostId);
+    }
+
+    @Override
+    public List<AskForGoodPost> findAllById(int userId){
+        return askForGoodPostDao.findAllById(userId);
+    }
 
 }
