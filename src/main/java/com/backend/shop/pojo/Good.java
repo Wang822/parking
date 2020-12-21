@@ -54,11 +54,11 @@ public class Good {
     @ApiModelProperty(value = "发布时间", example = "2020-12-10 23:13:10")
     private Timestamp publish;
 
-    public int getGood_id() {
+    public int getGid() {
         return gid;
     }
 
-    public void setGood_id(int q_good_id) {
+    public void setGid(int q_good_id) {
         this.gid = q_good_id;
     }
 
@@ -86,21 +86,21 @@ public class Good {
 
     public void setOld(int q_old){this.old=q_old;}
 
-    public int getSeller_id(){return seller;}
+    public int getSeller(){return seller;}
 
-    public void setSeller_id(int q_seller_id) {this.seller=q_seller_id;}
+    public void setSeller(int q_seller_id) {this.seller=q_seller_id;}
 
-    public String getPic_addr(){return pic;}
+    public String getPic(){return pic;}
 
-    public void setPic_addr(String q_pic_addr){this.pic=q_pic_addr;}
+    public void setPic(String q_pic_addr){this.pic=q_pic_addr;}
 
     public int getTag() {return tag;}
 
     public void setTag(int q_tag){this.tag=q_tag;}
 
-    public Timestamp getPublish_date(){return publish;}
+    public Timestamp getPublish(){return publish;}
 
-    public void setPublish_date(Timestamp q_publish_date){this.publish=q_publish_date;}
+    public void setPublish(Timestamp q_publish_date){this.publish=q_publish_date;}
 
     @Override
     public String toString() {

@@ -77,14 +77,14 @@ public class GoodController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Good with this goodId does not exist.");
         }
         Good good=new Good();
-        good.setGood_id(gid);
+        good.setGid(gid);
         good.setName(name);
         good.setPrice(price);
         good.setDescription(description);
         good.setCampus(campus);
         good.setOld(old);
-        good.setSeller_id(sellerId);
-        good.setPic_addr(pic);
+        good.setSeller(sellerId);
+        good.setPic(pic);
         good.setTag(tag);
         goodService.reviseGood(good);
 //        resultMap=getBackValue(flag,"Successful operation.");
@@ -114,17 +114,17 @@ public class GoodController {
         int goodId=goodService.getAllGoodOnSailCount()+1;
         Timestamp publishDate = new Timestamp(date.getTime()); //2013-01-14 22:45:36.484
         Good good=new Good();
-        good.setGood_id(goodId);
+        good.setGid(goodId);
         good.setName(name);
         good.setPrice(price);
         good.setDescription(description);
         good.setCampus(campus);
         good.setOld(old);
-        good.setSeller_id(sellerId);
-        good.setPic_addr(pic);
+        good.setSeller(sellerId);
+        good.setPic(pic);
         good.setTag(tag);
-        good.setPublish_date(publishDate);
-        good.toString();
+        good.setPublish(publishDate);
+        //good.toString();
         goodService.addGood(good);
         //System.out.println(good);
 //        resultMap=getBackValue(flag,"Successful operation.");

@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.shop.mapper.GoodDao">
     <resultMap id="goodMap" type="com.backend.shop.pojo.Good">
-        <result column="goodid" property="goodid"/>
+        <result column="goodid" property="gid"/>
         <result column="name" property="name"/>
         <result column="price" property="price"/>
         <result column="description" property="description"/>
         <result column="campus" property="campus"/>
         <result column="old" property="old"/>
-        <result column="sellerid" property="sellerid"/>
-        <result column="addr" property="picaddr"/>
-        <result column="publishdate" property="publishdate"/>
+        <result column="sellerid" property="seller"/>
+        <result column="addr" property="pic"/>
+        <result column="publishdate" property="publish"/>
         <result column="tag" property="tag"/>
     </resultMap>
 
