@@ -27,16 +27,10 @@
         where goodid=#{gid}
     </delete>
 
-    <update id="reviseGood" parameterType="Good">
+    <update id="reviseGood">
         update Good
-        set name=#{name}
-            price=#{price}
-            description=#{description}
-            campus=#{campus}
-            old=#{old}
-            sellerid=#{seller}
-            addr=#{pic}
-            tag=#{tag}
+        set price=#{price},name=#{name},description=#{description},campus=#{campus},
+            old=#{old},sellerid=#{seller},addr=#{pic},tag=#{tag}
         where goodid=#{gid}
     </update>
 
