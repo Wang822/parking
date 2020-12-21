@@ -17,5 +17,9 @@ public interface SearchDao {
                                   @Param("lowPrice") double lowPrice,
                                   @Param("highPrice") double highPrice);
 
-    ArrayList<Good> getRecommend(int userId);
+    ArrayList<Good> getRecommend();
+
+    ArrayList<Good> getRecommendByTag(int tag);
+
+    ArrayList<Good> getRecommendByCampus(int campus);
 }

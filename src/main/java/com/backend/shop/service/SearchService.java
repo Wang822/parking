@@ -12,6 +12,10 @@ public interface SearchService {
 
     ArrayList<Good> searchWithTag(String name, int tag, double lowPrice, double highPrice);
 
-    ArrayList<Good> getRecommend(int userId);
+    ArrayList<Good> getRecommendByTag(int tag);
+
+    ArrayList<Good> getRecommendByCampus(int campus);
+
+    ArrayList<Good> getRecommend();
 
 }
