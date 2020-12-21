@@ -7,6 +7,7 @@
     <select id="findAll" resultType="QuestionPost">
     select *
     from QuestionPost
+    order by time
   </select>
 
     <!--insert -->
@@ -48,5 +49,6 @@
     select *
     from QuestionPost
     where user_id=#{userId}
+    order by time
   </select>
 </mapper>

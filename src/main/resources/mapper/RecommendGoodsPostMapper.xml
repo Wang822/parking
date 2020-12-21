@@ -9,6 +9,7 @@
     <select id="findAll" resultType="RecommendGoodsPost">
         select *
         from RecommendGoodsPost
+        order by time
     </select>
 
     <!--insert -->
