@@ -52,7 +52,7 @@ public class Good {
 
     @TableField("publish")
     @ApiModelProperty(value = "发布时间", example = "2020-12-10 23:13:10")
-    private Timestamp publish;
+    private Date publish;
 
     public int getGid() {
         return gid;
@@ -98,9 +98,9 @@ public class Good {
 
     public void setTag(int q_tag){this.tag=q_tag;}
 
-    public Timestamp getPublish(){return publish;}
+    public Date getPublish(){return publish;}
 
-    public void setPublish(Timestamp q_publish_date){this.publish=q_publish_date;}
+    public void setPublish(Date q_publish_date){this.publish=q_publish_date;}
 
     @Override
     public String toString() {

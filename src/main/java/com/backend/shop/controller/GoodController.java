@@ -16,10 +16,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 
 @RestController
@@ -110,9 +107,22 @@ public class GoodController {
 //        Date publish_date = new Date();
 //        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
 //        dateFormat.format(publish_date);
-        Date date = new Date();
-        int goodId=goodService.getAllGoodOnSailCount()+1;
-        Timestamp publishDate = new Timestamp(date.getTime()); //2013-01-14 22:45:36.484
+        String val = "";
+        Random random = new Random();
+        for (int i = 0; i < 9; i++) {
+            val += String.valueOf(random.nextInt(10));
+        }
+        int goodId=-1;
+        try {
+            goodId = Integer.valueOf(val).intValue();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        //int goodId=goodService.getAllGoodOnSailCount()+1;
+        //Date date = new Date();
+        //Timestamp publishDate = new Timestamp(date.getTime()); //2013-01-14 22:45:36.484
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date publishDate = new Date();
         Good good=new Good();
         good.setGid(goodId);
         good.setName(name);
