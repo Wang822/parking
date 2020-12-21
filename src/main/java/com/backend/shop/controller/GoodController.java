@@ -40,7 +40,7 @@ public class GoodController {
     }
 
     @ApiOperation(value="remove a good")
-    @DeleteMapping("/remove/{goodId}")
+    @DeleteMapping("/remove/{gid}")
     public ResponseEntity<String> deleteGood(@PathVariable int gid)
     {
 //        boolean flag=true;
@@ -131,7 +131,7 @@ public class GoodController {
         return ResponseEntity.status(HttpStatus.OK).body(good);
     }
 
-    @GetMapping("/getItem/{goodId}")
+    @GetMapping("/getItem/{gid}")
     public ResponseEntity<Good> getGood(@PathVariable int gid)
     {
 //        boolean flag=true;
@@ -147,7 +147,7 @@ public class GoodController {
         return ResponseEntity.status(HttpStatus.OK).body(good);
     }
 
-    @GetMapping("/getItemList/{currPage}/{pageSize}")
+    @GetMapping("/getItemList/{currpage}/{pagesize}")
     public ResponseEntity<List<Good>> getGoodByPage(@RequestHeader(value="Authorization") String token,@PathVariable int currpage,@PathVariable int pagesize)
     {
         Good good=new Good();

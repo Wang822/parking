@@ -21,7 +21,7 @@
         ,#{seller},#{pic},#{publish},#{tag})
     </insert>
 
-    <delete id="deleteGood" parameterType="int" statementType="CALLABLE">
+    <delete id="deleteGood" parameterType="int">
         delete
         from Good
         where goodid=#{gid}
@@ -40,7 +40,7 @@
         where goodid=#{gid}
     </update>
 
-    <select id="getGood" parameterType="int" resultType="com.backend.shop.pojo.Good">
+    <select id="getGood" parameterType="int" resultMap="goodMap">
         select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
         from Good
         where goodid=#{gid}
@@ -52,7 +52,7 @@
         where goodid=#{gid}
     </select>
 
-    <select id="getGoodByPage" parameterType="int" resultType="com.backend.shop.pojo.Good">
+    <select id="getGoodByPage" parameterType="int" resultMap="goodMap">
         select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
         from Good
         where sellerid= #{userid}
