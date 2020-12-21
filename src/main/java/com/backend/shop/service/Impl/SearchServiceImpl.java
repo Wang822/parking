@@ -25,7 +25,17 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public ArrayList<Good> getRecommend(int userId) {
-        return searchDao.getRecommend(userId);
+    public ArrayList<Good> getRecommendByCampus(int campus) {
+        return searchDao.getRecommendByCampus(campus);
+    }
+
+    @Override
+    public ArrayList<Good> getRecommendByTag(int tag) {
+        return searchDao.getRecommendByTag(tag);
+    }
+
+    @Override
+    public ArrayList<Good> getRecommend() {
+        return searchDao.getRecommend();
     }
 }

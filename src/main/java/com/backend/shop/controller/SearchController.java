@@ -21,11 +21,24 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @ApiOperation(value = "get user's recommend goods")
+    @ApiOperation(value = "get all goods (without param)")
     @GetMapping("/getRecommend")
-    public ResponseEntity<ArrayList<Good>> getRecommend(@RequestHeader(value = "Authorization") String token) {
-        int userId = TokenUtil.getUserId(token);
-        ArrayList<Good> goods = searchService.getRecommend(userId);
+    public ResponseEntity<ArrayList<Good>> getRecommend() {
+        ArrayList<Good> goods = searchService.getRecommend();
+        return ResponseEntity.status(HttpStatus.OK).body(goods);
+    }
+
+    @ApiOperation(value = "get recommend goods by tag")
+    @GetMapping("/byTag")
+    public ResponseEntity<ArrayList<Good>> getRecommendByTag(@ApiParam(example = "2") @RequestParam(value = "tag") int tag) {
+        ArrayList<Good> goods = searchService.getRecommendByTag(tag);
+        return ResponseEntity.status(HttpStatus.OK).body(goods);
+    }
+
+    @ApiOperation(value = "get recommend goods by campus")
+    @GetMapping("/byCampus")
+    public ResponseEntity<ArrayList<Good>> getRecommendByCampus(@ApiParam(example = "2") @RequestParam(value = "campus") int campus) {
+        ArrayList<Good> goods = searchService.getRecommendByCampus(campus);
         return ResponseEntity.status(HttpStatus.OK).body(goods);
     }
 
