@@ -41,7 +41,7 @@ public class AccountController {
     @PostMapping("wx/login")
     @ResponseBody
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success login", responseHeaders = {
+            @ApiResponse(code = 200, message = "登录成功，返回是否已学生认证", responseHeaders = {
                     @ResponseHeader(name = "Authorization", description = "登录token")}),
             @ApiResponse(code = 401, message = "token verify fail"),
             @ApiResponse(code = 403, message = "签名校验失败")})
