@@ -14,4 +14,8 @@ public interface AskForGoodPostService {
     void deleteAskForGoodPost(int afgPostId);
 
     String selectNickname(int afgPostId);
+    void deleteReplies(int afgPostId);
+
+    int selectRCount(int afgPostId);
+    List<AskForGoodPost> findAllById(int userId);
 }

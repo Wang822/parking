@@ -42,9 +42,9 @@ public class QuestionPostReplyController {
     }
 
     @GetMapping("/get")
-    @ApiOperation(value = "return all QuestionPostReplies",response = QuestionPostReply.class)
+    @ApiOperation(value = "return all QuestionPostReplies")
     public ResponseEntity<List<QuestionPostReply>> getQuestionPostReplies(@RequestHeader(value = "Authorization") String token,
-                                                                          @ApiParam("QuestionPost's id")@PathVariable int qPostId) {
+                                                                          @ApiParam("QuestionPost's id")int qPostId) {
         int userId = TokenUtil.getUserId(token);
         List<QuestionPostReply> questionPostReplies = questionPostReplyService.selectQuestionPostReplies(qPostId);
         for (QuestionPostReply questionPostReply : questionPostReplies) {

@@ -8,9 +8,13 @@ import com.backend.shop.util.TokenUtil;
 import com.backend.shop.util.WechatUtil;
 import com.backend.shop.pojo.Account;
 import com.backend.shop.service.IAccountService;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -37,7 +41,7 @@ public class AccountController {
     @PostMapping("wx/login")
     @ResponseBody
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success login", responseHeaders = {
+            @ApiResponse(code = 200, message = "登录成功，返回是否已学生认证", responseHeaders = {
                     @ResponseHeader(name = "Authorization", description = "登录token")}),
             @ApiResponse(code = 401, message = "token verify fail"),
             @ApiResponse(code = 403, message = "签名校验失败")})
@@ -71,12 +75,14 @@ public class AccountController {
         if (account == null) {
             // 用户信息入库
             String nickName = rawDataJson.getString("nickName");
+            String avatar = rawDataJson.getString("avatar");
 
             account = new Account();
             account.setOpenId(openid);
             account.setCreateTime(new Date());
             account.setLastVisitTime(new Date());
             account.setNickName(nickName);
+            account.setAvatar(avatar);
             account.setAuthenticated(false);
             this.iAccountService.save(account);
         } else {
@@ -104,8 +110,38 @@ public class AccountController {
         System.out.println(new Date() + "  [Login]   AccountID: " + accountId);
 
 //        return new GlobalResult<>(200, "success login", account.isAuthenticated());
+//        return ResponseEntity.ok(new AccountResponse(
+//                account.getAccountId(),
+//                account.isAuthenticated(),
+//                account.getNickName(),
+//                account.getAvatar()));
         return ResponseEntity.ok(account.isAuthenticated());
     }
 
 }
 
+//@ApiModel(value = "Account Response", description = "返回账户信息")
+//class AccountResponse {
+//    @TableId(value = "account_id", type = IdType.AUTO)
+//    @ApiModelProperty(value = "账户ID", example = "1")
+//    private int accountId;
+//
+//    @TableField("authenticated")
+//    @ApiModelProperty(value = "是否已通过学生认证", example = "0")
+//    private boolean authenticated;
+//
+//    @TableField("nick_name")
+//    @ApiModelProperty(value = "昵称", example = "nick name")
+//    private String nickName;
+//
+//    @TableField("avatar")
+//    @ApiModelProperty(value = "头像图片路径", example = "example.png")
+//    private String avatar;
+//
+//    AccountResponse(int id, boolean auth, String nickName, String avatar) {
+//        this.accountId = id;
+//        this.authenticated = auth;
+//        this.nickName = nickName;
+//        this.avatar = avatar;
+//    }
+//}

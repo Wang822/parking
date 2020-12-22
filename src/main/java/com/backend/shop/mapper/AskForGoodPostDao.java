@@ -13,6 +13,11 @@ public interface AskForGoodPostDao {
     void delete(@Param("afgPostId") int afgPostId);
 
     String findNickname(@Param("afgPostId") int afgPostId);
+    void deleteRe(@Param("afgPostId") int afgPostId);
+
+    int selectCount(@Param("afgPostId") int afgPostId);
+
+    List<AskForGoodPost> findAllById(@Param("userId") int userId);
 
 
 }

@@ -93,3 +93,6 @@ public class UserController {
     }
 
 }
+
+/* add user request */
+// 不需要昵称、头像

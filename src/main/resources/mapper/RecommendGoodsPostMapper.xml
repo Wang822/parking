@@ -9,12 +9,13 @@
     <select id="findAll" resultType="RecommendGoodsPost">
         select *
         from RecommendGoodsPost
+        order by time
     </select>
 
     <!--insert -->
     <insert id="add" parameterType="RecommendGoodsPost">
-        insert into RecommendGoodsPost (user_id, rg_intro,rg_title,rg_tag,time)
-        values (#{userId}, #{rgIntro},#{rgTitle},#{rgTag},#{time})
+        insert into RecommendGoodsPost (user_id, rg_intro,rg_title,rg_tag,time,avatar)
+        values (#{userId}, #{rgIntro},#{rgTitle},#{rgTag},#{time},#{avatar})
     </insert>
 
     <!--delete-->

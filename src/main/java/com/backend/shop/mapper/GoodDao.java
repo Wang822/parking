@@ -7,24 +7,26 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Mapper
 @Component
 public interface GoodDao extends BaseMapper<Good> {
     void addGood(Good good);
 
-    Good getGood(@Param("good_id")int good_id);
+    Good getGood(@Param("gid")int gid);
 
-    void deleteGood(@Param("good_id") int good_id);
+    void deleteGood(@Param("gid") int gid);
 
     void reviseGood(Good good);
 
-    int existGood(@Param("good_id")int good_id);
+    int existGood(@Param("gid")int gid);
 
-    int getGoodOnSailCount(int userId);
+    int getGoodOnSailCount(@Param("userid") int userid);
 
     //Page<Good> getGoodByPage(Page<Good> page,@Param("Good") Good good);
-    Page<Good> getGoodByPage(Page<Good> page);
+    List<Good> getGoodByPage(Page<Good> page, @Param("good") Good good,@Param("userid") int userid);
+
+    int getAllGoodOnSailCount();
 
 }

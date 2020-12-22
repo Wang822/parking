@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间绑定一个指定的dao接口-->
+<mapper namespace="com.backend.shop.mapper.AskForGoodPostReplyDao">
+
+    <!--insert -->
+    <insert id="add" parameterType="AskForGoodPostReply">
+        insert into AskForGoodPostReply (afg_post_id,user_id,content,time)
+        values (#{afgPostId},#{userId},#{content},#{time})
+    </insert>
+
+    <!--select all replies in a question post-->
+    <select id="selectReplies" parameterType="int" resultType="AskForGoodPostReply">
+        SELECT afg_reply_id,
+               afg_post_id,
+               content,
+               time,
+               user_id
+        FROM AskForGoodPostReply
+        WHERE afg_post_id = #{afgPostId}
+        order by time
+    </select>
+
+    <!--delete-->
+    <delete id="delete">
+        delete
+        from AskForGoodPostReply
+        where afg_post_id = #{afgPostId}
+    </delete>
+
+    <!--    selectNickname-->
+    <select id="findNickname" resultType="String">
+        SELECT nick_name
+        FROM user natural join AskForGoodPostReply
+        WHERE afg_reply_id=#{afgReplyId}
+    </select>
+
+    <!--    selectAvatar-->
+    <select id="findAvatar" resultType="String">
+        SELECT avatar
+        FROM user natural join AskForGoodPostReply
+        WHERE afg_reply_id=#{afgReplyId}
+    </select>
+
+    <!--delete-->
+    <delete id="deleteOneReply">
+        delete
+        from AskForGoodPostReply
+        where afg_reply_id = #{afgReplyId}
+    </delete>
+</mapper>

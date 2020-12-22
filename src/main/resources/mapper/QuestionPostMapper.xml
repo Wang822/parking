@@ -7,6 +7,7 @@
     <select id="findAll" resultType="QuestionPost">
     select *
     from QuestionPost
+    order by time
   </select>
 
     <!--insert -->
@@ -35,4 +36,19 @@
         from QuestionPostReply
         where q_post_id = #{qPostId}
     </delete>
+
+
+    <!--select count of favorites-->
+    <select id="selectCount" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM QuestionPostReply
+        WHERE q_post_id=#{qPostId}
+    </select>
+
+    <select id="findAllById" resultType="QuestionPost">
+    select *
+    from QuestionPost
+    where user_id=#{userId}
+    order by time
+  </select>
 </mapper>
