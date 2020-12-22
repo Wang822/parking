@@ -38,7 +38,7 @@ public class GoodController {
 
     @ApiOperation(value="remove a good")
     @DeleteMapping("/remove/{gid}")
-    public ResponseEntity<String> deleteGood(@PathVariable int gid)
+    public ResponseEntity<String> deleteGood(@RequestParam int gid)
     {
 //        boolean flag=true;
 //        Map<String, Object> resultMap = new HashMap<>();
@@ -142,7 +142,7 @@ public class GoodController {
     }
 
     @GetMapping("/getItem/{gid}")
-    public ResponseEntity<Good> getGood(@PathVariable int gid)
+    public ResponseEntity<Good> getGood(@RequestParam int gid)
     {
 //        boolean flag=true;
 //        Map<String, Object> resultMap = new HashMap<>();
@@ -158,7 +158,7 @@ public class GoodController {
     }
 
     @GetMapping("/getItemList/{currpage}/{pagesize}")
-    public ResponseEntity<List<Good>> getGoodByPage(@RequestHeader(value="Authorization") String token,@PathVariable int currpage,@PathVariable int pagesize)
+    public ResponseEntity<List<Good>> getGoodByPage(@RequestHeader(value="Authorization") String token,@RequestParam int currpage,@RequestParam int pagesize)
     {
         Good good=new Good();
         int userId= TokenUtil.getUserId(token);
