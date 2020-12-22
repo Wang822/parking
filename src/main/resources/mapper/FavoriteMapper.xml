@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.shop.mapper.FavoriteDao">
+    <resultMap id="goodMap" type="com.backend.shop.pojo.Good">
+        <result column="goodid" property="gid"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="description" property="description"/>
+        <result column="campus" property="campus"/>
+        <result column="old" property="old"/>
+        <result column="sellerid" property="seller"/>
+        <result column="addr" property="pic"/>
+        <result column="publishdate" property="publish"/>
+        <result column="tag" property="tag"/>
+    </resultMap>
     <!--insert new chat-->
     <insert id="add" parameterType="Favorite">
         insert into favorite (user_id, good_id)
@@ -14,16 +26,15 @@
           and good_id = #{goodId}
     </select>
     <!--select all goods in the user's favorite list-->
-    <select id="selectGoods" parameterType="int" resultType="Good">
-        SELECT goodid,
+    <select id="selectGoods" parameterType="int" resultType="goodMap">
+        select goodid,
                name,
-               status,
                price,
                description,
                campus,
                old,
-               addr,
                sellerid,
+               addr,
                publishdate,
                tag
         FROM Good

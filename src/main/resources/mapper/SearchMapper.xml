@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.shop.mapper.SearchDao">
+    <resultMap id="goodMap" type="com.backend.shop.pojo.Good">
+        <result column="goodid" property="gid"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="description" property="description"/>
+        <result column="campus" property="campus"/>
+        <result column="old" property="old"/>
+        <result column="sellerid" property="seller"/>
+        <result column="addr" property="pic"/>
+        <result column="publishdate" property="publish"/>
+        <result column="tag" property="tag"/>
+    </resultMap>
     <!--select with name and price-->
-    <select id="search" resultType="Good">
+    <select id="search" resultType="goodMap">
         SELECT *
         FROM Good
         WHERE (name like "%"#{name}"%")
@@ -10,7 +22,7 @@
         order by publishdate DESC
     </select>
     <!--select with name, price and tag-->
-    <select id="searchWithTag" resultType="Good">
+    <select id="searchWithTag" resultType="goodMap">
         SELECT *
         FROM Good
         WHERE (tag = #{tag})
@@ -19,18 +31,18 @@
         order by publishdate DESC
     </select>
     <!-- get recommend by the user's campus -->
-    <select id="getRecommend" resultType="Good">
+    <select id="getRecommend" resultType="goodMap">
         SELECT *
         from Good
         order by publishdate DESC
     </select>
-    <select id="getRecommendByTag" parameterType="int" resultType="Good">
+    <select id="getRecommendByTag" parameterType="int" resultType="goodMap">
         SELECT *
         from Good
         where tag = #{tag}
         order by publishdate DESC
     </select>
-    <select id="getRecommendByCampus" parameterType="int" resultType="Good">
+    <select id="getRecommendByCampus" parameterType="int" resultType="goodMap">
         SELECT *
         from Good
         where campus = #{campus}
