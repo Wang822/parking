@@ -7,7 +7,7 @@
         FROM Good
         WHERE (name like "%"#{name}"%")
           and (price between #{lowPrice} and #{highPrice})
-        order by publish_date DESC
+        order by publishdate DESC
     </select>
     <!--select with name, price and tag-->
     <select id="searchWithTag" resultType="Good">
@@ -16,24 +16,24 @@
         WHERE (tag = #{tag})
           and (price between #{lowPrice} and #{highPrice})
           and (name like "%"#{name}"%")
-        order by publish_date DESC
+        order by publishdate DESC
     </select>
     <!-- get recommend by the user's campus -->
     <select id="getRecommend" resultType="Good">
         SELECT *
         from Good
-        order by publish_date DESC
+        order by publishdate DESC
     </select>
     <select id="getRecommendByTag" parameterType="int" resultType="Good">
         SELECT *
         from Good
         where tag = #{tag}
-        order by publish_date DESC )
+        order by publishdate DESC )
     </select>
     <select id="getRecommendByCampus" parameterType="int" resultType="Good">
         SELECT *
         from Good
         where campus #{campus}
-        order by publish_date DESC
+        order by publishdate DESC
     </select>
 </mapper>

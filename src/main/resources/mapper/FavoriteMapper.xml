@@ -15,17 +15,16 @@
     </select>
     <!--select all goods in the user's favorite list-->
     <select id="selectGoods" parameterType="int" resultType="Good">
-        SELECT good_id,
+        SELECT goodid,
                name,
                status,
                price,
                description,
                campus,
                old,
-               seller_id,
-               pic_addr,
-               publish_date,
-               deposit,
+               addr,
+               sellerid,
+               publishdate,
                tag
         FROM Good
                  natural join favorite
