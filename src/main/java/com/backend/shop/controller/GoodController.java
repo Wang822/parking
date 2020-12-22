@@ -158,7 +158,7 @@ public class GoodController {
     }
 
     @GetMapping("/getItemList/{currpage}/{pagesize}")
-    public ResponseEntity<List<Good>> getGoodByPage(@RequestHeader(value="Authorization") String token,@RequestParam int currpage,@RequestParam int pagesize)
+    public ResponseEntity<HashMap<String,Object>> getGoodByPage(@RequestHeader(value="Authorization") String token,@RequestParam int currpage,@RequestParam int pagesize)
     {
         Good good=new Good();
         int userId= TokenUtil.getUserId(token);
@@ -166,7 +166,12 @@ public class GoodController {
 //        Map<String, Object> resultMap = new HashMap<>();
 //        resultMap.put("result_code",1);
 //        resultMap.put("result_body",goodService.getGoodByPage(page));
-        return ResponseEntity.status(HttpStatus.OK).body(ipage.getRecords());
+        HashMap<String,Object> resultmap=new HashMap<String,Object>();
+        List<Good> goodlist=ipage.getRecords();
+        int count=goodService.getGoodOnSailCount(userId);
+        resultmap.put("total",count);
+        resultmap.put("list",goodlist);
+        return ResponseEntity.status(HttpStatus.OK).body(resultmap);
     }
     @GetMapping("/getGoodOnSail")
     public ResponseEntity<Integer> getGoodOnSailCount(@RequestHeader(value = "Authorization") String token)
