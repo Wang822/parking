@@ -28,12 +28,12 @@
         SELECT *
         from Good
         where tag = #{tag}
-        order by publishdate DESC )
+        order by publishdate DESC
     </select>
     <select id="getRecommendByCampus" parameterType="int" resultType="Good">
         SELECT *
         from Good
-        where campus #{campus}
+        where campus = #{campus}
         order by publishdate DESC
     </select>
 </mapper>
