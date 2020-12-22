@@ -14,7 +14,7 @@
         <result column="tag" property="tag"/>
     </resultMap>
     <!--select with name and price-->
-    <select id="search" resultType="goodMap">
+    <select id="search" resultMap="goodMap">
         SELECT *
         FROM Good
         WHERE (name like "%"#{name}"%")
@@ -22,7 +22,7 @@
         order by publishdate DESC
     </select>
     <!--select with name, price and tag-->
-    <select id="searchWithTag" resultType="goodMap">
+    <select id="searchWithTag" resultMap="goodMap">
         SELECT *
         FROM Good
         WHERE (tag = #{tag})
@@ -31,18 +31,18 @@
         order by publishdate DESC
     </select>
     <!-- get recommend by the user's campus -->
-    <select id="getRecommend" resultType="goodMap">
+    <select id="getRecommend" resultMap="goodMap">
         SELECT *
         from Good
         order by publishdate DESC
     </select>
-    <select id="getRecommendByTag" parameterType="int" resultType="goodMap">
+    <select id="getRecommendByTag" parameterType="int" resultMap="goodMap">
         SELECT *
         from Good
         where tag = #{tag}
         order by publishdate DESC
     </select>
-    <select id="getRecommendByCampus" parameterType="int" resultType="goodMap">
+    <select id="getRecommendByCampus" parameterType="int" resultMap="goodMap">
         SELECT *
         from Good
         where campus = #{campus}
