@@ -53,7 +53,7 @@ public class GoodController {
         return ResponseEntity.status(HttpStatus.OK).body("Successful operation.");
     }
 
-    @PutMapping("/revise")
+    @PostMapping("/revise")
     public ResponseEntity<String> reviseGood(@RequestHeader(value="Authorization") String token,
                                    @RequestParam int gid,
                                    @RequestParam String name,
