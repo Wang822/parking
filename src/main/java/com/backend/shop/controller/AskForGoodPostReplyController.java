@@ -58,8 +58,8 @@ public class AskForGoodPostReplyController {
     public ResponseEntity<String> deleteAskForGoodPostReplies(@RequestHeader(value = "Authorization") String token,
                                                             @ApiParam("AskForGoodPost's id")@PathVariable int afgPostId) {
         int userId = TokenUtil.getUserId(token);
-        askForGoodPostReplyService.deleteAskForGoodPostReplies(afgPostId);
-        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+            askForGoodPostReplyService.deleteAskForGoodPostReplies(afgPostId);
+            return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
     @DeleteMapping("/removeone/{afgReplyId}")
@@ -67,7 +67,12 @@ public class AskForGoodPostReplyController {
     public ResponseEntity<String> deleteOneAskForGoodPostReply(@RequestHeader(value = "Authorization") String token,
                                                              @ApiParam("AskForGoodPostReply's id")@PathVariable int afgReplyId) {
         int userId = TokenUtil.getUserId(token);
-        askForGoodPostReplyService.deleteOneAskForGoodPostReply(afgReplyId);
-        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        if(askForGoodPostReplyService.findReplyUserId(afgReplyId)==userId) {
+            askForGoodPostReplyService.deleteOneAskForGoodPostReply(afgReplyId);
+            return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body("delete denied");
+        }
     }
 }

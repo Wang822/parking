@@ -55,5 +55,11 @@
         order by time
     </select>
 
+    <!--    selectPostID-->
+    <select id="findPostUserId" parameterType="int" resultType="int">
+        SELECT user_id
+        FROM AskForGoodPost
+        WHERE afg_post_id=#{afgPostId}
+    </select>
 
 </mapper>

@@ -20,6 +20,8 @@ public interface QuestionPostDao {
 
     List<QuestionPost> findAllById(@Param("userId") int userId);
 
+    int findPostUserId(@Param("qPostId") int qPostId);
+
 
 
 }

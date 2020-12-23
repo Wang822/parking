@@ -50,4 +50,8 @@ public class AskForGoodPostServiceImpl implements AskForGoodPostService {
         return askForGoodPostDao.findAllById(userId);
     }
 
+    @Override
+    public int findPostUserId(int afgPostId){
+        return askForGoodPostDao.findPostUserId(afgPostId);
+    }
 }

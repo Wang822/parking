@@ -15,4 +15,6 @@ public interface QuestionPostService {
 
     int selectRCount(int qPostId);
     List<QuestionPost> findAllById(int userId);
+
+    int findPostUserId(int qPostId);
 }

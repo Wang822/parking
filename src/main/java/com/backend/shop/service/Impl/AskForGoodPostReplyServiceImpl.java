@@ -44,4 +44,10 @@ public class AskForGoodPostReplyServiceImpl implements AskForGoodPostReplyServic
         askForGoodPostReplyDao.deleteOneReply(afgReplyId);
     }
 
+    @Override
+    public int findReplyUserId(int afgReplyId){
+        return askForGoodPostReplyDao.findReplyUserId(afgReplyId);
+    }
+
+
 }

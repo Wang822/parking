@@ -13,4 +13,6 @@ public interface RecommendGoodsPostDao {
     void delete(@Param("rgPostId") int rgPostId);
 
     String findNickname(@Param("rgPostId") int rgPostId);
+
+    int findPostUserId(@Param("rgPostId") int rgPostId);
 }

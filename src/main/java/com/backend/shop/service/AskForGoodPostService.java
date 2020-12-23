@@ -18,4 +18,6 @@ public interface AskForGoodPostService {
 
     int selectRCount(int afgPostId);
     List<AskForGoodPost> findAllById(int userId);
+
+    int findPostUserId(int afgPostId);
 }

@@ -43,4 +43,12 @@
         from QuestionPostReply
         where q_reply_id = #{qReplyId}
     </delete>
+
+
+    <!--    selectPostID-->
+    <select id="findReplyUserId" parameterType="int" resultType="int">
+        SELECT user_id
+        FROM QuestionPostReply
+        WHERE q_reply_id = #{qReplyId}
+    </select>
 </mapper>

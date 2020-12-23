@@ -40,4 +40,11 @@ public class QuestionPostReplyServiceImpl implements QuestionPostReplyService {
         questionPostReplyDao.deleteOneReply(qReplyId);
     }
 
+    @Override
+    public int findReplyUserId(int qReplyId){
+        return questionPostReplyDao.findReplyUserId(qReplyId);
+    }
+
+
+
 }

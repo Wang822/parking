@@ -13,4 +13,7 @@ public interface QuestionPostReplyDao {
 
     String findNickname(@Param("qReplyId") int qReplyId);
     void deleteOneReply(@Param("qReplyId") int qReplyId);
+
+    int findReplyUserId(@Param("qReplyId") int qReplyId);
+
 }
