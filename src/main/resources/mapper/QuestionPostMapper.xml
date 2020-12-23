@@ -51,4 +51,11 @@
     where user_id=#{userId}
     order by time
   </select>
+
+    <!--    selectPostID-->
+    <select id="findPostUserId" parameterType="int" resultType="int">
+        SELECT user_id
+        FROM QuestionPost
+        WHERE q_post_id = #{qPostId}
+    </select>
 </mapper>

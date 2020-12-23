@@ -19,5 +19,6 @@ public interface AskForGoodPostDao {
 
     List<AskForGoodPost> findAllById(@Param("userId") int userId);
 
+    int findPostUserId(@Param("afgPostId") int afgPostId);
 
 }

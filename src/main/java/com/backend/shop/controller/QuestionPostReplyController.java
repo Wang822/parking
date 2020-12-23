@@ -58,8 +58,8 @@ public class QuestionPostReplyController {
     public ResponseEntity<String> deleteQuestionPostReplies(@RequestHeader(value = "Authorization") String token,
                                                             @ApiParam("QuestionPost's id")@PathVariable int qPostId) {
         int userId = TokenUtil.getUserId(token);
-        questionPostReplyService.deleteQuestionPostReplies(qPostId);
-        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+            questionPostReplyService.deleteQuestionPostReplies(qPostId);
+            return ResponseEntity.status(HttpStatus.OK).body("successful operation");
     }
 
     @DeleteMapping("/removeone/{qReplyId}")
@@ -67,7 +67,12 @@ public class QuestionPostReplyController {
     public ResponseEntity<String> deleteOneQuestionPostReply(@RequestHeader(value = "Authorization") String token,
                                                              @ApiParam("QuestionPostReply's id")@PathVariable int qReplyId) {
         int userId = TokenUtil.getUserId(token);
-        questionPostReplyService.deleteOneQuestionPostReply(qReplyId);
-        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        if(questionPostReplyService.findReplyUserId(qReplyId)==userId) {
+            questionPostReplyService.deleteOneQuestionPostReply(qReplyId);
+            return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body("delete denied");
+        }
     }
 }

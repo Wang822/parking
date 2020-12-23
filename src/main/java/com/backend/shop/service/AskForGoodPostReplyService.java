@@ -2,6 +2,7 @@ package com.backend.shop.service;
 
 import com.backend.shop.pojo.AskForGoodPostReply;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,4 +13,7 @@ public interface AskForGoodPostReplyService {
     String selectNickname(int afgReplyId);
     String selectAvatar(int afgReplyId);
     void deleteOneAskForGoodPostReply(int afgReplyId);
+
+    int findReplyUserId(int afgReplyId);
+
 }

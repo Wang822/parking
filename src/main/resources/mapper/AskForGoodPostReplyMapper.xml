@@ -50,4 +50,14 @@
         from AskForGoodPostReply
         where afg_reply_id = #{afgReplyId}
     </delete>
+
+
+
+    <!--    selectPostID-->
+    <select id="findReplyUserId" parameterType="int" resultType="int">
+        SELECT user_id
+        FROM AskForGoodPostReply
+        WHERE afg_reply_id = #{afgReplyId}
+    </select>
+
 </mapper>
