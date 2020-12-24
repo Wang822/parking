@@ -37,7 +37,7 @@ public class GoodController {
     }
 
     @ApiOperation(value="remove a good")
-    @DeleteMapping("/remove/{gid}")
+    @PostMapping("/remove/{gid}")
     public ResponseEntity<String> deleteGood(@RequestParam int gid)
     {
 //        boolean flag=true;
