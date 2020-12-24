@@ -99,7 +99,7 @@ public class UserController {
             @ApiResponse(code = 200, message = "成功读取用户信息"),
             @ApiResponse(code = 401, message = "token verify fail"),
             @ApiResponse(code = 204, message = "此用户未完成学生认证")})
-    public ResponseEntity<User> getOtherUser( @ApiParam(value = "sellerid", example = "8") @RequestParam() int userId) {
+    public ResponseEntity<User> getOtherUser( @ApiParam(value = "用户ID", example = "8") @RequestParam() int userId) {
 //        int userId = TokenUtil.getUserId(token);
         User user = iUserService.getById(userId);
         if (user == null) {
