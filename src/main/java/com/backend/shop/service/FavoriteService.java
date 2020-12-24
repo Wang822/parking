@@ -17,4 +17,6 @@ public interface FavoriteService {
     void deleteFavorite(int userId, int goodId);
 
     int selectCount(int userId);
+
+    void deleteFavoritesByGoodId(int goodId);
 }

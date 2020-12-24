@@ -18,4 +18,6 @@ public interface FavoriteDao {
     void deleteFavorite(@Param("userId") int userId, @Param("goodId") int goodId);
 
     int selectCount(int userId);
+
+    void deleteFavoritesByGoodId(int goodId);
 }

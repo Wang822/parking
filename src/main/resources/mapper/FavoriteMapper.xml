@@ -55,4 +55,10 @@
         FROM favorite
         WHERE user_id = #{userId}
     </select>
+    <!--delete favorites using goodid-->
+    <delete id="deleteFavoritesByGoodId" parameterType="int">
+        delete
+        from favorite
+        where good_id = #{goodId}
+    </delete>
 </mapper>

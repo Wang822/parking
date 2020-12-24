@@ -40,4 +40,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     public int selectCount(int userId) {
         return favoriteDao.selectCount(userId);
     }
+
+    @Override
+    public void deleteFavoritesByGoodId(int goodId) {
+        favoriteDao.deleteFavoritesByGoodId(goodId);
+    }
 }
