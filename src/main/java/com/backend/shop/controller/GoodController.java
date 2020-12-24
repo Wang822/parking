@@ -93,7 +93,7 @@ public class GoodController {
 
     @PostMapping("/add")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功添加商品"),
+            @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 401, message = "token verify fail")})
     public ResponseEntity<Good> addGood(@RequestHeader(value="Authorization") String token,
                                           @RequestParam String name,
