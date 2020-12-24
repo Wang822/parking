@@ -15,7 +15,7 @@ import java.util.Date;
 public class TokenUtil {
     //这里的token属性配置最好写在配置文件中，这里为了方面直接写成静态属性
     public static final long EXPIRE_TIME= 4*60*60*1000;//token到期时间4小时，毫秒为单位
-    public static final long REFRESH_EXPIRE_TIME=30*60;//RefreshToken到期时间为30分钟，秒为单位
+    public static final long REFRESH_EXPIRE_TIME=4*60*60;//RefreshToken到期时间为4小时，秒为单位
     private static final String TOKEN_SECRET="ljdyaishijin**3nkjnj??";  //密钥盐
 
     /**
@@ -38,8 +38,6 @@ public class TokenUtil {
         return token;
     }
 
-    // jwtUtils.getClaimByToken
-    // jwtUtils.isTokenExpired
     /**
      * token验证
      */
@@ -47,10 +45,6 @@ public class TokenUtil {
 
         JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();//创建token验证器
         DecodedJWT decodedJWT = jwtVerifier.verify(token); //若不成功, exception
-//        System.out.println("\n**** TokenUtil.verify认证 ****");
-//        System.out.println("请求时间：      " + new Date());
-//        System.out.println("账户ID:        " + decodedJWT.getClaim("accountId").asString());
-//        System.out.println("过期时间：      " + decodedJWT.getExpiresAt());
         System.out.println(new Date() + "  [Token认证]" +
                 "   AccountID: " + decodedJWT.getClaim("accountId").asString() +
                 "   过期时间: " + decodedJWT.getExpiresAt());

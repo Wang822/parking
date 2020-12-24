@@ -63,8 +63,13 @@ public class RecommendGoodsPostController {
     public ResponseEntity<String> deleteRecommendGoodsPost(@RequestHeader(value = "Authorization") String token,
                                                            @ApiParam("RecommendGoodsPost's id")@PathVariable int rgPostId) {
         int userId = TokenUtil.getUserId(token);
-        recommendGoodsPostService.deleteRecommendGoodsPost(rgPostId);
-        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        if(recommendGoodsPostService.findPostUserId(rgPostId)==userId) {
+            recommendGoodsPostService.deleteRecommendGoodsPost(rgPostId);
+            return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body("delete denied");
+        }
     }
 
 }

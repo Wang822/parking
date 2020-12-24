@@ -53,4 +53,9 @@ public class QuestionPostServiceImpl implements QuestionPostService {
         return questionPostDao.findAllById(userId);
     }
 
+    @Override
+    public int findPostUserId(int qPostId){
+        return questionPostDao.findPostUserId(qPostId);
+    }
+
 }

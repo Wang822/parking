@@ -68,12 +68,16 @@ public class QuestionPostController {
     @DeleteMapping("/remove/{qPostId}")
     @ApiOperation(value = "delete a QuestionPost")
     public ResponseEntity<String> deleteQuestionPost(@RequestHeader(value = "Authorization") String token,
-                                                     @ApiParam("QuestionPost's id")int qPostId) {
+                                                     @ApiParam("QuestionPost's id")@PathVariable int qPostId) {
         int userId = TokenUtil.getUserId(token);
-
-        questionPostService.deleteQuestionPost(qPostId);
-        questionPostService.deleteReplies(qPostId);
-        return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        if(questionPostService.findPostUserId(qPostId)==userId) {
+            questionPostService.deleteQuestionPost(qPostId);
+            questionPostService.deleteReplies(qPostId);
+            return ResponseEntity.status(HttpStatus.OK).body("successful operation");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK).body("delete denied");
+        }
     }
 
     @ApiOperation(value = "get the number of replies in post")

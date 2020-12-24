@@ -4,6 +4,7 @@ import com.backend.shop.mapper.RecommendGoodsPostDao;
 import com.backend.shop.pojo.RecommendGoodsPost;
 import com.backend.shop.service.RecommendGoodsPostService;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,6 +38,10 @@ public class RecommendGoodsPostServiceImpl implements RecommendGoodsPostService 
         return recommendGoodsPostDao.findNickname(rgPostId);
     }
 
+    @Override
+    public int findPostUserId(int rgPostId){
+        return recommendGoodsPostDao.findPostUserId(rgPostId);
+    }
 
 
 }

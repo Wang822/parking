@@ -31,4 +31,11 @@
         FROM user natural join RecommendGoodsPost
         WHERE rg_post_id=#{rgPostId}
     </select>
+
+    <!--    selectPostID-->
+    <select id="findPostUserId" parameterType="int" resultType="int">
+        SELECT user_id
+        FROM RecommendGoodsPost
+        WHERE rg_post_id=#{rgPostId}
+    </select>
 </mapper>

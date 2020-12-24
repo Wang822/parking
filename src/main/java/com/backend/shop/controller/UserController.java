@@ -92,6 +92,21 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/getOther")
+//    @ResponseBody
+    @ApiOperation(value = "获取其它用户个人信息", produces = "application/json")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "成功读取用户信息"),
+            @ApiResponse(code = 401, message = "token verify fail"),
+            @ApiResponse(code = 204, message = "此用户未完成学生认证")})
+    public ResponseEntity<User> getOtherUser( @ApiParam(value = "用户ID", example = "8") @RequestParam() int userId) {
+//        int userId = TokenUtil.getUserId(token);
+        User user = iUserService.getById(userId);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+        return ResponseEntity.ok(user);
+    }
 }
 
 /* add user request */

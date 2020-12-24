@@ -37,7 +37,7 @@ public class GoodController {
     }
 
     @ApiOperation(value="remove a good")
-    @DeleteMapping("/remove/{gid}")
+    @PostMapping("/remove/{gid}")
     public ResponseEntity<String> deleteGood(@RequestParam int gid)
     {
 //        boolean flag=true;
@@ -53,7 +53,7 @@ public class GoodController {
         return ResponseEntity.status(HttpStatus.OK).body("Successful operation.");
     }
 
-    @PutMapping("/revise")
+    @PostMapping("/revise")
     public ResponseEntity<String> reviseGood(@RequestHeader(value="Authorization") String token,
                                    @RequestParam int gid,
                                    @RequestParam String name,
