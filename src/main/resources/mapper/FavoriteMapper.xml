@@ -38,7 +38,7 @@
                publishdate,
                tag
         FROM Good
-                 natural join favorite
+                 join favorite on (Good.goodid = favorite.good_id)
         WHERE user_id = #{userId}
         order by favor_id
     </select>
