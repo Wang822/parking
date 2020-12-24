@@ -27,10 +27,9 @@ import java.util.Date;
 
 
 @Controller
-@Api(value = "账户", description = "账户")
+@Api(value = "Account", description = "Account")
 public class AccountController {
 
-    /* 不要在Controller里调用Mapper */
     @Autowired
     private IAccountService iAccountService;
 
@@ -41,16 +40,16 @@ public class AccountController {
     @PostMapping("wx/login")
     @ResponseBody
     @ApiResponses({
-            @ApiResponse(code = 200, message = "登录成功，返回是否已学生认证", responseHeaders = {
-                    @ResponseHeader(name = "Authorization", description = "登录token")}),
+            @ApiResponse(code = 200, message = "Login Success, return whether student verify passed", responseHeaders = {
+                    @ResponseHeader(name = "Authorization", description = "login token")}),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 403, message = "签名校验失败")})
+            @ApiResponse(code = 403, message = "Signature verify fail")})
     public ResponseEntity<Boolean> user_login(
-                                   @ApiParam("临时登录凭证")    @RequestParam(value = "code") String code,
-                                   @ApiParam("用户非敏感信息")  @RequestParam(value = "rawData") String rawData,
-                                   @ApiParam("签名")          @RequestParam(value = "signature") String signature,
-                                   @ApiParam("用户敏感信息")    @RequestParam(value = "encrypteData") String encrypteData,
-                                   @ApiParam("解密算法向量")    @RequestParam(value = "iv") String iv,
+                                   @ApiParam("temporary login credential code")    @RequestParam(value = "code") String code,
+                                   @ApiParam("user non-sensitive information")  @RequestParam(value = "rawData") String rawData,
+                                   @ApiParam("signature")          @RequestParam(value = "signature") String signature,
+                                   @ApiParam("user sensitive information")    @RequestParam(value = "encrypteData") String encrypteData,
+                                   @ApiParam("decryption algorithm vector")    @RequestParam(value = "iv") String iv,
                                    HttpServletResponse response) {
         // 用户非敏感信息：rawData
         // 签名：signature

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
-@Api(value = "User", description = "用户个人信息")
+@Api(value = "User", description = "User Information")
 public class UserController {
 
     @Autowired
@@ -26,11 +26,11 @@ public class UserController {
 
     @GetMapping("/get")
 //    @ResponseBody
-    @ApiOperation(value = "获取用户个人信息", produces = "application/json")
+    @ApiOperation(value = "Get User's Information", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功读取用户信息"),
+            @ApiResponse(code = 200, message = "Get Information Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 204, message = "此用户未完成学生认证")})
+            @ApiResponse(code = 204, message = "Student verify fail")})
     public ResponseEntity<User> getUser(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);
         User user = iUserService.getById(userId);
@@ -49,14 +49,14 @@ public class UserController {
      */
     @PostMapping("/add")
 //    @ResponseBody
-    @ApiOperation(value = "添加用户/学生认证", produces = "application/json")
+    @ApiOperation(value = "Add User/Verify Student", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功添加用户"),
+            @ApiResponse(code = 200, message = "Add User Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 409, message = "重复创建用户")})
+            @ApiResponse(code = 409, message = "Create User Repeat")})
     public ResponseEntity<User> addUser(@RequestHeader(value = "Authorization") String token,
-                                @ApiParam("用户个人信息，不用ID") @RequestBody User user) {
-        int userId = TokenUtil.getUserId(token); //获取User ID
+                                @ApiParam("Note: do not need ID") @RequestBody User user) {
+        int userId = TokenUtil.getUserId(token); //get User ID
         user.setUserId(userId);
         try {
             iUserService.save(user);
@@ -74,14 +74,14 @@ public class UserController {
 
     @PostMapping("/update")
 //    @ResponseBody
-    @ApiOperation(value = "修改用户个人信息", produces = "application/json")
+    @ApiOperation(value = "Update User Information", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功修改用户信息"),
+            @ApiResponse(code = 200, message = "Update User Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 204, message = "未完成学生认证")})
+            @ApiResponse(code = 204, message = "Student verify fail")})
     public ResponseEntity<User> updateUser(@RequestHeader(value = "Authorization") String token,
-                                   @ApiParam("用户个人信息，不用ID") @RequestBody User user) {
-        int userId = TokenUtil.getUserId(token); //获取User ID
+                                        @ApiParam("Note: do not need ID") @RequestBody User user) {
+        int userId = TokenUtil.getUserId(token); //get User ID
 
         User exist = iUserService.getById(userId);
         if (exist == null) {
@@ -94,12 +94,12 @@ public class UserController {
 
     @GetMapping("/getOther")
 //    @ResponseBody
-    @ApiOperation(value = "获取其它用户个人信息", produces = "application/json")
+    @ApiOperation(value = "Get other user's information", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功读取用户信息"),
+            @ApiResponse(code = 200, message = "Get Information Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 204, message = "此用户未完成学生认证")})
-    public ResponseEntity<User> getOtherUser( @ApiParam(value = "用户ID", example = "8") @RequestParam() int userId) {
+            @ApiResponse(code = 204, message = "Student verify fail")})
+    public ResponseEntity<User> getOtherUser( @ApiParam(value = "User ID", example = "8") @RequestParam() int userId) {
 //        int userId = TokenUtil.getUserId(token);
         User user = iUserService.getById(userId);
         if (user == null) {
@@ -108,6 +108,3 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 }
-
-/* add user request */
-// 不需要昵称、头像
