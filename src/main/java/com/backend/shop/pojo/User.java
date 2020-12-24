@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @TableName("user")
-@ApiModel(value = "User", description = "用户个人信息")
+@ApiModel(value = "User", description = "User Information")
 public class User {
     private static final long serialVersionUID = 1L;
 
