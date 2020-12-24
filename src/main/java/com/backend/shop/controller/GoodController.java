@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-
+import com.backend.shop.service.FavoriteService;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -24,6 +24,7 @@ import java.util.*;
 public class GoodController {
     @Autowired
     private GoodService goodService;
+    private FavoriteService favoriteService;
 
     public Map<String, Object> getBackValue(boolean flag, Object message) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -49,6 +50,7 @@ public class GoodController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Good with this goodId does not exist.");
         }
         goodService.deleteGood(gid);
+        favoriteService.deleteFavoritesByGoodId(gid);
 //        resultMap=getBackValue(flag,"Successful operation.");
         return ResponseEntity.status(HttpStatus.OK).body("Successful operation.");
     }
