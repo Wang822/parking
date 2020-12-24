@@ -48,7 +48,7 @@ public class FavoriteController {
     }
 
     @ApiOperation(value = "remove a good")
-    @DeleteMapping("/remove/{goodId}")
+    @PostMapping("/remove/{goodId}")
     public ResponseEntity<String> deleteFavor(@RequestHeader(value = "Authorization") String token,
                                               @ApiParam(value = "good's id", example = "2") @PathVariable int goodId) {
         int userId = TokenUtil.getUserId(token);
