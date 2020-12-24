@@ -92,8 +92,6 @@ public class AccountController {
 //            account.setSkey(skey);
             this.iAccountService.updateById(account);
         }
-        //encrypteData比rowData多了appid和openid
-        //JSONObject userInfo = WechatUtil.getUserInfo(encrypteData, sessionKey, iv);
         //6. 把新的skey返回给小程序
 //        GlobalResult result = GlobalResult.build(200, null, skey);
 
@@ -109,39 +107,7 @@ public class AccountController {
 
         System.out.println(new Date() + "  [Login]   AccountID: " + accountId);
 
-//        return new GlobalResult<>(200, "success login", account.isAuthenticated());
-//        return ResponseEntity.ok(new AccountResponse(
-//                account.getAccountId(),
-//                account.isAuthenticated(),
-//                account.getNickName(),
-//                account.getAvatar()));
         return ResponseEntity.ok(account.isAuthenticated());
     }
 
 }
-
-//@ApiModel(value = "Account Response", description = "返回账户信息")
-//class AccountResponse {
-//    @TableId(value = "account_id", type = IdType.AUTO)
-//    @ApiModelProperty(value = "账户ID", example = "1")
-//    private int accountId;
-//
-//    @TableField("authenticated")
-//    @ApiModelProperty(value = "是否已通过学生认证", example = "0")
-//    private boolean authenticated;
-//
-//    @TableField("nick_name")
-//    @ApiModelProperty(value = "昵称", example = "nick name")
-//    private String nickName;
-//
-//    @TableField("avatar")
-//    @ApiModelProperty(value = "头像图片路径", example = "example.png")
-//    private String avatar;
-//
-//    AccountResponse(int id, boolean auth, String nickName, String avatar) {
-//        this.accountId = id;
-//        this.authenticated = auth;
-//        this.nickName = nickName;
-//        this.avatar = avatar;
-//    }
-//}
