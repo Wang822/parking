@@ -24,6 +24,7 @@ import java.util.*;
 public class GoodController {
     @Autowired
     private GoodService goodService;
+    @Autowired
     private FavoriteService favoriteService;
 
     public Map<String, Object> getBackValue(boolean flag, Object message) {
