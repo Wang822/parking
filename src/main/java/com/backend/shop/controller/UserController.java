@@ -6,7 +6,9 @@ import com.backend.shop.pojo.User;
 import com.backend.shop.service.IAccountService;
 import com.backend.shop.service.IUserService;
 import com.backend.shop.util.TokenUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.*;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
-@Api(value = "User", description = "用户个人信息")
+@Api(value = "User", description = "User Information")
 public class UserController {
 
     @Autowired
@@ -26,11 +28,11 @@ public class UserController {
 
     @GetMapping("/get")
 //    @ResponseBody
-    @ApiOperation(value = "获取用户个人信息", produces = "application/json")
+    @ApiOperation(value = "Get User's Information", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功读取用户信息"),
+            @ApiResponse(code = 200, message = "Get Information Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 204, message = "此用户未完成学生认证")})
+            @ApiResponse(code = 204, message = "Student verify fail")})
     public ResponseEntity<User> getUser(@RequestHeader(value = "Authorization") String token) {
         int userId = TokenUtil.getUserId(token);
         User user = iUserService.getById(userId);
@@ -49,14 +51,14 @@ public class UserController {
      */
     @PostMapping("/add")
 //    @ResponseBody
-    @ApiOperation(value = "添加用户/学生认证", produces = "application/json")
+    @ApiOperation(value = "Add User/Verify Student", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功添加用户"),
+            @ApiResponse(code = 200, message = "Add User Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 409, message = "重复创建用户")})
+            @ApiResponse(code = 409, message = "Create User Repeat")})
     public ResponseEntity<User> addUser(@RequestHeader(value = "Authorization") String token,
-                                @ApiParam("用户个人信息，不用ID") @RequestBody User user) {
-        int userId = TokenUtil.getUserId(token); //获取User ID
+                                @ApiParam("Note: do not need ID") @RequestBody User user) {
+        int userId = TokenUtil.getUserId(token); //get User ID
         user.setUserId(userId);
         try {
             iUserService.save(user);
@@ -74,32 +76,36 @@ public class UserController {
 
     @PostMapping("/update")
 //    @ResponseBody
-    @ApiOperation(value = "修改用户个人信息", produces = "application/json")
+    @ApiOperation(value = "Update User Information", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功修改用户信息"),
+            @ApiResponse(code = 200, message = "Update User Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 204, message = "未完成学生认证")})
+            @ApiResponse(code = 204, message = "Student verify fail")})
     public ResponseEntity<User> updateUser(@RequestHeader(value = "Authorization") String token,
-                                   @ApiParam("用户个人信息，不用ID") @RequestBody User user) {
-        int userId = TokenUtil.getUserId(token); //获取User ID
+                                        @ApiParam("User Info Update Body") @RequestBody UpdateRequest updateRequest) {
+        int userId = TokenUtil.getUserId(token); //get User ID
 
         User exist = iUserService.getById(userId);
         if (exist == null) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
-        user.setUserId(userId);
-        iUserService.updateById(user);
-        return ResponseEntity.ok(user);
+        exist.setNickName(updateRequest.getNickName());
+        exist.setGrade(updateRequest.getGrade());
+        exist.setMajor(updateRequest.getMajor());
+        exist.setCollege(updateRequest.getCollege());
+        exist.setCampus(updateRequest.getCampus());
+        iUserService.updateById(exist);
+        return ResponseEntity.ok(exist);
     }
 
     @GetMapping("/getOther")
 //    @ResponseBody
-    @ApiOperation(value = "获取其它用户个人信息", produces = "application/json")
+    @ApiOperation(value = "Get other user's information", produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "成功读取用户信息"),
+            @ApiResponse(code = 200, message = "Get Information Success"),
             @ApiResponse(code = 401, message = "token verify fail"),
-            @ApiResponse(code = 204, message = "此用户未完成学生认证")})
-    public ResponseEntity<User> getOtherUser( @ApiParam(value = "用户ID", example = "8") @RequestParam() int userId) {
+            @ApiResponse(code = 204, message = "Student verify fail")})
+    public ResponseEntity<User> getOtherUser( @ApiParam(value = "User ID", example = "8") @RequestParam() int userId) {
 //        int userId = TokenUtil.getUserId(token);
         User user = iUserService.getById(userId);
         if (user == null) {
@@ -109,5 +115,28 @@ public class UserController {
     }
 }
 
-/* add user request */
-// 不需要昵称、头像
+@Data
+@ApiModel(value = "UserInfoRequest", description = "Request of update user information")
+class UpdateRequest {
+
+    @TableField("nick_name")
+    @ApiModelProperty(value = "昵称", example = "nick")
+    private String nickName;
+
+    @TableField("campus")
+    @ApiModelProperty(value = "校区",example = "1")
+    private int campus;
+
+    @TableField("college")
+    @ApiModelProperty(value = "学院", example = "sse")
+    private String college;
+
+    @TableField("major")
+    @ApiModelProperty(value = "专业", example = "se")
+    private String major;
+
+    @TableField("grade")
+    @ApiModelProperty(value = "年级", example = "3")
+    private int grade;
+
+}

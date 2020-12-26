@@ -19,18 +19,17 @@ public class TokenUtil {
     private static final String TOKEN_SECRET="ljdyaishijin**3nkjnj??";  //密钥盐
 
     /**
-     * 生成token
+     * generate token
      */
     public static String sign(String accountId, Long currentTime){
-
         String token = null;
         try {
             Date expireAt=new Date(currentTime+EXPIRE_TIME);
             token = JWT.create()
-                    .withIssuer("auth0")//发行人
-                    .withClaim("accountId", accountId)//存放数据
+                    .withIssuer("auth0") //publisher
+                    .withClaim("accountId", accountId) //data
                     .withClaim("currentTime", currentTime)
-                    .withExpiresAt(expireAt)//过期时间
+                    .withExpiresAt(expireAt) //expire time
                     .sign(Algorithm.HMAC256(TOKEN_SECRET));
         } catch (IllegalArgumentException| JWTCreationException je) {
             je.printStackTrace();
@@ -39,15 +38,15 @@ public class TokenUtil {
     }
 
     /**
-     * token验证
+     * token verify
      */
     public static boolean verify(String token) throws Exception {
-
-        JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();//创建token验证器
-        DecodedJWT decodedJWT = jwtVerifier.verify(token); //若不成功, exception
-        System.out.println(new Date() + "  [Token认证]" +
+        // create token verifier
+        JWTVerifier jwtVerifier= JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();
+        DecodedJWT decodedJWT = jwtVerifier.verify(token); //not success: global exception
+        System.out.println(new Date() + "  [Token Verify]" +
                 "   AccountID: " + decodedJWT.getClaim("accountId").asString() +
-                "   过期时间: " + decodedJWT.getExpiresAt());
+                "   Expire Time: " + decodedJWT.getExpiresAt());
         return true;
     }
 
