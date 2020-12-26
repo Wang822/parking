@@ -6,7 +6,9 @@ import com.backend.shop.pojo.User;
 import com.backend.shop.service.IAccountService;
 import com.backend.shop.service.IUserService;
 import com.backend.shop.util.TokenUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.*;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,16 +82,20 @@ public class UserController {
             @ApiResponse(code = 401, message = "token verify fail"),
             @ApiResponse(code = 204, message = "Student verify fail")})
     public ResponseEntity<User> updateUser(@RequestHeader(value = "Authorization") String token,
-                                        @ApiParam("Note: do not need ID") @RequestBody User user) {
+                                        @ApiParam("User Info Update Body") @RequestBody UpdateRequest updateRequest) {
         int userId = TokenUtil.getUserId(token); //get User ID
 
         User exist = iUserService.getById(userId);
         if (exist == null) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         }
-        user.setUserId(userId);
-        iUserService.updateById(user);
-        return ResponseEntity.ok(user);
+        exist.setNickName(updateRequest.getNickName());
+        exist.setGrade(updateRequest.getGrade());
+        exist.setMajor(updateRequest.getMajor());
+        exist.setCollege(updateRequest.getCollege());
+        exist.setCampus(updateRequest.getCampus());
+        iUserService.updateById(exist);
+        return ResponseEntity.ok(exist);
     }
 
     @GetMapping("/getOther")
@@ -107,4 +113,30 @@ public class UserController {
         }
         return ResponseEntity.ok(user);
     }
+}
+
+@Data
+@ApiModel(value = "UserInfoRequest", description = "Request of update user information")
+class UpdateRequest {
+
+    @TableField("nick_name")
+    @ApiModelProperty(value = "昵称", example = "nick")
+    private String nickName;
+
+    @TableField("campus")
+    @ApiModelProperty(value = "校区",example = "1")
+    private int campus;
+
+    @TableField("college")
+    @ApiModelProperty(value = "学院", example = "sse")
+    private String college;
+
+    @TableField("major")
+    @ApiModelProperty(value = "专业", example = "se")
+    private String major;
+
+    @TableField("grade")
+    @ApiModelProperty(value = "年级", example = "3")
+    private int grade;
+
 }
