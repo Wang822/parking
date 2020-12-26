@@ -1,6 +1,6 @@
 package com.backend.shop;
 
-import com.backend.shop.mapper.AccountMapper;
+import com.backend.shop.mapper.AccountDao;
 import com.backend.shop.pojo.Account;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import java.util.Date;
 public class AccountInsertTest {
 
     @Resource
-    private AccountMapper accountMapper;
+    private AccountDao accountDao;
 
     @Test
     public void test() {
@@ -28,7 +28,7 @@ public class AccountInsertTest {
         account.setNickName("TEST Account");
         account.setAuthenticated(false);
 
-        accountMapper.insert(account);
+        accountDao.insert(account);
         System.out.println("accountId" + account.getAccountId());
     }
 }

@@ -47,6 +47,14 @@ public class FavoriteController {
         return ResponseEntity.status(HttpStatus.OK).body(goods);
     }
 
+    @ApiOperation(value = "get all favorite goods of the user by id")
+    @GetMapping("/getById")
+    public ResponseEntity<ArrayList<Good>> getFavoritesById(
+            @ApiParam(value = "user id", example = "11") @RequestParam int userId) {
+        ArrayList<Good> goods = favoriteService.selectGoods(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(goods);
+    }
+
     @ApiOperation(value = "remove a good")
     @PostMapping("/remove")
     public ResponseEntity<String> deleteFavor(@RequestHeader(value = "Authorization") String token,
