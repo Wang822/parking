@@ -183,4 +183,11 @@ public class GoodController {
         int count=goodService.getGoodOnSailCount(userId);
         return ResponseEntity.status(HttpStatus.OK).body(count);
     }
+    @GetMapping("/getGoodByUserId")
+    public ResponseEntity<List<Good>> getGoodByUserId(@RequestParam int userid)
+    {
+        List<Good> goodlist=goodService.getGoodByUserId(userid);
+        return ResponseEntity.status(HttpStatus.OK).body(goodlist);
+    }
+
 }

@@ -62,4 +62,10 @@
         select count(*)
         from Good
     </select>
+
+    <select id="getGoodByUserId" parameterType="int" resultMap="goodMap">
+        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
+        from Good
+        where sellerid= #{userid}
+    </select>
 </mapper>

@@ -29,4 +29,6 @@ public interface GoodDao extends BaseMapper<Good> {
 
     int getAllGoodOnSailCount();
 
+    List<Good> getGoodByUserId(@Param("userid") int userod);
+
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public interface GoodService {
@@ -26,4 +27,6 @@ public interface GoodService {
 
     IPage<Good> getGoodByPage(Good good,int currPage,int pageSize, int userId);
     int getAllGoodOnSailCount();
+
+    List<Good> getGoodByUserId(int userid);
 }

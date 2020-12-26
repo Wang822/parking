@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -63,4 +64,7 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     public int getAllGoodOnSailCount(){return goodDao.getAllGoodOnSailCount();}
+
+    @Override
+    public List<Good> getGoodByUserId(int userid){return goodDao.getGoodByUserId(userid);}
 }
