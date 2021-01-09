@@ -39,8 +39,8 @@ public class GoodController {
     }
 
     @ApiOperation(value="remove a good")
-    @PostMapping("/remove/{gid}")
-    public ResponseEntity<String> deleteGood(@RequestParam int gid)
+    @PostMapping("/remove")
+    public ResponseEntity<String> deleteGood(@RequestParam int gid, @RequestParam int reason)
     {
 //        boolean flag=true;
 //        Map<String, Object> resultMap = new HashMap<>();
@@ -50,8 +50,11 @@ public class GoodController {
 //            resultMap=getBackValue(flag,"Good with this goodId does not exist.");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Good with this goodId does not exist.");
         }
-        goodService.deleteGood(gid);
-        favoriteService.deleteFavoritesByGoodId(gid);
+        if (reason < 1 || reason > 6) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Reason number out of bound.");
+        }
+        goodService.deleteGood(gid, reason);
+//        favoriteService.deleteFavoritesByGoodId(gid);
 //        resultMap=getBackValue(flag,"Successful operation.");
         return ResponseEntity.status(HttpStatus.OK).body("Successful operation.");
     }

@@ -31,10 +31,10 @@ public class GoodServiceImpl implements GoodService {
         return goodDao.getGood(goodId);
     }
 
-    @Override
-    public void deleteGood(int goodId) {
-        goodDao.deleteGood(goodId);
-    }
+//    @Override
+//    public void deleteGood(int goodId) { goodDao.deleteGood(goodId); }
+
+    public void deleteGood(int goodId, int reason) { goodDao.soldOut(goodId, reason); }
 
     @Override
     public void reviseGood(Good good) {

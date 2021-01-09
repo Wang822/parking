@@ -12,13 +12,14 @@
         <result column="addr" property="pic"/>
         <result column="publishdate" property="publish"/>
         <result column="tag" property="tag"/>
+        <result column="sold_out" property="soldOut" />
     </resultMap>
 
     <insert id="addGood" >
         insert into Good(goodid,name,price,description,campus,old,sellerid,addr
-        ,publishdate,tag)
+        ,publishdate,tag,sold_out)
         values (#{gid},#{name},#{price},#{description},#{campus},#{old}
-        ,#{seller},#{pic},#{publish},#{tag})
+        ,#{seller},#{pic},#{publish},#{tag},0)
     </insert>
 
     <delete id="deleteGood" parameterType="int">
@@ -26,6 +27,12 @@
         from Good
         where goodid=#{gid}
     </delete>
+
+    <update id="soldOut" parameterType="int">
+        update Good
+        set sold_out=#{reason}
+        where goodid=#{gid}
+    </update>
 
     <update id="reviseGood">
         update Good
@@ -35,7 +42,7 @@
     </update>
 
     <select id="getGood" parameterType="int" resultMap="goodMap">
-        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
+        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag,sold_out
         from Good
         where goodid=#{gid}
     </select>
@@ -47,7 +54,7 @@
     </select>
 
     <select id="getGoodByPage" parameterType="int" resultMap="goodMap">
-        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
+        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag,sold_out
         from Good
         where sellerid= #{userid}
     </select>
@@ -55,16 +62,17 @@
     <select id="getGoodOnSailCount" resultType="int">
         select count(*)
         from Good
-        where sellerid = #{userid}
+        where sellerid = #{userid} and sold_out=0
     </select>
 
     <select id="getAllGoodOnSailCount" resultType="int">
         select count(*)
         from Good
+        where sold_out=0
     </select>
 
     <select id="getGoodByUserId" parameterType="int" resultMap="goodMap">
-        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag
+        select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag,sold_out
         from Good
         where sellerid= #{userid}
     </select>

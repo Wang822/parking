@@ -54,6 +54,10 @@ public class Good {
     @ApiModelProperty(value = "发布时间", example = "2020-12-10 23:13:10")
     private Date publish;
 
+    @TableField("sold_out")
+    @ApiModelProperty(value = "0未下架，1-6下架理由",example = "0")
+    private int soldOut;
+
     public int getGid() {
         return gid;
     }

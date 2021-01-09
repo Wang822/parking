@@ -16,7 +16,9 @@ public interface GoodDao extends BaseMapper<Good> {
 
     Good getGood(@Param("gid")int gid);
 
-    void deleteGood(@Param("gid") int gid);
+//    void deleteGood(@Param("gid") int gid);
+
+    void soldOut(@Param("gid") int gid, @Param("reason") int reason);
 
     void reviseGood(Good good);
 

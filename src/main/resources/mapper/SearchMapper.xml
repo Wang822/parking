@@ -12,6 +12,7 @@
         <result column="addr" property="pic"/>
         <result column="publishdate" property="publish"/>
         <result column="tag" property="tag"/>
+        <result column="sold_out" property="soldOut" />
     </resultMap>
     <!--select with name and price-->
     <select id="search" resultMap="goodMap">

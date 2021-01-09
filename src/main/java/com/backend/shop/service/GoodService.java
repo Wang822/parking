@@ -16,7 +16,8 @@ public interface GoodService {
 
     Good getGood(int goodId);
 
-    void deleteGood(int goodId);
+//    void deleteGood(int goodId);
+    void deleteGood(int goodId, int reason);
 
     void reviseGood(Good good);
 

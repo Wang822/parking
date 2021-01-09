@@ -36,7 +36,8 @@
                sellerid,
                addr,
                publishdate,
-               tag
+               tag,
+               sold_out
         FROM Good
                  join favorite on (Good.goodid = favorite.good_id)
         WHERE user_id = #{userId}
