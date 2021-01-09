@@ -33,7 +33,6 @@ public class ChatController {
      * @param token       token
      * @param receiver_id user id of receiver
      * @param content     message content
-     * @param time        sending time, pattern: yyyy-MM-dd hh:mm:ss
      * @return ResponseEntity
      * @throws ParseException time pattern error
      */
@@ -41,15 +40,13 @@ public class ChatController {
     @ApiOperation(value = "add a new massage")
     public ResponseEntity<String> addChat(@RequestHeader(value = "Authorization") String token,
                                           @ApiParam(value = "receiver's id", example = "3") @RequestParam int receiver_id,
-                                          @ApiParam(value = "message's content", example = "6") @RequestParam String content,
-                                          @ApiParam(value = "time, yyyy-MM-dd hh:mm:ss", example = "2020-12-19 23:22:11") @RequestParam String time) throws ParseException {
+                                          @ApiParam(value = "message's content", example = "6") @RequestParam String content) throws ParseException {
         int userId = TokenUtil.getUserId(token);
         Chat chat = new Chat();
         chat.setReceiverId(receiver_id);
         chat.setSenderId(userId);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date = sdf.parse(time);
-        chat.setTime(date);
+        chat.setTime(sdf.format(new Date()));
         chat.setContent(content);
         chatService.add(chat);
         return ResponseEntity.status(HttpStatus.OK).body("successful operation");

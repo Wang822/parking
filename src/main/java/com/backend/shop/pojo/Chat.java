@@ -30,5 +30,5 @@ public class Chat {
     @TableField("time")
     @ApiModelProperty(value = "message sending time", example = "2020-12-19 23:22:11")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Date time;
+    private String time;
 }
