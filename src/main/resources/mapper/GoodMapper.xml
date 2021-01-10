@@ -75,5 +75,6 @@
         select goodid,name,price,description,campus,old,sellerid,addr,publishdate,tag,sold_out
         from Good
         where sellerid= #{userid}
+        order by sold_out
     </select>
 </mapper>
