@@ -12,6 +12,7 @@
         <result column="addr" property="pic"/>
         <result column="publishdate" property="publish"/>
         <result column="tag" property="tag"/>
+        <result column="sold_out" property="soldOut"/>
     </resultMap>
     <!--insert new chat-->
     <insert id="add" parameterType="Favorite">
@@ -41,7 +42,7 @@
         FROM Good
                  join favorite on (Good.goodid = favorite.good_id)
         WHERE user_id = #{userId}
-        order by favor_id
+        order by sold_out, favor_id
     </select>
     <!--delete a favorite-->
     <delete id="deleteFavorite">

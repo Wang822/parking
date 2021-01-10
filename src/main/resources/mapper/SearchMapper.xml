@@ -20,6 +20,7 @@
         FROM Good
         WHERE (name like "%"#{name}"%")
           and (price between #{lowPrice} and #{highPrice})
+          and sold_out=0
         order by publishdate DESC
     </select>
     <!--select with name, price and tag-->
@@ -29,24 +30,26 @@
         WHERE (tag = #{tag})
           and (price between #{lowPrice} and #{highPrice})
           and (name like "%"#{name}"%")
+          and sold_out=0
         order by publishdate DESC
     </select>
     <!-- get recommend by the user's campus -->
     <select id="getRecommend" resultMap="goodMap">
         SELECT *
         from Good
+        where sold_out=0
         order by publishdate DESC
     </select>
     <select id="getRecommendByTag" parameterType="int" resultMap="goodMap">
         SELECT *
         from Good
-        where tag = #{tag}
+        where tag = #{tag} and sold_out=0
         order by publishdate DESC
     </select>
     <select id="getRecommendByCampus" parameterType="int" resultMap="goodMap">
         SELECT *
         from Good
-        where campus = #{campus}
+        where campus = #{campus} and sold_out=0
         order by publishdate DESC
     </select>
 </mapper>
